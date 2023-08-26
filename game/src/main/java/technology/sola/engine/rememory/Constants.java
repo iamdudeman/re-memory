@@ -45,8 +45,9 @@ public final class Constants {
   }
 
   public enum Tags implements ColliderComponent.ColliderTag {
+    BOUNDARY,
+    PLAYER,
     PORTAL,
-    PLAYER
   }
 
   private Constants() {

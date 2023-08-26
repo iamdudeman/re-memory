@@ -1,6 +1,6 @@
 package technology.sola.engine.rememory;
 
-import technology.sola.engine.InitialRooms;
+import technology.sola.engine.RoomBuilders;
 import technology.sola.engine.assets.BulkAssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.core.SolaConfiguration;
@@ -8,7 +8,9 @@ import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.system.GravitySystem;
+import technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem;
 import technology.sola.engine.physics.system.ParticleSystem;
+import technology.sola.engine.rememory.systems.ChangeRoomSystem;
 import technology.sola.engine.rememory.systems.PlayerSystem;
 
 public class ReMemorySola extends SolaWithDefaults {
@@ -21,6 +23,7 @@ public class ReMemorySola extends SolaWithDefaults {
     defaultsConfigurator.usePhysics().useGraphics().useLighting(new Color(10, 10, 10)).useBackgroundColor(Color.WHITE);
 
     solaEcs.getSystem(GravitySystem.class).setActive(false);
+    solaEcs.addSystem(new ImpulseCollisionResolutionSystem(eventHub, 15, 0.001f, 0.7f));
 
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
     platform.getRenderer().createLayers(
@@ -28,10 +31,11 @@ public class ReMemorySola extends SolaWithDefaults {
     );
 
     solaEcs.addSystems(
-      new PlayerSystem(keyboardInput),
-      new ParticleSystem()
+      new PlayerSystem(keyboardInput, eventHub),
+      new ParticleSystem(),
+      new ChangeRoomSystem(eventHub, platform.getRenderer(), solaEcs)
     );
-    solaEcs.setWorld(InitialRooms.buildForest(platform.getRenderer().getWidth(), platform.getRenderer().getHeight()));
+    solaEcs.setWorld(RoomBuilders.buildForest(platform.getRenderer().getWidth(), platform.getRenderer().getHeight()));
   }
 
   @Override

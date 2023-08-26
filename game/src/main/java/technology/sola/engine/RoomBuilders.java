@@ -9,17 +9,13 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.rememory.Constants;
+import technology.sola.engine.rememory.components.PortalComponent;
 import technology.sola.math.linear.Vector2D;
 
 import java.util.Random;
 
-public class InitialRooms {
+public class RoomBuilders {
   private static final float boundarySize = 50;
-
-  public static World buildFirstRoom() {
-    // todo
-    return new World(5);
-  }
 
   public static World buildCozy(int rendererWidth, int rendererHeight) {
     World world = new World(1500);
@@ -31,18 +27,21 @@ public class InitialRooms {
           new SpriteComponent(Constants.Assets.CozySprites.ID, Constants.Assets.CozySprites.FLOOR)
         );
 
-        if (j < 16) {
+        if (j == 0) {
           world.createEntity(
             new TransformComponent(i, j),
             new SpriteComponent(Constants.Assets.CozySprites.ID, Constants.Assets.CozySprites.BACK_WALL_TOP)
           );
           world.createEntity(
             new TransformComponent(i, j + 8),
-            new SpriteComponent(Constants.Assets.CozySprites.ID, Constants.Assets.CozySprites.BACK_WALL_BOTTOM)
+            new SpriteComponent(Constants.Assets.CozySprites.ID, Constants.Assets.CozySprites.BACK_WALL_BOTTOM),
+            ColliderComponent.aabb(16, 8)
           );
         }
       }
     }
+
+    addBoundaries(world, rendererWidth, rendererHeight);
 
     addPlayer(world);
 
@@ -96,19 +95,19 @@ public class InitialRooms {
   private static void addBoundaries(World world, int rendererWidth, int rendererHeight) {
     world.createEntity(
       new TransformComponent(0, -boundarySize, rendererWidth, boundarySize),
-      ColliderComponent.aabb()
+      ColliderComponent.aabb().setTags(Constants.Tags.BOUNDARY)
     );
     world.createEntity(
       new TransformComponent(0, rendererHeight, rendererWidth, boundarySize),
-      ColliderComponent.aabb()
+      ColliderComponent.aabb().setTags(Constants.Tags.BOUNDARY)
     );
     world.createEntity(
       new TransformComponent(-boundarySize, 0, boundarySize, rendererHeight),
-      ColliderComponent.aabb()
+      ColliderComponent.aabb().setTags(Constants.Tags.BOUNDARY)
     );
     world.createEntity(
       new TransformComponent(rendererWidth, 0, boundarySize, rendererHeight),
-      ColliderComponent.aabb()
+      ColliderComponent.aabb().setTags(Constants.Tags.BOUNDARY)
     );
   }
 
@@ -137,8 +136,9 @@ public class InitialRooms {
     portalParticleEmitter.setParticlesPerEmit(5);
 
     world.createEntity(
+      new PortalComponent(),
       new TransformComponent(x, y, 20),
-      ColliderComponent.circle(20).setSensor(true).setTags(Constants.Tags.PORTAL),
+      ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
       new CircleRendererComponent(Color.YELLOW, true), // TODO temp until particle layer works
       new LayerComponent(Constants.Layers.OBJECTS),
       portalParticleEmitter
