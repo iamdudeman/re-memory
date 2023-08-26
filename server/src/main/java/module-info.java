@@ -1,4 +1,4 @@
-module technology.sola.engine.template.server {
+module technology.sola.rememory.server {
   requires technology.sola.engine.server;
-  requires technology.sola.engine.template.game;
+  requires technology.sola.rememory.game;
 }

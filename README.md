@@ -1,4 +1,4 @@
-# sola-game-template
+# re;memory
 
 Template project for building a game using [sola-game-engine](https://github.com/iamdudeman/sola-game-engine).
 
