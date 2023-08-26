@@ -1,6 +1,5 @@
 package technology.sola.engine.rememory;
 
-import technology.sola.engine.RoomBuilders;
 import technology.sola.engine.assets.BulkAssetLoader;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.assets.graphics.font.Font;
@@ -15,6 +14,7 @@ import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.engine.rememory.gui.GameGui;
 import technology.sola.engine.rememory.systems.ChangeRoomSystem;
 import technology.sola.engine.rememory.systems.PlayerSystem;
+import technology.sola.engine.rememory.systems.PortalSystem;
 
 public class ReMemorySola extends SolaWithDefaults {
   public ReMemorySola() {
@@ -29,21 +29,28 @@ public class ReMemorySola extends SolaWithDefaults {
       .useLighting(new Color(10, 10, 10))
       .useBackgroundColor(Color.WHITE);
 
+    // default physics overrides
     solaEcs.getSystem(GravitySystem.class).setActive(false);
-    solaEcs.addSystem(new ImpulseCollisionResolutionSystem(eventHub, 15, 0.001f, 0.7f));
+    solaEcs.addSystem(
+      new ImpulseCollisionResolutionSystem(eventHub, 15, 0.001f, 0.7f)
+    );
 
+    // rendering stuff
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
     platform.getRenderer().createLayers(
       Constants.Layers.OBJECTS
     );
 
+    // ecs
     solaEcs.addSystems(
-      new PlayerSystem(keyboardInput, eventHub),
+      new PlayerSystem(keyboardInput),
       new ParticleSystem(),
-      new ChangeRoomSystem(eventHub, platform.getRenderer(), solaEcs)
+      new ChangeRoomSystem(eventHub, platform.getRenderer(), solaEcs),
+      new PortalSystem(eventHub)
     );
     solaEcs.setWorld(RoomBuilders.buildForest(platform.getRenderer().getWidth(), platform.getRenderer().getHeight()));
 
+    // gui
     solaGuiDocument.setGuiRoot(GameGui.build(solaGuiDocument));
   }
 

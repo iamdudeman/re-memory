@@ -20,10 +20,10 @@ public final class Constants {
       public static final String GRASS_1 = "grass_1";
       public static final String GRASS_2 = "grass_2";
       public static final String GRASS_3 = "grass_3";
+      public static final String TABLE = "table";
       public static final String BATTERY = "battery";
       public static final String LAPIS = "lapis";
-      public static final String TABLE_EMPTY = "table_empty";
-      public static final String TABLE_PAGE = "table_page";
+      public static final String PAEG = "page";
 
       private Sprites() {
       }

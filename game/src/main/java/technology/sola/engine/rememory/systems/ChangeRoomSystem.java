@@ -3,7 +3,7 @@ package technology.sola.engine.rememory.systems;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.World;
-import technology.sola.engine.RoomBuilders;
+import technology.sola.engine.rememory.RoomBuilders;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.rememory.events.NewRoomEvent;

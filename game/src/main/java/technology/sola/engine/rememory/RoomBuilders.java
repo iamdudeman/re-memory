@@ -1,4 +1,4 @@
-package technology.sola.engine;
+package technology.sola.engine.rememory;
 
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
@@ -7,10 +7,7 @@ import technology.sola.engine.graphics.components.*;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
-import technology.sola.engine.physics.component.ParticleEmitterComponent;
-import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.components.PortalComponent;
-import technology.sola.math.linear.Vector2D;
 
 import java.util.Random;
 
@@ -124,24 +121,12 @@ public class RoomBuilders {
   }
 
   private static void addPortal(World world, float x, float y) {
-    ParticleEmitterComponent portalParticleEmitter = new ParticleEmitterComponent();
-
-    // TODO test these settings out later
-    portalParticleEmitter.setParticleBlendMode(BlendMode.DISSOLVE);
-    portalParticleEmitter.setParticleColor(new Color(220, 220, 220));
-    portalParticleEmitter.setParticleSizeBounds(3, 5);
-    portalParticleEmitter.setParticleLifeBounds(3, 5);
-    portalParticleEmitter.setParticleVelocityBounds(new Vector2D(-5f, -5f), new Vector2D(5f, 5f));
-    portalParticleEmitter.setParticleEmissionDelay(0.1f);
-    portalParticleEmitter.setParticlesPerEmit(5);
-
     world.createEntity(
-      new PortalComponent(),
+      new PortalComponent(true),
       new TransformComponent(x, y, 20),
       ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
-      new CircleRendererComponent(Color.YELLOW, true), // TODO temp until particle layer works
-      new LayerComponent(Constants.Layers.OBJECTS),
-      portalParticleEmitter
+      new CircleRendererComponent(Color.LIGHT_GRAY, true), // TODO temp until particle layer works
+      new LayerComponent(Constants.Layers.OBJECTS)
     );
   }
 }
