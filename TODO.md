@@ -3,7 +3,6 @@
 * You can always have a re;memory
     * Who you are
         * attributes that affect gameplay and contribute to your story
-            * name
             * move speed
             * battery drain
         * re;memory resets all attributes
@@ -12,7 +11,8 @@
             * good -> plus to an attribute
             * bad -> minus to an attribute
             * very bad
-    * Where you've been
+        * name (affects all attributes -1 to +1)
+      * Where you've been
         * the rooms you have seen so far
         * always start outside the "mansion"
         * first room is always a "dead end"
@@ -25,10 +25,15 @@
 
 ### Random notes
 
+* Attribute "slots"
+  * name - 1
+  * job - 1
+  * interests - 3
+
 * Battery bar that steadily goes down
-* Maybe only 5 inventory slots
+* Maybe only 3 inventory slots
 * Show attributes in top left
-    * Name
     * Haste - move speed
     * Efficiency? - battery goes down slower
     * Clarity? - can see more
+    * Luck (better chance to get + attributes)
