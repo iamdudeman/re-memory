@@ -3,10 +3,11 @@ package technology.sola.engine.rememory.systems;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
-import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.KeyboardInput;
+import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.rememory.Constants;
+import technology.sola.math.linear.Vector2D;
 
 public class PlayerSystem extends EcsSystem {
   private final KeyboardInput keyboardInput;
@@ -17,21 +18,23 @@ public class PlayerSystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    final int speed = 2;
+    final int speed = 50;
     Entity playerEntity = world.findEntityByName(Constants.Names.PLAYER);
-    TransformComponent transformComponent = playerEntity.getComponent(TransformComponent.class);
+    DynamicBodyComponent dynamicBodyComponent = playerEntity.getComponent(DynamicBodyComponent.class);
+
+    dynamicBodyComponent.setVelocity(new Vector2D(0, 0));
 
     if (keyboardInput.isKeyHeld(Key.W)) {
-      transformComponent.setY(transformComponent.getY() - speed);
+      dynamicBodyComponent.setVelocity(new Vector2D(0, -speed));
     }
     if (keyboardInput.isKeyHeld(Key.S)) {
-      transformComponent.setY(transformComponent.getY() + speed);
+      dynamicBodyComponent.setVelocity(new Vector2D(0, speed));
     }
     if (keyboardInput.isKeyHeld(Key.A)) {
-      transformComponent.setX(transformComponent.getX() - speed);
+      dynamicBodyComponent.setVelocity(new Vector2D(-speed, dynamicBodyComponent.getVelocity().y()));
     }
     if (keyboardInput.isKeyHeld(Key.D)) {
-      transformComponent.setX(transformComponent.getX() + speed);
+      dynamicBodyComponent.setVelocity(new Vector2D(speed, dynamicBodyComponent.getVelocity().y()));
     }
   }
 }

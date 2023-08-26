@@ -3,19 +3,50 @@ package technology.sola.engine;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.components.BlendModeComponent;
-import technology.sola.engine.graphics.components.LayerComponent;
-import technology.sola.engine.graphics.components.LightComponent;
-import technology.sola.engine.graphics.components.SpriteComponent;
+import technology.sola.engine.graphics.components.*;
 import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.DynamicBodyComponent;
+import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.rememory.Constants;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.Random;
 
 public class InitialRooms {
+  private static final float boundarySize = 50;
+
   public static World buildFirstRoom() {
     // todo
     return new World(5);
+  }
+
+  public static World buildCozy(int rendererWidth, int rendererHeight) {
+    World world = new World(1500);
+
+    for (int i = 0; i < rendererWidth; i += 16) {
+      for (int j = 0; j < rendererHeight; j += 16) {
+        world.createEntity(
+          new TransformComponent(i, j),
+          new SpriteComponent(Constants.Assets.CozySprites.ID, Constants.Assets.CozySprites.FLOOR)
+        );
+
+        if (j < 16) {
+          world.createEntity(
+            new TransformComponent(i, j),
+            new SpriteComponent(Constants.Assets.CozySprites.ID, Constants.Assets.CozySprites.BACK_WALL_TOP)
+          );
+          world.createEntity(
+            new TransformComponent(i, j + 8),
+            new SpriteComponent(Constants.Assets.CozySprites.ID, Constants.Assets.CozySprites.BACK_WALL_BOTTOM)
+          );
+        }
+      }
+    }
+
+    addPlayer(world);
+
+    return world;
   }
 
   public static World buildForest(int rendererWidth, int rendererHeight) {
@@ -24,18 +55,12 @@ public class InitialRooms {
 
     for (int i = 0; i < rendererWidth; i += 8) {
       for (int j = 0; j < rendererHeight; j += 8) {
-        String sprite;
-
-        if (i >= 40 && i <= 200 && j <= 40 && j >= 0) {
-          sprite = Constants.Assets.Sprites.WOOD_1;
-        } else {
-          int grassTileIndex = random.nextInt(3) + 1;
-          sprite = "grass_" + grassTileIndex;
-        }
+        int grassTileIndex = random.nextInt(3) + 1;
+        String sprite = "grass_" + grassTileIndex;
 
         world.createEntity(
           new TransformComponent(i, j),
-          new SpriteComponent(Constants.Assets.Sprites.ID_SHEET, sprite)
+          new SpriteComponent(Constants.Assets.Sprites.ID, sprite)
         );
       }
     }
@@ -50,27 +75,73 @@ public class InitialRooms {
 
       world.createEntity(
         new TransformComponent(x, y),
-        new SpriteComponent(Constants.Assets.Sprites.ID_SHEET, Constants.Assets.Sprites.TREE),
+        new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.TREE),
         new LayerComponent(Constants.Layers.OBJECTS),
         new BlendModeComponent(BlendMode.MASK)
       );
     }
 
-    world.createEntity(
-      new TransformComponent(100, 0),
-      new SpriteComponent(Constants.Assets.Sprites.ID_SHEET, Constants.Assets.Sprites.DOOR_TOP),
-      new LayerComponent(Constants.Layers.OBJECTS),
-      new BlendModeComponent(BlendMode.MASK)
-    );
+    int x = random.nextInt(rendererWidth - 20) + 10;
+    int y = random.nextInt(rendererHeight - 20) + 10;
 
+    addBoundaries(world, rendererWidth, rendererHeight);
+
+    addPortal(world, x, y);
+
+    addPlayer(world);
+
+    return world;
+  }
+
+  private static void addBoundaries(World world, int rendererWidth, int rendererHeight) {
     world.createEntity(
+      new TransformComponent(0, -boundarySize, rendererWidth, boundarySize),
+      ColliderComponent.aabb()
+    );
+    world.createEntity(
+      new TransformComponent(0, rendererHeight, rendererWidth, boundarySize),
+      ColliderComponent.aabb()
+    );
+    world.createEntity(
+      new TransformComponent(-boundarySize, 0, boundarySize, rendererHeight),
+      ColliderComponent.aabb()
+    );
+    world.createEntity(
+      new TransformComponent(rendererWidth, 0, boundarySize, rendererHeight),
+      ColliderComponent.aabb()
+    );
+  }
+
+  private static void addPlayer(World world) {
+    world.createEntity(
+      new DynamicBodyComponent(),
       new TransformComponent(100, 100, 1, 1),
       new LayerComponent(Constants.Layers.OBJECTS, 2),
       new BlendModeComponent(BlendMode.MASK),
       new LightComponent(50, new Color(200, 255, 255, 255)).setOffset(2.5f, 4),
-      new SpriteComponent(Constants.Assets.Sprites.ID_SHEET, Constants.Assets.Sprites.PLAYER)
+      new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PLAYER),
+      ColliderComponent.aabb(3, 5).setTags(Constants.Tags.PLAYER)
     ).setName(Constants.Names.PLAYER);
+  }
 
-    return world;
+  private static void addPortal(World world, float x, float y) {
+    ParticleEmitterComponent portalParticleEmitter = new ParticleEmitterComponent();
+
+    // TODO test these settings out later
+    portalParticleEmitter.setParticleBlendMode(BlendMode.DISSOLVE);
+    portalParticleEmitter.setParticleColor(new Color(220, 220, 220));
+    portalParticleEmitter.setParticleSizeBounds(3, 5);
+    portalParticleEmitter.setParticleLifeBounds(3, 5);
+    portalParticleEmitter.setParticleVelocityBounds(new Vector2D(-5f, -5f), new Vector2D(5f, 5f));
+    portalParticleEmitter.setParticleEmissionDelay(0.1f);
+    portalParticleEmitter.setParticlesPerEmit(5);
+
+    world.createEntity(
+      new TransformComponent(x, y, 20),
+      ColliderComponent.circle(20).setSensor(true).setTags(Constants.Tags.PORTAL),
+      new CircleRendererComponent(Color.YELLOW, true), // TODO temp until particle layer works
+      new LayerComponent(Constants.Layers.OBJECTS),
+      portalParticleEmitter
+    );
   }
 }
