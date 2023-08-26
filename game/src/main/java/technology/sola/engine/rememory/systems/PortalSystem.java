@@ -11,7 +11,7 @@ import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.components.PortalComponent;
-import technology.sola.engine.rememory.events.NewRoomEvent;
+import technology.sola.engine.rememory.events.ChangeRoomEvent;
 import technology.sola.math.linear.Vector2D;
 
 public class PortalSystem extends EcsSystem {
@@ -22,7 +22,7 @@ public class PortalSystem extends EcsSystem {
         entity -> entity.getComponent(ColliderComponent.class).hasTag(Constants.Tags.PORTAL),
         (player, portal) -> {
           if (portal.getComponent(PortalComponent.class).isActive()) {
-            eventHub.emit(new NewRoomEvent(null));
+            eventHub.emit(new ChangeRoomEvent(null));
           }
         }
       );

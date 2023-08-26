@@ -12,7 +12,7 @@ import technology.sola.engine.physics.system.GravitySystem;
 import technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.engine.rememory.gui.GameGui;
-import technology.sola.engine.rememory.systems.ChangeRoomSystem;
+import technology.sola.engine.rememory.systems.RoomSystem;
 import technology.sola.engine.rememory.systems.PlayerSystem;
 import technology.sola.engine.rememory.systems.PortalSystem;
 
@@ -45,10 +45,9 @@ public class ReMemorySola extends SolaWithDefaults {
     solaEcs.addSystems(
       new PlayerSystem(keyboardInput),
       new ParticleSystem(),
-      new ChangeRoomSystem(eventHub, platform.getRenderer(), solaEcs),
+      new RoomSystem(eventHub, platform.getRenderer(), solaEcs),
       new PortalSystem(eventHub)
     );
-    solaEcs.setWorld(RoomBuilders.buildForest(platform.getRenderer().getWidth(), platform.getRenderer().getHeight()));
 
     // gui
     solaGuiDocument.setGuiRoot(GameGui.build(solaGuiDocument));

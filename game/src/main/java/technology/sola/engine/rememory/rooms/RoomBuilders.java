@@ -1,4 +1,4 @@
-package technology.sola.engine.rememory;
+package technology.sola.engine.rememory.rooms;
 
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
@@ -7,6 +7,7 @@ import technology.sola.engine.graphics.components.*;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
+import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.components.PortalComponent;
 
 import java.util.Random;
@@ -114,7 +115,7 @@ public class RoomBuilders {
       new TransformComponent(100, 100, 1, 1),
       new LayerComponent(Constants.Layers.OBJECTS, 2),
       new BlendModeComponent(BlendMode.MASK),
-      new LightComponent(50, new Color(200, 255, 255, 255)).setOffset(2.5f, 4),
+      new LightComponent(200, new Color(200, 255, 255, 255)).setOffset(2.5f, 4),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PLAYER),
       ColliderComponent.aabb(5, 7).setTags(Constants.Tags.PLAYER)
     ).setName(Constants.Names.PLAYER);
@@ -122,7 +123,7 @@ public class RoomBuilders {
 
   private static void addPortal(World world, float x, float y) {
     world.createEntity(
-      new PortalComponent(true),
+      new PortalComponent(null, false),
       new TransformComponent(x, y, 20),
       ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
       new CircleRendererComponent(Color.LIGHT_GRAY, true), // TODO temp until particle layer works
