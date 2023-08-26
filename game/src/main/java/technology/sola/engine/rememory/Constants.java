@@ -21,7 +21,7 @@ public final class Constants {
       public static final String GRASS_2 = "grass_2";
       public static final String GRASS_3 = "grass_3";
       public static final String BATTERY = "battery";
-      public static final String KEY = "key";
+      public static final String LAPIS = "lapis";
       public static final String TABLE_EMPTY = "table_empty";
       public static final String TABLE_PAGE = "table_page";
 
