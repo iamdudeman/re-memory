@@ -3,6 +3,9 @@ package technology.sola.engine.rememory.systems;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.World;
+import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.rememory.components.PortalComponent;
 import technology.sola.engine.rememory.rooms.CozyRoomWorld;
 import technology.sola.engine.rememory.rooms.ForestRoomWorld;
@@ -52,6 +55,8 @@ public class RoomSystem extends EcsSystem {
       nextRoom.createView().of(PortalComponent.class).getEntries()
         .forEach(entry -> {
           entry.c1().resetActivation();
+          entry.entity().removeComponent(ParticleEmitterComponent.class);
+          entry.entity().getComponent(CircleRendererComponent.class).setColor(Color.LIGHT_GRAY);
         });
     }
 
