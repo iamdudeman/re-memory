@@ -30,7 +30,7 @@ public class ReMemorySola extends SolaWithDefaults {
     defaultsConfigurator.useGraphics().useLighting(new Color(10, 10, 10)).useBackgroundColor(Color.WHITE);
 
     assetLoaderProvider.get(SpriteSheet.class)
-      .addAssetMapping("main", "assets/forest_spritesheet.json");
+      .addAssetMapping("main", "assets/rememory_spritesheet.json");
 
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
 

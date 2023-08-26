@@ -1,13 +1,13 @@
-package technology.sola.javafx;
+package technology.sola.browser.rememory;
 
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.rememory.ReMemorySola;
-import technology.sola.engine.platform.javafx.JavaFxSolaPlatform;
+import technology.sola.engine.platform.browser.BrowserSolaPlatform;
 
-public class JavaFxMain {
+public class BrowserMain {
   public static void main(String[] args) {
-    SolaPlatform solaPlatform = new JavaFxSolaPlatform();
+    SolaPlatform solaPlatform = new BrowserSolaPlatform();
     Sola sola = new ReMemorySola();
 
     solaPlatform.play(sola);

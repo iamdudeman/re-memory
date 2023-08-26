@@ -1,13 +1,13 @@
-package technology.sola.browser;
+package technology.sola.swing.rememory;
 
 import technology.sola.engine.core.SolaPlatform;
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.rememory.ReMemorySola;
-import technology.sola.engine.platform.browser.BrowserSolaPlatform;
+import technology.sola.engine.platform.swing.SwingSolaPlatform;
 
-public class BrowserMain {
+public class SwingMain {
   public static void main(String[] args) {
-    SolaPlatform solaPlatform = new BrowserSolaPlatform();
+    SolaPlatform solaPlatform = new SwingSolaPlatform();
     Sola sola = new ReMemorySola();
 
     solaPlatform.play(sola);
