@@ -1,6 +1,9 @@
 # re;memory
 
-Template project for building a game using [sola-game-engine](https://github.com/iamdudeman/sola-game-engine).
+This is a game made for the One Lone Coder Codejam 2023. The theme for the codejam was "Memory."
+It was built on  [sola-game-engine](https://github.com/iamdudeman/sola-game-engine) using repo
+template [sola-game-template](https://github.com/iamdudeman/sola-game-template)
+to start the project.
 
 ## Project structure
 
