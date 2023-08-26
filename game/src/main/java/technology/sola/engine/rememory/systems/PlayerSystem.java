@@ -64,6 +64,5 @@ public class PlayerSystem extends EcsSystem {
     }
 
     dynamicBodyComponent.setVelocity(new Vector2D(xSpeed, ySpeed));
-
   }
 }
