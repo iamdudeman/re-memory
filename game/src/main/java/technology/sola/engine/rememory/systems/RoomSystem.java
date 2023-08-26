@@ -3,7 +3,9 @@ package technology.sola.engine.rememory.systems;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.World;
-import technology.sola.engine.rememory.rooms.RoomBuilders;
+import technology.sola.engine.rememory.components.PortalComponent;
+import technology.sola.engine.rememory.rooms.CozyRoomWorld;
+import technology.sola.engine.rememory.rooms.ForestRoomWorld;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.rememory.events.ChangeRoomEvent;
@@ -15,6 +17,7 @@ public class RoomSystem extends EcsSystem {
   private final Renderer renderer;
   private final SolaEcs solaEcs;
   private final Map<String, World> worldMap = new HashMap<>();
+  private String currentRoomId;
   private String nextRoomId;
   private int idCounter = 0;
 
@@ -34,14 +37,22 @@ public class RoomSystem extends EcsSystem {
 
     if (nextRoomId == null) {
       if (idCounter == 0) {
-        nextRoom = RoomBuilders.buildForest(renderer.getWidth(), renderer.getHeight());
+        nextRoom = new ForestRoomWorld(null, renderer.getWidth(), renderer.getHeight());
       } else {
-        nextRoom = RoomBuilders.buildCozy(renderer.getWidth(), renderer.getHeight());
+        nextRoom = new CozyRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight());
       }
 
-      worldMap.put(nextId(), nextRoom);
+      currentRoomId = nextId();
+      worldMap.put(currentRoomId, nextRoom);
     } else {
+      currentRoomId = nextRoomId;
       nextRoom = worldMap.get(nextRoomId);
+
+      // reset room
+      nextRoom.createView().of(PortalComponent.class).getEntries()
+        .forEach(entry -> {
+          entry.c1().resetActivation();
+        });
     }
 
     solaEcs.setWorld(nextRoom);

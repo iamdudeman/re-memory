@@ -43,7 +43,7 @@ public class ReMemorySola extends SolaWithDefaults {
 
     // ecs
     solaEcs.addSystems(
-      new PlayerSystem(keyboardInput),
+      new PlayerSystem(keyboardInput, eventHub),
       new ParticleSystem(),
       new RoomSystem(eventHub, platform.getRenderer(), solaEcs),
       new PortalSystem(eventHub)

@@ -9,6 +9,8 @@ public class PortalComponent implements Component {
   private String roomId;
 
   public PortalComponent(String roomId, boolean delayActivation) {
+    this.roomId = roomId;
+
     if (!delayActivation) {
       inactiveTicks = ACTIVATION_DELAY;
     }
@@ -16,6 +18,10 @@ public class PortalComponent implements Component {
 
   public String getRoomId() {
     return roomId;
+  }
+
+  public void clearRoomId() {
+    roomId = null;
   }
 
   public boolean isActive() {
@@ -32,5 +38,10 @@ public class PortalComponent implements Component {
 
   public void activate() {
     isActive = true;
+  }
+
+  public void resetActivation() {
+    isActive = false;
+    inactiveTicks = 0;
   }
 }

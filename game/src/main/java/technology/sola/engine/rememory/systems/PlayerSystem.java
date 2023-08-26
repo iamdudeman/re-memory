@@ -3,18 +3,22 @@ package technology.sola.engine.rememory.systems;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
+import technology.sola.engine.event.EventHub;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.rememory.Constants;
+import technology.sola.engine.rememory.events.ForgetWhereEvent;
 import technology.sola.math.linear.Vector2D;
 
 public class PlayerSystem extends EcsSystem {
   private final KeyboardInput keyboardInput;
+  private final EventHub eventHub;
   private final float halfRootTwo = (float) (Math.sqrt(2) * 0.5f);
 
-  public PlayerSystem(KeyboardInput keyboardInput) {
+  public PlayerSystem(KeyboardInput keyboardInput, EventHub eventHub) {
     this.keyboardInput = keyboardInput;
+    this.eventHub = eventHub;
   }
 
   @Override
@@ -47,6 +51,10 @@ public class PlayerSystem extends EcsSystem {
         xSpeed = speed * halfRootTwo;
         ySpeed *= halfRootTwo;
       }
+    }
+
+    if (keyboardInput.isKeyPressed(Key.ONE)) {
+      eventHub.emit(new ForgetWhereEvent());
     }
 
     dynamicBodyComponent.setVelocity(new Vector2D(xSpeed, ySpeed));
