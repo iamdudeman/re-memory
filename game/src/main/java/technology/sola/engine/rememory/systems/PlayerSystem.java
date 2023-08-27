@@ -5,6 +5,7 @@ import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
+import technology.sola.engine.graphics.components.LightComponent;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.physics.component.ColliderComponent;
@@ -12,18 +13,21 @@ import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.events.ForgetWhereEvent;
+import technology.sola.engine.rememory.gamestate.PlayerAttributeContainer;
 import technology.sola.engine.rememory.rooms.RoomWorld;
 import technology.sola.math.linear.Vector2D;
 
 public class PlayerSystem extends EcsSystem {
+  private final float halfRootTwo = (float) (Math.sqrt(2) * 0.5f);
   private final KeyboardInput keyboardInput;
   private final EventHub eventHub;
-  private final float halfRootTwo = (float) (Math.sqrt(2) * 0.5f);
+  private final PlayerAttributeContainer playerAttributeContainer;
   private int lapisCount = 0;
 
-  public PlayerSystem(KeyboardInput keyboardInput, EventHub eventHub) {
+  public PlayerSystem(KeyboardInput keyboardInput, EventHub eventHub, PlayerAttributeContainer playerAttributeContainer) {
     this.keyboardInput = keyboardInput;
     this.eventHub = eventHub;
+    this.playerAttributeContainer = playerAttributeContainer;
 
     eventHub.add(SensorEvent.class, event -> {
       event.collisionManifold().conditionallyResolveCollision(
@@ -39,9 +43,13 @@ public class PlayerSystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    final int speed = 50;
     Entity playerEntity = world.findEntityByName(Constants.Names.PLAYER);
     DynamicBodyComponent dynamicBodyComponent = playerEntity.getComponent(DynamicBodyComponent.class);
+    LightComponent lightComponent = playerEntity.getComponent(LightComponent.class);
+
+    // apply attributes
+    final int speed = playerAttributeContainer.getFitness() * 10;
+    lightComponent.setRadius(playerAttributeContainer.getVision() * 10);
 
     float xSpeed = 0;
     float ySpeed = 0;
