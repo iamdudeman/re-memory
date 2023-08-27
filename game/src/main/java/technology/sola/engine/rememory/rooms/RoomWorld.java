@@ -17,7 +17,7 @@ public abstract class RoomWorld extends World {
   protected Random random = new Random();
   protected int rendererWidth;
   protected int rendererHeight;
-  private String previousRoomId;
+  private final String previousRoomId;
 
   public RoomWorld(String previousRoomId, int rendererWidth, int rendererHeight) {
     super(1500);

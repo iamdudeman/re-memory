@@ -11,6 +11,8 @@ import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.system.GravitySystem;
 import technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem;
 import technology.sola.engine.physics.system.ParticleSystem;
+import technology.sola.engine.rememory.events.ForgetWhoEvent;
+import technology.sola.engine.rememory.gamestate.PlayerAttributeContainer;
 import technology.sola.engine.rememory.gui.GameGui;
 import technology.sola.engine.rememory.systems.RoomSystem;
 import technology.sola.engine.rememory.systems.PlayerSystem;
@@ -41,6 +43,8 @@ public class ReMemorySola extends SolaWithDefaults {
       Constants.Layers.OBJECTS
     );
 
+    PlayerAttributeContainer playerAttributeContainer = new PlayerAttributeContainer(eventHub);
+
     // ecs
     solaEcs.addSystems(
       new PlayerSystem(keyboardInput, eventHub),
@@ -50,7 +54,9 @@ public class ReMemorySola extends SolaWithDefaults {
     );
 
     // gui
-    solaGuiDocument.setGuiRoot(GameGui.build(solaGuiDocument));
+    solaGuiDocument.setGuiRoot(GameGui.build(solaGuiDocument, playerAttributeContainer, eventHub));
+
+    eventHub.emit(new ForgetWhoEvent());
   }
 
   @Override

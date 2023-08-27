@@ -7,8 +7,6 @@ import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.rememory.Constants;
 
-import java.util.Random;
-
 public class ForestRoomWorld extends RoomWorld {
   public ForestRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight) {
     super(previousRoomId, rendererWidth, rendererHeight);
