@@ -35,7 +35,7 @@ public class ForestRoomWorld extends RoomWorld {
       createEntity(
         new TransformComponent(x, y),
         new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.TREE),
-        new LayerComponent(Constants.Layers.OBJECTS),
+        new LayerComponent(Constants.Layers.DECORATION),
         new BlendModeComponent(BlendMode.MASK)
       );
     }

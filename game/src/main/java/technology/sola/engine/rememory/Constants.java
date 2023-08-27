@@ -34,6 +34,7 @@ public final class Constants {
   }
 
   public final static class Layers {
+    public static final String DECORATION = "decoration";
     public static final String OBJECTS = "objects";
   }
 

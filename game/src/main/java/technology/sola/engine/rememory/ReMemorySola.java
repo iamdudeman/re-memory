@@ -44,6 +44,7 @@ public class ReMemorySola extends SolaWithDefaults {
     // rendering stuff
     platform.getViewport().setAspectMode(AspectMode.MAINTAIN);
     platform.getRenderer().createLayers(
+      Constants.Layers.DECORATION,
       Constants.Layers.OBJECTS
     );
 

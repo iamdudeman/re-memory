@@ -1,6 +1,7 @@
 package technology.sola.engine.rememory.rooms;
 
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.rememory.Constants;
@@ -22,11 +23,13 @@ public class CozyRoomWorld extends RoomWorld {
         if (j == 0) {
           createEntity(
             new TransformComponent(i, j),
-            new SpriteComponent(Constants.Assets.CozySprites.ID, Constants.Assets.CozySprites.BACK_WALL_TOP)
+            new SpriteComponent(Constants.Assets.CozySprites.ID, Constants.Assets.CozySprites.BACK_WALL_TOP),
+            new LayerComponent(Constants.Layers.DECORATION)
           );
           createEntity(
             new TransformComponent(i, j + 8),
-            new SpriteComponent(Constants.Assets.CozySprites.ID, Constants.Assets.CozySprites.BACK_WALL_BOTTOM)
+            new SpriteComponent(Constants.Assets.CozySprites.ID, Constants.Assets.CozySprites.BACK_WALL_BOTTOM),
+            new LayerComponent(Constants.Layers.DECORATION)
           );
         }
       }
@@ -39,6 +42,7 @@ public class CozyRoomWorld extends RoomWorld {
         random.nextInt(20, rendererHeight - 20)
       ),
       ColliderComponent.aabb(2, 2).setSensor(true).setTags(Constants.Tags.LAPIS),
+      new LayerComponent(Constants.Layers.OBJECTS),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.LAPIS)
     );
 
@@ -50,6 +54,7 @@ public class CozyRoomWorld extends RoomWorld {
       ),
       ColliderComponent.aabb(3, 6).setSensor(true),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PAGE),
+      new LayerComponent(Constants.Layers.OBJECTS),
       new PageComponent(reMemoryMaker.createPage())
     );
 
