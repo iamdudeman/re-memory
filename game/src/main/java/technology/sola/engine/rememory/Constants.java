@@ -48,6 +48,7 @@ public final class Constants {
     BOUNDARY,
     PLAYER,
     PORTAL,
+    LAPIS,
   }
 
   private Constants() {

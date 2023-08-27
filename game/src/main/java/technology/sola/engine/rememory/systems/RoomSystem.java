@@ -21,7 +21,7 @@ public class RoomSystem extends EcsSystem {
   private final SolaEcs solaEcs;
   private final Map<String, World> worldMap = new HashMap<>();
   private String currentRoomId;
-  private String nextRoomId;
+  private String nextRoomId = "";
   private int idCounter = 0;
 
   public RoomSystem(EventHub eventHub, Renderer renderer, SolaEcs solaEcs) {
@@ -29,23 +29,30 @@ public class RoomSystem extends EcsSystem {
     this.solaEcs = solaEcs;
 
     eventHub.add(ChangeRoomEvent.class, event -> {
-      nextRoomId = event.roomId();
+      if (event.portalComponent().getRoomId() == null) {
+        nextRoomId = nextId();
+        event.portalComponent().setRoomId(nextRoomId);
+      } else {
+        nextRoomId = event.portalComponent().getRoomId();
+      }
+
       setActive(true);
     });
   }
 
   @Override
   public void update(World world, float deltaTime) {
-    World nextRoom;
+    World nextRoom = worldMap.get(nextRoomId);
 
-    if (nextRoomId == null) {
+    if (nextRoom == null) {
       if (idCounter == 0) {
+        nextRoomId = nextId();
         nextRoom = new ForestRoomWorld(null, renderer.getWidth(), renderer.getHeight());
       } else {
         nextRoom = new CozyRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight());
       }
 
-      currentRoomId = nextId();
+      currentRoomId = nextRoomId;
       worldMap.put(currentRoomId, nextRoom);
     } else {
       currentRoomId = nextRoomId;

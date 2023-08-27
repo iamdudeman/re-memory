@@ -13,7 +13,6 @@ public class ForestRoomWorld extends RoomWorld {
   public ForestRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight) {
     super(previousRoomId, rendererWidth, rendererHeight);
 
-    Random random = new Random();
 
     for (int i = 0; i < rendererWidth; i += 8) {
       for (int j = 0; j < rendererHeight; j += 8) {

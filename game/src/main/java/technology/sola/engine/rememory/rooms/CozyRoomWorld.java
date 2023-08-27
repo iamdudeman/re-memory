@@ -30,6 +30,15 @@ public class CozyRoomWorld extends RoomWorld {
       }
     }
 
+    int x = random.nextInt(10, rendererWidth - 20);
+    int y = random.nextInt(20, rendererHeight - 20);
+
+    createEntity(
+      new TransformComponent(x, y),
+      ColliderComponent.aabb(2, 2).setSensor(true).setTags(Constants.Tags.LAPIS),
+      new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.LAPIS)
+    );
+
     addBoundaries();
 
     addInitialPortal(rendererWidth * 0.5f, rendererHeight * 0.5f, true);

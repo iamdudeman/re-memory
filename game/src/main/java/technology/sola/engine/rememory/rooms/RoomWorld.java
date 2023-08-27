@@ -10,8 +10,11 @@ import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.components.PortalComponent;
 
+import java.util.Random;
+
 public abstract class RoomWorld extends World {
   private static final float boundarySize = 50;
+  protected Random random = new Random();
   protected int rendererWidth;
   protected int rendererHeight;
   private String previousRoomId;
@@ -21,6 +24,16 @@ public abstract class RoomWorld extends World {
     this.previousRoomId = previousRoomId;
     this.rendererWidth = rendererWidth;
     this.rendererHeight = rendererHeight;
+  }
+
+  public void addPortal(float x, float y) {
+    createEntity(
+      new PortalComponent(null, true),
+      new TransformComponent(x, y, 20),
+      ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
+      new CircleRendererComponent(Color.LIGHT_GRAY, true), // TODO temp until particle layer works
+      new LayerComponent(Constants.Layers.OBJECTS)
+    );
   }
 
   protected void addPlayer(float x, float y) {

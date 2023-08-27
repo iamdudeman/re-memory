@@ -20,8 +20,8 @@ public class PortalComponent implements Component {
     return roomId;
   }
 
-  public void clearRoomId() {
-    roomId = null;
+  public void setRoomId(String roomId) {
+    this.roomId = roomId;
   }
 
   public boolean isActive() {

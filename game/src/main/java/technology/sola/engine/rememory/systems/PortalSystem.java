@@ -27,7 +27,7 @@ public class PortalSystem extends EcsSystem {
           PortalComponent portalComponent = portal.getComponent(PortalComponent.class);
 
           if (portalComponent.isActive()) {
-            eventHub.emit(new ChangeRoomEvent(portalComponent.getRoomId()));
+            eventHub.emit(new ChangeRoomEvent(portalComponent));
           }
         }
       );
@@ -44,7 +44,7 @@ public class PortalSystem extends EcsSystem {
       .getEntries()
       .forEach(entry -> {
         if (clearPortalIds) {
-          entry.c1().clearRoomId();
+          entry.c1().setRoomId(null);
         }
 
         if (entry.c1().canBeActivated()) {
