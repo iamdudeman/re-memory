@@ -62,7 +62,7 @@ public class GameGui {
       p -> p.setGap(3).setDirection(StreamGuiElementContainer.Direction.VERTICAL).setId("page_container").setDisplay(Display.NONE),
       document.createElement(
         TextGuiElement::new,
-        p -> p.setWidth(140).padding.set(2, 5).setBorderColor(Color.BLACK).setId("page")
+        p -> p.setWidth(165).padding.set(2, 5).setBorderColor(Color.BLACK).setId("page")
       ),
       document.createElement(
         StreamGuiElementContainer::new,
