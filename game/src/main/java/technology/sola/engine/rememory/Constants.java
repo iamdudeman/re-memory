@@ -23,7 +23,7 @@ public final class Constants {
       public static final String TABLE = "table";
       public static final String BATTERY = "battery";
       public static final String LAPIS = "lapis";
-      public static final String PAEG = "page";
+      public static final String PAGE = "page";
 
       private Sprites() {
       }

@@ -6,8 +6,14 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
+import technology.sola.engine.graphics.gui.elements.input.ButtonGuiElement;
+import technology.sola.engine.graphics.gui.properties.Display;
+import technology.sola.engine.physics.event.SensorEvent;
+import technology.sola.engine.rememory.Constants;
+import technology.sola.engine.rememory.components.PageComponent;
 import technology.sola.engine.rememory.events.AttributesChangedEvent;
 import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
+import technology.sola.engine.rememory.events.PageAcceptedEvent;
 
 public class GameGui {
   public static GuiElement<?> build(SolaGuiDocument document, PlayerAttributeContainer playerAttributeContainer, EventHub eventHub) {
@@ -21,66 +27,69 @@ public class GameGui {
 
     return document.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBackgroundColor(new Color(100, 255, 255, 255)),
+      p -> p.setGap(2).setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setBackgroundColor(new Color(100, 255, 255, 255)).padding.set(2),
+      createAttributeContainer(document),
+      createReadPageContainer(document, eventHub)
+    );
+  }
+
+  private static GuiElement<?> createReadPageContainer(SolaGuiDocument document, EventHub eventHub) {
+    eventHub.add(SensorEvent.class, event -> {
+      event.collisionManifold().conditionallyResolveCollision(
+        entity -> Constants.Names.PLAYER.equals(entity.getName()),
+        entity -> entity.hasComponent(PageComponent.class),
+        (player, page) -> {
+          var pageComponent = page.getComponent(PageComponent.class);
+          var pageContainer = document.getElementById("page_container").properties();
+
+          document.getElementById("page", TextGuiElement.class).properties().setText(pageComponent.reMemoryPage().getText());
+          document.getElementById("page_button", ButtonGuiElement.class).setOnAction(() -> {
+            pageContainer.setDisplay(Display.NONE);
+            page.destroy();
+            eventHub.emit(new PageAcceptedEvent(pageComponent.reMemoryPage()));
+          });
+          pageContainer.setDisplay(Display.DEFAULT);
+        }
+      );
+    });
+
+    return document.createElement(
+      StreamGuiElementContainer::new,
+      p -> p.setGap(3).setDirection(StreamGuiElementContainer.Direction.VERTICAL).setId("page_container").setDisplay(Display.NONE),
       document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setGap(0),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("Name:")
-        ),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setId("name")
-        )
+        TextGuiElement::new,
+        p -> p.setText("This is some text for a page being read.").setWidth(140).padding.set(2, 5).setBorderColor(Color.BLACK).setId("page")
       ),
       document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setGap(0),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("Fitness:")
-        ),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setId("fitness")
-        )
+        ButtonGuiElement::new,
+        p -> p.setText("Remember").padding.set(2).setBackgroundColor(Color.WHITE).setId("page_button").setFocusable(false).hover.setBackgroundColor(Color.WHITE.shade(0.1f))
+      )
+    );
+  }
+
+  private static GuiElement<?> createAttributeContainer(SolaGuiDocument document) {
+    return document.createElement(
+      StreamGuiElementContainer::new,
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.DARK_GRAY),
+      createAttributeText(document, "Name:", "name"),
+      createAttributeText(document, "Fitness:", "fitness"),
+      createAttributeText(document, "Efficiency:", "efficiency"),
+      createAttributeText(document, "Vision:", "vision"),
+      createAttributeText(document, "Luck:", "luck")
+    );
+  }
+
+  private static GuiElement<?> createAttributeText(SolaGuiDocument document, String label, String id) {
+    return document.createElement(
+      StreamGuiElementContainer::new,
+      p -> p.setGap(0),
+      document.createElement(
+        TextGuiElement::new,
+        p -> p.setText(label)
       ),
       document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setGap(0),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("Efficiency:")
-        ),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setId("efficiency")
-        )
-      ),
-      document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setGap(0),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("Vision:")
-        ),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setId("vision")
-        )
-      ),
-      document.createElement(
-        StreamGuiElementContainer::new,
-        p -> p.setGap(0),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setText("Luck:")
-        ),
-        document.createElement(
-          TextGuiElement::new,
-          p -> p.setId("luck")
-        )
+        TextGuiElement::new,
+        p -> p.setId(id)
       )
     );
   }

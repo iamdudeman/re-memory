@@ -4,6 +4,8 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.rememory.Constants;
+import technology.sola.engine.rememory.attributes.ReMemoryPage;
+import technology.sola.engine.rememory.components.PageComponent;
 
 public class CozyRoomWorld extends RoomWorld {
   public CozyRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight) {
@@ -37,6 +39,16 @@ public class CozyRoomWorld extends RoomWorld {
       new TransformComponent(x, y),
       ColliderComponent.aabb(2, 2).setSensor(true).setTags(Constants.Tags.LAPIS),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.LAPIS)
+    );
+
+    createEntity(
+      new TransformComponent(
+        random.nextInt(10, rendererWidth - 20),
+        random.nextInt(20, rendererHeight - 20)
+      ),
+      ColliderComponent.aabb(3, 6).setSensor(true),
+      new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PAGE),
+      new PageComponent(new ReMemoryPage())
     );
 
     addBoundaries();
