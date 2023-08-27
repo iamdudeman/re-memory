@@ -16,11 +16,16 @@ public class PlayerAttributeContainer {
   private int luck;
   private final Map<AttributeCategory, ReMemoryPage> acceptedPages = new HashMap<>();
 
+  private int hack = 0; // todo remove hack
+
   public PlayerAttributeContainer(EventHub eventHub) {
     forget();
 
     eventHub.add(PageAcceptedEvent.class, event -> {
-      // todo
+      // todo remove hack
+      acceptedPages.put(AttributeCategory.values()[hack++], event.reMemoryPage());
+
+      System.out.println("Found page " + acceptedPages.keySet().size());
 
       eventHub.emit(new AttributesChangedEvent());
     });
