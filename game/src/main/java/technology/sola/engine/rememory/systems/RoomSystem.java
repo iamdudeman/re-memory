@@ -7,6 +7,7 @@ import technology.sola.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
+import technology.sola.engine.rememory.attributes.ReMemoryMaker;
 import technology.sola.engine.rememory.components.PortalComponent;
 import technology.sola.engine.rememory.rooms.CozyRoomWorld;
 import technology.sola.engine.rememory.rooms.ForestRoomWorld;
@@ -21,14 +22,16 @@ import java.util.Map;
 public class RoomSystem extends EcsSystem {
   private final Renderer renderer;
   private final SolaEcs solaEcs;
+  private final ReMemoryMaker reMemoryMaker;
   private final Map<String, RoomWorld> worldMap = new HashMap<>();
   private String currentRoomId;
   private String nextRoomId = "";
   private int idCounter = 0;
 
-  public RoomSystem(EventHub eventHub, Renderer renderer, SolaEcs solaEcs) {
+  public RoomSystem(EventHub eventHub, Renderer renderer, SolaEcs solaEcs, ReMemoryMaker reMemoryMaker) {
     this.renderer = renderer;
     this.solaEcs = solaEcs;
+    this.reMemoryMaker = reMemoryMaker;
 
     eventHub.add(ChangeRoomEvent.class, event -> {
       if (event.portalComponent().getRoomId() == null) {
@@ -53,7 +56,7 @@ public class RoomSystem extends EcsSystem {
         nextRoomId = nextId();
         nextRoom = new ForestRoomWorld(null, renderer.getWidth(), renderer.getHeight());
       } else {
-        nextRoom = new CozyRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight());
+        nextRoom = new CozyRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), reMemoryMaker);
       }
 
       currentRoomId = nextRoomId;

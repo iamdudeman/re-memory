@@ -12,6 +12,7 @@ import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.system.GravitySystem;
 import technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem;
 import technology.sola.engine.physics.system.ParticleSystem;
+import technology.sola.engine.rememory.attributes.ReMemoryMaker;
 import technology.sola.engine.rememory.events.ForgetWhoEvent;
 import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
 import technology.sola.engine.rememory.gui.GameGui;
@@ -47,12 +48,13 @@ public class ReMemorySola extends SolaWithDefaults {
     );
 
     PlayerAttributeContainer playerAttributeContainer = new PlayerAttributeContainer(eventHub);
+    ReMemoryMaker reMemoryMaker = new ReMemoryMaker(playerAttributeContainer);
 
     // ecs
     solaEcs.addSystems(
       new PlayerSystem(keyboardInput, eventHub, playerAttributeContainer),
       new ParticleSystem(),
-      new RoomSystem(eventHub, platform.getRenderer(), solaEcs),
+      new RoomSystem(eventHub, platform.getRenderer(), solaEcs, reMemoryMaker),
       new PortalSystem(eventHub)
     );
 

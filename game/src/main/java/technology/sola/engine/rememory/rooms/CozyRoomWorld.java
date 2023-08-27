@@ -4,11 +4,12 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.rememory.Constants;
-import technology.sola.engine.rememory.attributes.ReMemoryPage;
+import technology.sola.engine.rememory.attributes.ReMemoryMaker;
 import technology.sola.engine.rememory.components.PageComponent;
 
 public class CozyRoomWorld extends RoomWorld {
-  public CozyRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight) {
+
+  public CozyRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight, ReMemoryMaker reMemoryMaker) {
     super(previousRoomId, rendererWidth, rendererHeight);
 
     for (int i = 0; i < rendererWidth; i += 16) {
@@ -32,15 +33,17 @@ public class CozyRoomWorld extends RoomWorld {
       }
     }
 
-    int x = random.nextInt(10, rendererWidth - 20);
-    int y = random.nextInt(20, rendererHeight - 20);
-
+    // todo probably needs to be a random chance instead
     createEntity(
-      new TransformComponent(x, y),
+      new TransformComponent(
+        random.nextInt(10, rendererWidth - 20),
+        random.nextInt(20, rendererHeight - 20)
+      ),
       ColliderComponent.aabb(2, 2).setSensor(true).setTags(Constants.Tags.LAPIS),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.LAPIS)
     );
 
+    // todo probably needs to be a random chance instead
     createEntity(
       new TransformComponent(
         random.nextInt(10, rendererWidth - 20),
@@ -48,7 +51,7 @@ public class CozyRoomWorld extends RoomWorld {
       ),
       ColliderComponent.aabb(3, 6).setSensor(true),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PAGE),
-      new PageComponent(new ReMemoryPage())
+      new PageComponent(reMemoryMaker.createPage())
     );
 
     addBoundaries();
