@@ -1,6 +1,7 @@
 package technology.sola.engine.rememory;
 
 import technology.sola.engine.assets.BulkAssetLoader;
+import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.assets.graphics.font.Font;
 import technology.sola.engine.core.SolaConfiguration;
@@ -63,12 +64,15 @@ public class ReMemorySola extends SolaWithDefaults {
   @Override
   protected void onAsyncInit(Runnable completeAsyncInit) {
     new BulkAssetLoader(assetLoaderProvider)
+      .addAsset(AudioClip.class, "time", "assets/time.wav")
       .addAsset(Font.class, "monospaced_NORMAL_10", "assets/monospaced_NORMAL_10.json")
       .addAsset(SpriteSheet.class, Constants.Assets.Sprites.ID, "assets/rememory_spritesheet.json")
       .addAsset(SpriteSheet.class, Constants.Assets.CozySprites.ID, "assets/cozy_room.json")
       .loadAll()
         .onComplete(assets -> {
-          platform.getRenderer().setFont((Font) assets[0]);
+          AudioClip audioClip = ((AudioClip)assets[0]);
+          audioClip.setVolume(0.5f);
+          audioClip.loop(-1);
           completeAsyncInit.run();
         });
   }
