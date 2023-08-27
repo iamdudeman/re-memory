@@ -13,6 +13,7 @@ import technology.sola.engine.rememory.rooms.ForestRoomWorld;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.rememory.events.ChangeRoomEvent;
+import technology.sola.engine.rememory.rooms.RoomWorld;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +21,7 @@ import java.util.Map;
 public class RoomSystem extends EcsSystem {
   private final Renderer renderer;
   private final SolaEcs solaEcs;
-  private final Map<String, World> worldMap = new HashMap<>();
+  private final Map<String, RoomWorld> worldMap = new HashMap<>();
   private String currentRoomId;
   private String nextRoomId = "";
   private int idCounter = 0;
@@ -39,11 +40,13 @@ public class RoomSystem extends EcsSystem {
 
       setActive(true);
     });
+
+    // todo add listener for forget where to clear worldMap cache other than current room
   }
 
   @Override
   public void update(World world, float deltaTime) {
-    World nextRoom = worldMap.get(nextRoomId);
+    RoomWorld nextRoom = worldMap.get(nextRoomId);
 
     if (nextRoom == null) {
       if (idCounter == 0) {

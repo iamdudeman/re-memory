@@ -5,8 +5,8 @@ import technology.sola.engine.rememory.events.AttributesChangedEvent;
 import technology.sola.engine.rememory.events.ForgetWhoEvent;
 import technology.sola.engine.rememory.events.PageAcceptedEvent;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerAttributeContainer {
   private String name;
@@ -14,18 +14,13 @@ public class PlayerAttributeContainer {
   private int efficiency;
   private int vision;
   private int luck;
-  private final Map<AttributeCategory, ReMemoryPage> acceptedPages = new HashMap<>();
-
-  private int hack = 0; // todo remove hack
+  private final List<ReMemoryPage> acceptedPages = new ArrayList<>();
 
   public PlayerAttributeContainer(EventHub eventHub) {
     forget();
 
     eventHub.add(PageAcceptedEvent.class, event -> {
-      // todo remove hack
-      acceptedPages.put(AttributeCategory.values()[hack++], event.reMemoryPage());
-
-      System.out.println("Found page " + acceptedPages.keySet().size());
+      acceptedPages.add(event.reMemoryPage());
 
       eventHub.emit(new AttributesChangedEvent());
     });
@@ -36,17 +31,7 @@ public class PlayerAttributeContainer {
     });
   }
 
-  private void forget() {
-    // todo emit change event
-    name = "???";
-    fitness = 5;
-    efficiency = 5;
-    vision = 5;
-    luck = 5;
-    acceptedPages.clear();
-  }
-
-  public Map<AttributeCategory, ReMemoryPage> getAcceptedPages() {
+  public List<ReMemoryPage> getAcceptedPages() {
     return acceptedPages;
   }
 
@@ -68,5 +53,14 @@ public class PlayerAttributeContainer {
 
   public int getLuck() {
     return luck;
+  }
+
+  private void forget() {
+    name = "???";
+    fitness = 5;
+    efficiency = 5;
+    vision = 5;
+    luck = 5;
+    acceptedPages.clear();
   }
 }

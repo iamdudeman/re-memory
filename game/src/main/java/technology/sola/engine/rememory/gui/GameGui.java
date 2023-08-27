@@ -44,7 +44,7 @@ public class GameGui {
 
           page.destroy();
 
-          document.getElementById("page", TextGuiElement.class).properties().setText(pageComponent.reMemoryPage().getText());
+          document.getElementById("page", TextGuiElement.class).properties().setText(pageComponent.reMemoryPage().getPageText());
           document.getElementById("remember", ButtonGuiElement.class).setOnAction(() -> {
             pageContainer.setDisplay(Display.NONE);
             eventHub.emit(new PageAcceptedEvent(pageComponent.reMemoryPage()));
@@ -110,9 +110,9 @@ public class GameGui {
     textGuiElement.properties().setText("" + value);
 
     if (value < 5) {
-      textGuiElement.properties().setColorText(Color.RED);
+      textGuiElement.properties().setColorText(new Color(230, 159, 0));
     } else if (value > 5) {
-      textGuiElement.properties().setColorText(Color.GREEN);
+      textGuiElement.properties().setColorText(new Color(0, 114, 178));
     } else {
       textGuiElement.properties().setColorText(Color.BLACK);
     }
