@@ -1,21 +1,12 @@
 package technology.sola.engine.rememory.attributes;
 
-public class ReMemoryPage {
-  private AttributeCategory attributeCategory;
-  private AttributeModifier attributeModifier;
-  private String text = "This is some fake text";
-
-  public AttributeCategory getAttributeCategory() {
-    return attributeCategory;
-  }
-
-  public AttributeModifier getAttributeModifier() {
-    return attributeModifier;
-  }
-
-  public String noun;
-
+public record ReMemoryPage(AttributeCategory attributeCategory, AttributeModifier attributeModifier, String noun) {
   public String getPageText() {
-    return text;
+    return switch (attributeCategory) {
+      case NAME -> "Your name was " + noun;
+      case JOB -> "Your profession was " + noun;
+      case LIKES -> "You potentially liked " + noun;
+      case INTERESTS -> "You possibly had interest in " + noun;
+    };
   }
 }
