@@ -1,4 +1,4 @@
-package technology.sola.engine.rememory.gamestate;
+package technology.sola.engine.rememory.attributes;
 
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.rememory.events.AttributesChangedEvent;

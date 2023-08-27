@@ -1,4 +1,4 @@
-package technology.sola.engine.rememory.gamestate;
+package technology.sola.engine.rememory.attributes;
 
 public enum AttributeType {
   ALL,

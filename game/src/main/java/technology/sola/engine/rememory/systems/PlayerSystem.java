@@ -13,7 +13,7 @@ import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.events.ForgetWhereEvent;
-import technology.sola.engine.rememory.gamestate.PlayerAttributeContainer;
+import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
 import technology.sola.engine.rememory.rooms.RoomWorld;
 import technology.sola.math.linear.Vector2D;
 

@@ -12,7 +12,7 @@ import technology.sola.engine.physics.system.GravitySystem;
 import technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.engine.rememory.events.ForgetWhoEvent;
-import technology.sola.engine.rememory.gamestate.PlayerAttributeContainer;
+import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
 import technology.sola.engine.rememory.gui.GameGui;
 import technology.sola.engine.rememory.systems.RoomSystem;
 import technology.sola.engine.rememory.systems.PlayerSystem;

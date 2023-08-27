@@ -37,3 +37,8 @@
     * Efficiency? - battery goes down slower
     * Clarity? - can see more
     * Luck (better chance to get + attributes)
+
+* enemies
+  * enemy type that steals lapis
+  * enemy type that drains battery
+  * enemy type that kills
