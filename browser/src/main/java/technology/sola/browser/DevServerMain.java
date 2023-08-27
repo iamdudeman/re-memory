@@ -1,4 +1,4 @@
-package technology.sola.browser.rememory;
+package technology.sola.browser;
 
 import technology.sola.engine.platform.browser.tools.SimpleSolaBrowserFileServer;
 

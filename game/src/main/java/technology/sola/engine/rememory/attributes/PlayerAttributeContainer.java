@@ -21,7 +21,7 @@ public class PlayerAttributeContainer {
 
     eventHub.add(PageAcceptedEvent.class, event -> {
       acceptedPages.add(event.reMemoryPage());
-
+      applyPageAttributes(event.reMemoryPage());
       eventHub.emit(new AttributesChangedEvent());
     });
 
@@ -62,5 +62,39 @@ public class PlayerAttributeContainer {
     vision = 5;
     luck = 5;
     acceptedPages.clear();
+  }
+
+  private void applyPageAttributes(ReMemoryPage reMemoryPage) {
+    if (reMemoryPage.attributeCategory() == AttributeCategory.NAME) {
+      name = reMemoryPage.noun();
+      fitness++;
+      efficiency++;
+      vision++;
+      luck++;
+    } else {
+      // todo not just fitness
+      fitness += updateAttribute(fitness, reMemoryPage.attributeModifier());
+    }
+  }
+
+  private int updateAttribute(int value, AttributeModifier attributeModifier) {
+    int newValue = value;
+
+    newValue += switch (attributeModifier) {
+      case GREAT -> 2;
+      case GOOD -> 1;
+      case BAD -> -1;
+      case TERRIBLE -> -2;
+    };
+
+    return clampAttribute(newValue);
+  }
+
+  private int clampAttribute(int value) {
+    if (value < 1) {
+      return 1;
+    }
+
+    return Math.min(value, 10);
   }
 }

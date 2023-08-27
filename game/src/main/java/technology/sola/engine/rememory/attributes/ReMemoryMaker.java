@@ -43,8 +43,8 @@ public class ReMemoryMaker {
   }
 
   private AttributeCategory determineCategory() {
-    int nameRange = 5;
-    int jobRange = 15;
+    int nameRange = playerAttributeContainer.getLuck() + playerAttributeContainer.getAcceptedPages().size() * 10;
+    int jobRange = 15 + playerAttributeContainer.getAcceptedPages().size() * 10;
     int likeRange = 50;
 
     if (playerAttributeContainer.getAcceptedPages().stream().anyMatch(page -> page.attributeCategory() == AttributeCategory.NAME)) {

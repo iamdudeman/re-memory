@@ -1,4 +1,4 @@
-package technology.sola.javafx.rememory;
+package technology.sola.javafx;
 
 import technology.sola.engine.core.Sola;
 import technology.sola.engine.rememory.ReMemorySola;
