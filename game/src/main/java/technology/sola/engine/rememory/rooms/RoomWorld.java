@@ -29,7 +29,7 @@ public abstract class RoomWorld extends World {
   public void addPortal(float x, float y) {
     createEntity(
       new PortalComponent(null, true),
-      new TransformComponent(x, y, 20),
+      new TransformComponent(x, y, 8),
       ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
       new CircleRendererComponent(Color.LIGHT_GRAY, true), // TODO temp until particle layer works
       new LayerComponent(Constants.Layers.OBJECTS)
@@ -51,7 +51,7 @@ public abstract class RoomWorld extends World {
   protected void addInitialPortal(float x, float y, boolean delayActivation) {
     createEntity(
       new PortalComponent(previousRoomId, delayActivation),
-      new TransformComponent(x, y, 20),
+      new TransformComponent(x, y, 8),
       ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
       new CircleRendererComponent(Color.LIGHT_GRAY, true), // TODO temp until particle layer works
       new LayerComponent(Constants.Layers.OBJECTS)

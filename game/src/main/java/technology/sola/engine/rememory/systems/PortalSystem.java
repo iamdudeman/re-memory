@@ -2,9 +2,11 @@ package technology.sola.engine.rememory.systems;
 
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.World;
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
@@ -51,17 +53,23 @@ public class PortalSystem extends EcsSystem {
           ParticleEmitterComponent portalParticleEmitter = new ParticleEmitterComponent();
 
           // TODO test these settings out later when particle emitter layer bug fixed
-          portalParticleEmitter.setParticleBlendMode(BlendMode.DISSOLVE);
-          portalParticleEmitter.setParticleColor(new Color(220, 220, 220));
-          portalParticleEmitter.setParticleSizeBounds(3, 5);
-          portalParticleEmitter.setParticleLifeBounds(3, 5);
-          portalParticleEmitter.setParticleVelocityBounds(new Vector2D(-5f, -5f), new Vector2D(5f, 5f));
-          portalParticleEmitter.setParticleEmissionDelay(0.1f);
+          portalParticleEmitter.setParticleBlendMode(BlendMode.MULTIPLY);
+          portalParticleEmitter.setParticleColor(new Color(120, 177, 156, 217));
+          portalParticleEmitter.setParticleSizeBounds(1, 3);
+          portalParticleEmitter.setParticleLifeBounds(1, 3);
+          portalParticleEmitter.setParticleVelocityBounds(new Vector2D(-4f, -5f), new Vector2D(4f, 0));
+          portalParticleEmitter.setParticleEmissionDelay(0.25f);
           portalParticleEmitter.setParticlesPerEmit(5);
 
-          entry.entity().addComponent(portalParticleEmitter);
+          world.createEntity(
+            new TransformComponent(3, 5, entry.entity()),
+            new LayerComponent(Constants.Layers.OBJECTS, 2),
+            portalParticleEmitter
+          );
+
+//          entry.entity().addComponent(portalParticleEmitter);
 //          entry.entity().removeComponent(CircleRendererComponent.class); // todo do this when particle emitter layer bug fixed
-          entry.entity().getComponent(CircleRendererComponent.class).setColor(Color.YELLOW);
+          entry.entity().getComponent(CircleRendererComponent.class).setColor(new Color(177, 156, 217));
           entry.c1().activate();
         } else {
           entry.c1().tickInactive(deltaTime);

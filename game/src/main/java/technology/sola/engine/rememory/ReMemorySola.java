@@ -28,6 +28,7 @@ public class ReMemorySola extends SolaWithDefaults {
     defaultsConfigurator.useGui(new GuiPropertyDefaults("monospaced_NORMAL_10", Color.BLACK, Color.BLANK))
       .usePhysics()
       .useGraphics()
+//      .useLighting()
       .useLighting(new Color(10, 10, 10))
       .useBackgroundColor(Color.WHITE);
 

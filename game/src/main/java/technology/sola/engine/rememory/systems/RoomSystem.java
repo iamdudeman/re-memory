@@ -1,6 +1,7 @@
 package technology.sola.engine.rememory.systems;
 
 import technology.sola.ecs.EcsSystem;
+import technology.sola.ecs.Entity;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.World;
 import technology.sola.engine.graphics.Color;
@@ -59,6 +60,7 @@ public class RoomSystem extends EcsSystem {
       nextRoom = worldMap.get(nextRoomId);
 
       // reset room
+      nextRoom.findEntitiesWithComponents(ParticleEmitterComponent.class).forEach(Entity::destroy);
       nextRoom.createView().of(PortalComponent.class).getEntries()
         .forEach(entry -> {
           entry.c1().resetActivation();
