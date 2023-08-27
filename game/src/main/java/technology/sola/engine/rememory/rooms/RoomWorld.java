@@ -13,7 +13,7 @@ import technology.sola.engine.rememory.components.PortalComponent;
 import java.util.Random;
 
 public abstract class RoomWorld extends World {
-  private static final float boundarySize = 50;
+  protected static final float boundarySize = 50;
   protected Random random = new Random();
   protected int rendererWidth;
   protected int rendererHeight;
@@ -58,19 +58,23 @@ public abstract class RoomWorld extends World {
     );
   }
 
-  protected void addBoundaries() {
+  protected void addBoundaries(float topBoundaryY) {
+    // top
     createEntity(
-      new TransformComponent(0, -boundarySize, rendererWidth, boundarySize),
+      new TransformComponent(0, topBoundaryY, rendererWidth, boundarySize),
       ColliderComponent.aabb().setTags(Constants.Tags.BOUNDARY)
     );
+    // bottom
     createEntity(
       new TransformComponent(0, rendererHeight, rendererWidth, boundarySize),
       ColliderComponent.aabb().setTags(Constants.Tags.BOUNDARY)
     );
+    // left
     createEntity(
       new TransformComponent(-boundarySize, 0, boundarySize, rendererHeight),
       ColliderComponent.aabb().setTags(Constants.Tags.BOUNDARY)
     );
+    // right
     createEntity(
       new TransformComponent(rendererWidth, 0, boundarySize, rendererHeight),
       ColliderComponent.aabb().setTags(Constants.Tags.BOUNDARY)

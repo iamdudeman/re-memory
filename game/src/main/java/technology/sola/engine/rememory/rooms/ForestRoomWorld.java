@@ -43,7 +43,7 @@ public class ForestRoomWorld extends RoomWorld {
     int x = random.nextInt(rendererWidth - 20) + 10;
     int y = random.nextInt(rendererHeight - 20) + 10;
 
-    addBoundaries();
+    addBoundaries(-boundarySize);
 
     addInitialPortal(x, y, false);
 

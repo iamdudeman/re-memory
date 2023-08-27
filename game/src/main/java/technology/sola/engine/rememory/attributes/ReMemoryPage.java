@@ -1,6 +1,6 @@
 package technology.sola.engine.rememory.attributes;
 
-public record ReMemoryPage(AttributeCategory attributeCategory, AttributeModifier attributeModifier, String noun) {
+public record ReMemoryPage(AttributeCategory attributeCategory, AttributeModifier attributeModifier, Attribute attribute, String noun) {
   public String getPageText() {
     return switch (attributeCategory) {
       case NAME -> "Your name was " + noun + ".";

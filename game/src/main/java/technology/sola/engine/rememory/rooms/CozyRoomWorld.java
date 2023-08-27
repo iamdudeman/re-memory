@@ -26,8 +26,7 @@ public class CozyRoomWorld extends RoomWorld {
           );
           createEntity(
             new TransformComponent(i, j + 8),
-            new SpriteComponent(Constants.Assets.CozySprites.ID, Constants.Assets.CozySprites.BACK_WALL_BOTTOM),
-            ColliderComponent.aabb(16, 8)
+            new SpriteComponent(Constants.Assets.CozySprites.ID, Constants.Assets.CozySprites.BACK_WALL_BOTTOM)
           );
         }
       }
@@ -54,7 +53,7 @@ public class CozyRoomWorld extends RoomWorld {
       new PageComponent(reMemoryMaker.createPage())
     );
 
-    addBoundaries();
+    addBoundaries(-boundarySize + 16);
 
     addInitialPortal(rendererWidth * 0.5f, rendererHeight * 0.5f, true);
 

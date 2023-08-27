@@ -72,8 +72,21 @@ public class PlayerAttributeContainer {
       vision++;
       luck++;
     } else {
-      // todo not just fitness
-      fitness += updateAttribute(fitness, reMemoryPage.attributeModifier());
+      switch (reMemoryPage.attribute()) {
+        case FITNESS -> {
+          fitness = updateAttribute(fitness, reMemoryPage.attributeModifier());
+        }
+        case VISION -> {
+          vision = updateAttribute(vision, reMemoryPage.attributeModifier());
+        }
+        case LUCK -> {
+          luck = updateAttribute(luck, reMemoryPage.attributeModifier());
+        }
+        case EFFICIENCY -> {
+          efficiency = updateAttribute(efficiency, reMemoryPage.attributeModifier());
+        }
+      }
+
     }
   }
 
