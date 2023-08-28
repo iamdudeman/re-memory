@@ -20,14 +20,14 @@ public class GameGui {
     eventHub.add(AttributesChangedEvent.class, event -> {
       document.getElementById("name", TextGuiElement.class).properties().setText(playerAttributeContainer.getName());
       updateAttributeValueText(document.getElementById("fitness", TextGuiElement.class), playerAttributeContainer.getFitness());
-      updateAttributeValueText(document.getElementById("efficiency", TextGuiElement.class), playerAttributeContainer.getEfficiency());
+      updateAttributeValueText(document.getElementById("stealth", TextGuiElement.class), playerAttributeContainer.getStealth());
       updateAttributeValueText(document.getElementById("vision", TextGuiElement.class), playerAttributeContainer.getVision());
       updateAttributeValueText(document.getElementById("luck", TextGuiElement.class), playerAttributeContainer.getLuck());
     });
 
     return document.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setGap(2).setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setBackgroundColor(new Color(100, 255, 255, 255)).padding.set(2),
+      p -> p.setGap(2).setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setBackgroundColor(new Color(100, 255, 255, 255)).padding.set(1),
       createAttributeContainer(document),
       createReadPageContainer(document, eventHub)
     );
@@ -82,10 +82,10 @@ public class GameGui {
   private static GuiElement<?> createAttributeContainer(SolaGuiDocument document) {
     return document.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.DARK_GRAY),
+      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.DARK_GRAY).padding.set(2),
       createAttributeText(document, "Name:", "name"),
       createAttributeText(document, "Fitness:", "fitness"),
-      createAttributeText(document, "Efficiency:", "efficiency"),
+      createAttributeText(document, "Stealth:", "stealth"),
       createAttributeText(document, "Vision:", "vision"),
       createAttributeText(document, "Luck:", "luck")
     );

@@ -39,7 +39,7 @@ public class ReMemoryMaker {
       return Attribute.LUCK;
     }
 
-    return Attribute.EFFICIENCY;
+    return Attribute.STEALTH;
   }
 
   private AttributeModifier determineModifier() {

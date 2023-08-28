@@ -11,7 +11,7 @@ import java.util.List;
 public class PlayerAttributeContainer {
   private String name;
   private int fitness;
-  private int efficiency;
+  private int stealth;
   private int vision;
   private int luck;
   private final List<ReMemoryPage> acceptedPages = new ArrayList<>();
@@ -43,8 +43,8 @@ public class PlayerAttributeContainer {
     return fitness;
   }
 
-  public int getEfficiency() {
-    return efficiency;
+  public int getStealth() {
+    return stealth;
   }
 
   public int getVision() {
@@ -58,7 +58,7 @@ public class PlayerAttributeContainer {
   private void forget() {
     name = "???";
     fitness = 5;
-    efficiency = 5;
+    stealth = 5;
     vision = 5;
     luck = 5;
     acceptedPages.clear();
@@ -68,7 +68,7 @@ public class PlayerAttributeContainer {
     if (reMemoryPage.attributeCategory() == AttributeCategory.NAME) {
       name = reMemoryPage.noun();
       fitness++;
-      efficiency++;
+      stealth++;
       vision++;
       luck++;
     } else {
@@ -82,8 +82,8 @@ public class PlayerAttributeContainer {
         case LUCK -> {
           luck = updateAttribute(luck, reMemoryPage.attributeModifier());
         }
-        case EFFICIENCY -> {
-          efficiency = updateAttribute(efficiency, reMemoryPage.attributeModifier());
+        case STEALTH -> {
+          stealth = updateAttribute(stealth, reMemoryPage.attributeModifier());
         }
       }
 
