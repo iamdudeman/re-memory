@@ -48,6 +48,11 @@ public class ForestRoomWorld extends RoomWorld {
 
     addInitialPortal(x, y, false);
 
+    addTorch(
+      RandomUtils.quickRandomDoubleClamp(x - 40, x + 40, x - 5, x + 5),
+      RandomUtils.quickRandomDoubleClamp(y - 40, y + 40, y - 5, y + 5)
+    );
+
     addBoundaries(-boundarySize);
 
     addPlayer(halfWidth, halfHeight);

@@ -73,6 +73,17 @@ public abstract class RoomWorld extends World {
     );
   }
 
+  protected void addTorch(float x, float y) {
+    createEntity(
+      new TransformComponent(x, y),
+      new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.TORCH),
+      new LayerComponent(Constants.Layers.OBJECTS, 1),
+      new LightComponent(16, Color.YELLOW)
+        .setOffset(1.5f, 3)
+        .setLightFlicker(new LightFlicker(0.2f, 0.8f))
+    );
+  }
+
   protected void addBoundaries(float topBoundaryY) {
     // top
     createEntity(
