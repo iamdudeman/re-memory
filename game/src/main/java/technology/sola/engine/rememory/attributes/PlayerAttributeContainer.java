@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PlayerAttributeContainer {
   private String name;
-  private int fitness;
+  private int speed;
   private int stealth;
   private int vision;
   private int luck;
@@ -39,8 +39,8 @@ public class PlayerAttributeContainer {
     return name;
   }
 
-  public int getFitness() {
-    return fitness;
+  public int getSpeed() {
+    return speed;
   }
 
   public int getStealth() {
@@ -57,7 +57,7 @@ public class PlayerAttributeContainer {
 
   private void forget() {
     name = "???";
-    fitness = 3;
+    speed = 3;
     stealth = 3;
     vision = 3;
     luck = 3;
@@ -67,14 +67,14 @@ public class PlayerAttributeContainer {
   private void applyPageAttributes(ReMemoryPage reMemoryPage) {
     if (reMemoryPage.attributeCategory() == AttributeCategory.NAME) {
       name = reMemoryPage.noun();
-      fitness++;
+      speed++;
       stealth++;
       vision++;
       luck++;
     } else {
       switch (reMemoryPage.attribute()) {
-        case FITNESS -> {
-          fitness = updateAttribute(fitness, reMemoryPage.attributeModifier());
+        case SPEED -> {
+          speed = updateAttribute(speed, reMemoryPage.attributeModifier());
         }
         case VISION -> {
           vision = updateAttribute(vision, reMemoryPage.attributeModifier());

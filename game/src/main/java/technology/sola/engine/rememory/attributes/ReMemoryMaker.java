@@ -25,17 +25,17 @@ public class ReMemoryMaker {
   }
 
   private Attribute determineAttribute() {
-    int fitnessRange = 33;
+    int speedRange = 33;
     int visionRange = 33;
     int luckRange = 33;
 
     int roll = RandomUtils.roll100();
 
-    if (roll < fitnessRange) {
-      return Attribute.FITNESS;
-    } else if (roll < fitnessRange + visionRange) {
+    if (roll < speedRange) {
+      return Attribute.SPEED;
+    } else if (roll < speedRange + visionRange) {
       return Attribute.VISION;
-    } else if (roll < fitnessRange + visionRange + luckRange) {
+    } else if (roll < speedRange + visionRange + luckRange) {
       return Attribute.LUCK;
     }
 

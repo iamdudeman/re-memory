@@ -1,7 +1,7 @@
 package technology.sola.engine.rememory.attributes;
 
 public enum Attribute {
-  FITNESS,
+  SPEED,
   STEALTH,
   VISION,
   LUCK,

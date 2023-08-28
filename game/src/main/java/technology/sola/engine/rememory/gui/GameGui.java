@@ -19,7 +19,7 @@ public class GameGui {
   public static GuiElement<?> build(SolaGuiDocument document, PlayerAttributeContainer playerAttributeContainer, EventHub eventHub) {
     eventHub.add(AttributesChangedEvent.class, event -> {
       document.getElementById("name", TextGuiElement.class).properties().setText(playerAttributeContainer.getName());
-      updateAttributeValueText(document.getElementById("fitness", TextGuiElement.class), playerAttributeContainer.getFitness());
+      updateAttributeValueText(document.getElementById("speed", TextGuiElement.class), playerAttributeContainer.getSpeed());
       updateAttributeValueText(document.getElementById("stealth", TextGuiElement.class), playerAttributeContainer.getStealth());
       updateAttributeValueText(document.getElementById("vision", TextGuiElement.class), playerAttributeContainer.getVision());
       updateAttributeValueText(document.getElementById("luck", TextGuiElement.class), playerAttributeContainer.getLuck());
@@ -87,7 +87,7 @@ public class GameGui {
       StreamGuiElementContainer::new,
       p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.DARK_GRAY).padding.set(2),
       createAttributeText(document, "Name:", "name"),
-      createAttributeText(document, "Fitness:", "fitness"),
+      createAttributeText(document, "Speed:", "speed"),
       createAttributeText(document, "Stealth:", "stealth"),
       createAttributeText(document, "Vision:", "vision"),
       createAttributeText(document, "Luck:", "luck")
