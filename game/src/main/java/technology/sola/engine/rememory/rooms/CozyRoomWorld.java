@@ -63,7 +63,7 @@ public class CozyRoomWorld extends RoomWorld {
 
       createEntity(
         new TransformComponent(x, y),
-        ColliderComponent.circle(4),
+        ColliderComponent.circle(4).setTags(Constants.Tags.BOUNDARY),
         new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.TABLE),
         new LayerComponent(Constants.Layers.DECORATION)
       );
@@ -102,6 +102,10 @@ public class CozyRoomWorld extends RoomWorld {
       );
     }
 
+    addEnemy(
+      RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+      RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
+    );
     addEnemy(
       RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
       RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)

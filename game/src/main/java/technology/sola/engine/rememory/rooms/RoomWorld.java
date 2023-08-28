@@ -64,12 +64,12 @@ public abstract class RoomWorld extends World {
       new TransformComponent(x, y,
         4 // todo temp until sprite
       ),
-      new DynamicBodyComponent(true),
+      new DynamicBodyComponent(),
       new EnemyComponent(),
-      ColliderComponent.circle(), // todo temp until sprite (need to set radius then)
+      ColliderComponent.circle().setIgnoreTags(Constants.Tags.BOUNDARY), // todo temp until sprite (need to set radius then)
       new CircleRendererComponent(Color.BLACK), // todo temp until sprite
 //      new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.ENEMY),
-      new LayerComponent(Constants.Layers.OBJECTS)
+      new LayerComponent(Constants.Layers.OBJECTS, 1)
     );
   }
 
