@@ -25,8 +25,8 @@ public class NounDictionary {
 
   private static final List<String> NAMES = List.of(
     "Bob",
-    "Jack",
-    "Tim"
+    "John",
+    "Alex"
   );
   private static final List<String> JOBS = List.of(
     "accountant",
@@ -37,12 +37,14 @@ public class NounDictionary {
     "dogs",
     "cats",
     "pizza",
-    "travel"
+    "tea",
+    "coffee"
   );
   private static final List<String> INTERESTS = List.of(
     "programming",
     "game development",
     "sewing",
-    "tennis"
+    "tennis",
+    "gaming"
   );
 }

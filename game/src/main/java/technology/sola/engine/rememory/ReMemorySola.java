@@ -31,8 +31,7 @@ public class ReMemorySola extends SolaWithDefaults {
     defaultsConfigurator.useGui(new GuiPropertyDefaults("monospaced_NORMAL_10", Color.BLACK, Color.BLANK))
       .usePhysics()
       .useGraphics()
-//      .useLighting()
-      .useLighting(new Color(10, 10, 10))
+      .useLighting()
       .useBackgroundColor(Color.WHITE);
 
     // default physics overrides
@@ -75,11 +74,12 @@ public class ReMemorySola extends SolaWithDefaults {
       .addAsset(SpriteSheet.class, Constants.Assets.Sprites.ID, "assets/rememory_spritesheet.json")
       .addAsset(SpriteSheet.class, Constants.Assets.CozySprites.ID, "assets/cozy_room.json")
       .loadAll()
-        .onComplete(assets -> {
-          AudioClip audioClip = ((AudioClip)assets[0]);
-          audioClip.setVolume(0.5f);
-          audioClip.loop(-1);
-          completeAsyncInit.run();
-        });
+      .onComplete(assets -> {
+        AudioClip audioClip = ((AudioClip) assets[0]);
+
+        audioClip.setVolume(0.5f);
+        audioClip.loop(-1);
+        completeAsyncInit.run();
+      });
   }
 }
