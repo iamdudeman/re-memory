@@ -5,6 +5,7 @@ import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.rememory.Constants;
+import technology.sola.engine.rememory.RandomUtils;
 import technology.sola.engine.rememory.attributes.ReMemoryMaker;
 import technology.sola.engine.rememory.components.PageComponent;
 
@@ -35,11 +36,17 @@ public class CozyRoomWorld extends RoomWorld {
       }
     }
 
+    float halfWidth = rendererWidth * 0.5f;
+    float halfHeight = rendererHeight * 0.5f;
+
     // todo probably needs to be a random chance instead
     createEntity(
       new TransformComponent(
-        random.nextInt(10, rendererWidth - 20),
-        random.nextInt(20, rendererHeight - 20)
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
+
+//        random.nextInt(10, rendererWidth - 20),
+//        random.nextInt(20, rendererHeight - 20)
       ),
       ColliderComponent.aabb(2, 2).setSensor(true).setTags(Constants.Tags.LAPIS),
       new LayerComponent(Constants.Layers.OBJECTS),
@@ -49,8 +56,8 @@ public class CozyRoomWorld extends RoomWorld {
     // todo probably needs to be a random chance instead
     createEntity(
       new TransformComponent(
-        random.nextInt(10, rendererWidth - 20),
-        random.nextInt(20, rendererHeight - 20)
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
       ),
       ColliderComponent.aabb(3, 6).setSensor(true),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PAGE),
@@ -60,8 +67,8 @@ public class CozyRoomWorld extends RoomWorld {
 
     addBoundaries(-boundarySize + 16);
 
-    addInitialPortal(rendererWidth * 0.5f, rendererHeight * 0.5f, true);
+    addInitialPortal(halfWidth, halfHeight, true);
 
-    addPlayer(rendererWidth * 0.5f, rendererHeight * 0.5f - 10);
+    addPlayer(halfWidth, halfHeight - 10);
   }
 }

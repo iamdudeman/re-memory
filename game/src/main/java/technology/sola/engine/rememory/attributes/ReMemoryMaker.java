@@ -1,11 +1,11 @@
 package technology.sola.engine.rememory.attributes;
 
+import technology.sola.engine.rememory.RandomUtils;
+
 import java.util.List;
-import java.util.Random;
 
 public class ReMemoryMaker {
   private final PlayerAttributeContainer playerAttributeContainer;
-  private final Random random = new Random();
 
   public ReMemoryMaker(PlayerAttributeContainer playerAttributeContainer) {
     this.playerAttributeContainer = playerAttributeContainer;
@@ -29,7 +29,7 @@ public class ReMemoryMaker {
     int visionRange = 33;
     int luckRange = 33;
 
-    int roll = random.nextInt(100);
+    int roll = RandomUtils.roll100();
 
     if (roll < fitnessRange) {
       return Attribute.FITNESS;
@@ -48,7 +48,7 @@ public class ReMemoryMaker {
     int terribleRange = 10 - playerLuck;
     int goodRange = 45 + playerLuck * 2;
 
-    int roll = random.nextInt(100);
+    int roll = RandomUtils.roll100();
 
     if (roll < greatRange) {
       return AttributeModifier.GREAT;
@@ -74,7 +74,7 @@ public class ReMemoryMaker {
       jobRange = 0;
     }
 
-    int roll = random.nextInt(100);
+    int roll = RandomUtils.roll100();
 
     if (roll < nameRange) {
       return AttributeCategory.NAME;

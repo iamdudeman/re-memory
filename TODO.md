@@ -1,3 +1,10 @@
+## Pieces missing
+
+* Final paragraph of "who you are"
+* Enemies
+* How to win/lose
+
+
 ## Outline
 
 * You can always have a re;memory
