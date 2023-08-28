@@ -49,8 +49,8 @@ public class PlayerSystem extends EcsSystem {
     LightComponent lightComponent = playerEntity.getComponent(LightComponent.class);
 
     // apply attributes
-    final int speed = playerAttributeContainer.getFitness() * 10;
-    lightComponent.setRadius(playerAttributeContainer.getVision() * 10);
+    final int speed = playerAttributeContainer.getFitness() * 20;
+    lightComponent.setRadius(playerAttributeContainer.getVision() * 20);
 
     float xSpeed = 0;
     float ySpeed = 0;

@@ -44,7 +44,7 @@ public class EnemySystem extends EcsSystem {
 
         float speed = enemyType == EnemyComponent.EnemyType.CREEPER ? 10 : 40;
         float initialDetectionRange = enemyType == EnemyComponent.EnemyType.CREEPER ? 300 : 55;
-        float detectionRange = Math.max(initialDetectionRange - playerAttributeContainer.getStealth() * 10, 55);
+        float detectionRange = Math.max(initialDetectionRange - playerAttributeContainer.getStealth() * 20, 55);
 
         if (distanceFromPlayer < detectionRange) {
           dynamicBodyComponent.setVelocity(playerTranslate.subtract(enemyTranslate).normalize().scalar(speed));

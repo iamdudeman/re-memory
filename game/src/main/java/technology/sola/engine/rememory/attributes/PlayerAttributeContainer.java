@@ -57,10 +57,10 @@ public class PlayerAttributeContainer {
 
   private void forget() {
     name = "???";
-    fitness = 5;
-    stealth = 5;
-    vision = 5;
-    luck = 5;
+    fitness = 3;
+    stealth = 3;
+    vision = 3;
+    luck = 3;
     acceptedPages.clear();
   }
 
@@ -108,6 +108,6 @@ public class PlayerAttributeContainer {
       return 1;
     }
 
-    return Math.min(value, 10);
+    return Math.min(value, 5);
   }
 }

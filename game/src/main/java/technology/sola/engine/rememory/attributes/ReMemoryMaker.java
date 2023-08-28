@@ -43,7 +43,7 @@ public class ReMemoryMaker {
   }
 
   private AttributeModifier determineModifier() {
-    int playerLuck = playerAttributeContainer.getLuck();
+    int playerLuck = playerAttributeContainer.getLuck() * 2;
     int greatRange = playerLuck;
     int terribleRange = 10 - playerLuck;
     int goodRange = 45 + playerLuck * 2;
@@ -62,7 +62,7 @@ public class ReMemoryMaker {
   }
 
   private AttributeCategory determineCategory() {
-    int nameRange = playerAttributeContainer.getLuck() + playerAttributeContainer.getAcceptedPages().size() * 10;
+    int nameRange = playerAttributeContainer.getLuck() * 2 + playerAttributeContainer.getAcceptedPages().size() * 10;
     int jobRange = 15 + playerAttributeContainer.getAcceptedPages().size() * 10;
     int likeRange = 45;
 

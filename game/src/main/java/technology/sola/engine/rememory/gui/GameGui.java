@@ -40,7 +40,7 @@ public class GameGui {
         entity -> entity.hasComponent(PageComponent.class),
         (player, page) -> {
           var pageComponent = page.getComponent(PageComponent.class);
-          var pageContainer = document.getElementById("page_container").properties();
+          var pageContainer = document.getElementById("page_container");
           var rememberButton = document.getElementById("remember", ButtonGuiElement.class);
           var denyButton = document.getElementById("deny", ButtonGuiElement.class);
 
@@ -48,19 +48,13 @@ public class GameGui {
 
           document.getElementById("page", TextGuiElement.class).properties().setText(pageComponent.reMemoryPage().getPageText());
           rememberButton.setOnAction(() -> {
-            pageContainer.setDisplay(Display.NONE);
-            rememberButton.properties().setFocusable(false);
-            denyButton.properties().setFocusable(false);
+            pageContainer.properties().setDisplay(Display.NONE);
             eventHub.emit(new PageAcceptedEvent(pageComponent.reMemoryPage()));
           });
           denyButton.setOnAction(() -> {
-            pageContainer.setDisplay(Display.NONE);
-            rememberButton.properties().setFocusable(false);
-            denyButton.properties().setFocusable(false);
+            pageContainer.properties().setDisplay(Display.NONE);
           });
-          pageContainer.setDisplay(Display.DEFAULT);
-          rememberButton.properties().setFocusable(true);
-          denyButton.properties().setFocusable(true);
+          pageContainer.properties().setDisplay(Display.DEFAULT);
           rememberButton.requestFocus();
         }
       );
@@ -118,9 +112,9 @@ public class GameGui {
   private static void updateAttributeValueText(TextGuiElement textGuiElement, int value) {
     textGuiElement.properties().setText("" + value);
 
-    if (value < 5) {
+    if (value < 3) {
       textGuiElement.properties().setColorText(new Color(230, 159, 0));
-    } else if (value > 5) {
+    } else if (value > 3) {
       textGuiElement.properties().setColorText(new Color(0, 114, 178));
     } else {
       textGuiElement.properties().setColorText(Color.BLACK);
