@@ -51,9 +51,9 @@ public class CozyRoomWorld extends RoomWorld {
   }
 
   private void addExtras() {
-    boolean hasSpawnedPage = false;
     float halfWidth = rendererWidth * 0.5f;
     float halfHeight = rendererHeight * 0.5f;
+    boolean hasSpawnedPage = false;
 
     int tableCount = random.nextInt(4);
 
@@ -101,5 +101,10 @@ public class CozyRoomWorld extends RoomWorld {
         new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.LAPIS)
       );
     }
+
+    addEnemy(
+      RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+      RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
+    );
   }
 }

@@ -41,11 +41,12 @@ public class GameGui {
         (player, page) -> {
           var pageComponent = page.getComponent(PageComponent.class);
           var pageContainer = document.getElementById("page_container").properties();
+          var rememberButton = document.getElementById("remember", ButtonGuiElement.class);
 
           page.destroy();
 
           document.getElementById("page", TextGuiElement.class).properties().setText(pageComponent.reMemoryPage().getPageText());
-          document.getElementById("remember", ButtonGuiElement.class).setOnAction(() -> {
+          rememberButton.setOnAction(() -> {
             pageContainer.setDisplay(Display.NONE);
             eventHub.emit(new PageAcceptedEvent(pageComponent.reMemoryPage()));
           });
@@ -53,6 +54,7 @@ public class GameGui {
             pageContainer.setDisplay(Display.NONE);
           });
           pageContainer.setDisplay(Display.DEFAULT);
+          rememberButton.requestFocus();
         }
       );
     });
@@ -69,11 +71,11 @@ public class GameGui {
         p -> p.setGap(3),
         document.createElement(
           ButtonGuiElement::new,
-          p -> p.setText("Deny").padding.set(2).setBackgroundColor(Color.WHITE).setId("deny").setFocusable(false).hover.setBackgroundColor(Color.WHITE.shade(0.1f))
+          p -> p.setText("Deny").padding.set(2).setBackgroundColor(Color.WHITE).setId("deny").hover.setBackgroundColor(Color.WHITE.shade(0.1f))
         ),
         document.createElement(
           ButtonGuiElement::new,
-          p -> p.setText("Remember").padding.set(2).setBackgroundColor(Color.WHITE).setId("remember").setFocusable(false).hover.setBackgroundColor(Color.WHITE.shade(0.1f))
+          p -> p.setText("Remember").padding.set(2).setBackgroundColor(Color.WHITE).setId("remember").hover.setBackgroundColor(Color.WHITE.shade(0.1f))
         )
       )
     );

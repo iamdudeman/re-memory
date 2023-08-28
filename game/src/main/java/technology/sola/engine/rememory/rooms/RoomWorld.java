@@ -8,6 +8,7 @@ import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.rememory.Constants;
+import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.components.PortalComponent;
 
 import java.util.Random;
@@ -54,6 +55,20 @@ public abstract class RoomWorld extends World {
       new TransformComponent(x, y, 8),
       ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
       new CircleRendererComponent(Color.LIGHT_GRAY, true), // TODO temp until particle layer works
+      new LayerComponent(Constants.Layers.OBJECTS)
+    );
+  }
+
+  protected void addEnemy(float x, float y) {
+    createEntity(
+      new TransformComponent(x, y,
+        4 // todo temp until sprite
+      ),
+      new DynamicBodyComponent(true),
+      new EnemyComponent(),
+      ColliderComponent.circle(), // todo temp until sprite (need to set radius then)
+      new CircleRendererComponent(Color.BLACK), // todo temp until sprite
+//      new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.ENEMY),
       new LayerComponent(Constants.Layers.OBJECTS)
     );
   }
