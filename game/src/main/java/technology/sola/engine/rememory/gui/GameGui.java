@@ -42,18 +42,25 @@ public class GameGui {
           var pageComponent = page.getComponent(PageComponent.class);
           var pageContainer = document.getElementById("page_container").properties();
           var rememberButton = document.getElementById("remember", ButtonGuiElement.class);
+          var denyButton = document.getElementById("deny", ButtonGuiElement.class);
 
           page.destroy();
 
           document.getElementById("page", TextGuiElement.class).properties().setText(pageComponent.reMemoryPage().getPageText());
           rememberButton.setOnAction(() -> {
             pageContainer.setDisplay(Display.NONE);
+            rememberButton.properties().setFocusable(false);
+            denyButton.properties().setFocusable(false);
             eventHub.emit(new PageAcceptedEvent(pageComponent.reMemoryPage()));
           });
-          document.getElementById("deny", ButtonGuiElement.class).setOnAction(() -> {
+          denyButton.setOnAction(() -> {
             pageContainer.setDisplay(Display.NONE);
+            rememberButton.properties().setFocusable(false);
+            denyButton.properties().setFocusable(false);
           });
           pageContainer.setDisplay(Display.DEFAULT);
+          rememberButton.properties().setFocusable(true);
+          denyButton.properties().setFocusable(true);
           rememberButton.requestFocus();
         }
       );

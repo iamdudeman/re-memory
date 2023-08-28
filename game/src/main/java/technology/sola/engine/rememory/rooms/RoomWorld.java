@@ -65,7 +65,7 @@ public abstract class RoomWorld extends World {
         4 // todo temp until sprite
       ),
       new DynamicBodyComponent(),
-      new EnemyComponent(),
+      new EnemyComponent(random.nextBoolean() ? EnemyComponent.EnemyType.CREEPER : EnemyComponent.EnemyType.SPOOKER),
       ColliderComponent.circle().setIgnoreTags(Constants.Tags.BOUNDARY), // todo temp until sprite (need to set radius then)
       new CircleRendererComponent(Color.BLACK), // todo temp until sprite
 //      new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.ENEMY),

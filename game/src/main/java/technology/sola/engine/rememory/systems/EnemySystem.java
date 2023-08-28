@@ -32,19 +32,21 @@ public class EnemySystem extends EcsSystem {
 
   @Override
   public void update(World world, float deltaTime) {
-    final float speed = 8;
-    final float initialDetectionRange = 150;
-
     Entity playerEntity = world.findEntityByName(Constants.Names.PLAYER);
     Vector2D playerTranslate = playerEntity.getComponent(TransformComponent.class).getTranslate();
 
     world.createView().of(TransformComponent.class, DynamicBodyComponent.class, EnemyComponent.class).getEntries()
       .forEach(entry -> {
+        EnemyComponent.EnemyType enemyType = entry.c3().type();
         Vector2D enemyTranslate = entry.c1().getTranslate();
         DynamicBodyComponent dynamicBodyComponent = entry.c2();
         float distanceFromPlayer = playerTranslate.distance(enemyTranslate);
 
-        if (distanceFromPlayer < (initialDetectionRange - playerAttributeContainer.getStealth() * 10)) {
+        float speed = enemyType == EnemyComponent.EnemyType.CREEPER ? 10 : 40;
+        float initialDetectionRange = enemyType == EnemyComponent.EnemyType.CREEPER ? 300 : 55;
+        float detectionRange = Math.max(initialDetectionRange - playerAttributeContainer.getStealth() * 10, 55);
+
+        if (distanceFromPlayer < detectionRange) {
           dynamicBodyComponent.setVelocity(playerTranslate.subtract(enemyTranslate).normalize().scalar(speed));
         } else {
           dynamicBodyComponent.setVelocity(new Vector2D(0, 0));
