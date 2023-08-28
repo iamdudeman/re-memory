@@ -1,3 +1,11 @@
+## New ideas potentially
+
+* Madlibs
+* Enemies force bad option word onto you for current slot
+* Nouns and adjectives and verbs?
+* Complete your madlib
+  * madlib randomly selected at start
+
 ## Pieces missing
 
 * Final paragraph of "who you are"

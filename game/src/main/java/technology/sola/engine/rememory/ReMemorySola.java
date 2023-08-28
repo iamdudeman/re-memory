@@ -17,6 +17,7 @@ import technology.sola.engine.rememory.events.ForgetWhoEvent;
 import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
 import technology.sola.engine.rememory.gui.GameGui;
 import technology.sola.engine.rememory.render.GrainyGraphicsModule;
+import technology.sola.engine.rememory.systems.EnemySystem;
 import technology.sola.engine.rememory.systems.RoomSystem;
 import technology.sola.engine.rememory.systems.PlayerSystem;
 import technology.sola.engine.rememory.systems.PortalSystem;
@@ -53,6 +54,7 @@ public class ReMemorySola extends SolaWithDefaults {
     // ecs
     solaEcs.addSystems(
       new PlayerSystem(keyboardInput, eventHub, playerAttributeContainer),
+      new EnemySystem(),
       new ParticleSystem(),
       new RoomSystem(eventHub, platform.getRenderer(), solaEcs, reMemoryMaker),
       new PortalSystem(eventHub)
