@@ -13,7 +13,6 @@ public class PlayerAttributeContainer {
   private int speed;
   private int stealth;
   private int vision;
-  private int luck;
   private final List<ReMemoryPage> acceptedPages = new ArrayList<>();
 
   public PlayerAttributeContainer(EventHub eventHub) {
@@ -51,16 +50,11 @@ public class PlayerAttributeContainer {
     return vision;
   }
 
-  public int getLuck() {
-    return luck;
-  }
-
   private void forget() {
     name = "???";
     speed = 3;
     stealth = 3;
     vision = 3;
-    luck = 3;
     acceptedPages.clear();
   }
 
@@ -70,7 +64,6 @@ public class PlayerAttributeContainer {
       speed++;
       stealth++;
       vision++;
-      luck++;
     } else {
       switch (reMemoryPage.attribute()) {
         case SPEED -> {
@@ -78,9 +71,6 @@ public class PlayerAttributeContainer {
         }
         case VISION -> {
           vision = updateAttribute(vision, reMemoryPage.attributeModifier());
-        }
-        case LUCK -> {
-          luck = updateAttribute(luck, reMemoryPage.attributeModifier());
         }
         case STEALTH -> {
           stealth = updateAttribute(stealth, reMemoryPage.attributeModifier());

@@ -4,5 +4,4 @@ public enum Attribute {
   SPEED,
   STEALTH,
   VISION,
-  LUCK,
 }

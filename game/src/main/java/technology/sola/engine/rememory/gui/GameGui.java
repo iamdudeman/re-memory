@@ -22,7 +22,6 @@ public class GameGui {
       updateAttributeValueText(document.getElementById("speed", TextGuiElement.class), playerAttributeContainer.getSpeed());
       updateAttributeValueText(document.getElementById("stealth", TextGuiElement.class), playerAttributeContainer.getStealth());
       updateAttributeValueText(document.getElementById("vision", TextGuiElement.class), playerAttributeContainer.getVision());
-      updateAttributeValueText(document.getElementById("luck", TextGuiElement.class), playerAttributeContainer.getLuck());
     });
 
     return document.createElement(
@@ -89,8 +88,7 @@ public class GameGui {
       createAttributeText(document, "Name:", "name"),
       createAttributeText(document, "Speed:", "speed"),
       createAttributeText(document, "Stealth:", "stealth"),
-      createAttributeText(document, "Vision:", "vision"),
-      createAttributeText(document, "Luck:", "luck")
+      createAttributeText(document, "Vision:", "vision")
     );
   }
 

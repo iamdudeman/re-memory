@@ -27,7 +27,6 @@ public class ReMemoryMaker {
   private Attribute determineAttribute() {
     int speedRange = 33;
     int visionRange = 33;
-    int luckRange = 33;
 
     int roll = RandomUtils.roll100();
 
@@ -35,18 +34,15 @@ public class ReMemoryMaker {
       return Attribute.SPEED;
     } else if (roll < speedRange + visionRange) {
       return Attribute.VISION;
-    } else if (roll < speedRange + visionRange + luckRange) {
-      return Attribute.LUCK;
     }
 
     return Attribute.STEALTH;
   }
 
   private AttributeModifier determineModifier() {
-    int playerLuck = playerAttributeContainer.getLuck() * 2;
-    int greatRange = playerLuck;
-    int terribleRange = 10 - playerLuck;
-    int goodRange = 45 + playerLuck * 2;
+    int greatRange = 5;
+    int terribleRange = 5;
+    int goodRange = 50;
 
     int roll = RandomUtils.roll100();
 
@@ -62,7 +58,7 @@ public class ReMemoryMaker {
   }
 
   private AttributeCategory determineCategory() {
-    int nameRange = playerAttributeContainer.getLuck() * 2 + playerAttributeContainer.getAcceptedPages().size() * 10;
+    int nameRange = playerAttributeContainer.getAcceptedPages().size() * 10;
     int jobRange = 15 + playerAttributeContainer.getAcceptedPages().size() * 10;
     int likeRange = 45;
 
