@@ -3,7 +3,9 @@ package technology.sola.engine.rememory.rooms;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
+import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.RandomUtils;
 import technology.sola.engine.rememory.attributes.ReMemoryMaker;
@@ -99,6 +101,31 @@ public class CozyRoomWorld extends RoomWorld {
         ColliderComponent.aabb(2, 2).setSensor(true).setTags(Constants.Tags.LAPIS),
         new LayerComponent(Constants.Layers.OBJECTS),
         new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.LAPIS)
+      );
+    }
+
+    if (RandomUtils.roll100() < 5) {
+      createEntity(
+        new TransformComponent(
+          RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+          RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
+        ),
+        ColliderComponent.circle(4).setTags(Constants.Tags.BOUNDARY, Constants.Tags.DUCK),
+        new SpriteComponent(Constants.Assets.AcidRainSprites.ID, Constants.Assets.AcidRainSprites.DUCK),
+        new LayerComponent(Constants.Layers.DECORATION)
+      );
+    }
+
+    if (RandomUtils.roll100() < 10) {
+      createEntity(
+        new TransformComponent(
+          RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+          RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
+        ),
+        new DynamicBodyComponent(new Material(50, 0.1f, 0.99f)),
+        ColliderComponent.circle(3),
+        new SpriteComponent(Constants.Assets.AcidRainSprites.ID, Constants.Assets.AcidRainSprites.DONUT),
+        new LayerComponent(Constants.Layers.OBJECTS)
       );
     }
 

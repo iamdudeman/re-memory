@@ -3,11 +3,15 @@ package technology.sola.engine.rememory.systems;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
+import technology.sola.engine.assets.AssetLoader;
+import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.components.LightComponent;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.input.KeyboardInput;
+import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
+import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.events.ForgetWhereEvent;
 import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
@@ -20,10 +24,24 @@ public class PlayerSystem extends EcsSystem {
   private final EventHub eventHub;
   private final PlayerAttributeContainer playerAttributeContainer;
 
-  public PlayerSystem(KeyboardInput keyboardInput, EventHub eventHub, PlayerAttributeContainer playerAttributeContainer) {
+  public PlayerSystem(KeyboardInput keyboardInput, EventHub eventHub, PlayerAttributeContainer playerAttributeContainer, AssetLoader<AudioClip> audioClipAssetLoader) {
     this.keyboardInput = keyboardInput;
     this.eventHub = eventHub;
     this.playerAttributeContainer = playerAttributeContainer;
+
+    eventHub.add(CollisionEvent.class, event -> {
+      event.collisionManifold().conditionallyResolveCollision(
+        entity -> Constants.Names.PLAYER.equals(entity.getName()),
+        entity -> entity.getComponent(ColliderComponent.class).hasTag(Constants.Tags.DUCK),
+        (player, duck) -> {
+          audioClipAssetLoader.get(Constants.Assets.AudioClips.QUACK).executeIfLoaded(audioClip -> {
+            if (!audioClip.isPlaying()) {
+              audioClip.play();
+            }
+          });
+        }
+      );
+    });
   }
 
   @Override

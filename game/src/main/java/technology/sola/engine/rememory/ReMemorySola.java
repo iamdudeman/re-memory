@@ -53,7 +53,7 @@ public class ReMemorySola extends SolaWithDefaults {
 
     // ecs
     solaEcs.addSystems(
-      new PlayerSystem(keyboardInput, eventHub, playerAttributeContainer),
+      new PlayerSystem(keyboardInput, eventHub, playerAttributeContainer, assetLoaderProvider.get(AudioClip.class)),
       new EnemySystem(eventHub, playerAttributeContainer),
       new ParticleSystem(),
       new RoomSystem(eventHub, platform.getRenderer(), solaEcs, reMemoryMaker),
@@ -72,15 +72,21 @@ public class ReMemorySola extends SolaWithDefaults {
   protected void onAsyncInit(Runnable completeAsyncInit) {
     new BulkAssetLoader(assetLoaderProvider)
       .addAsset(AudioClip.class, "time", "assets/time.wav")
+      .addAsset(AudioClip.class, Constants.Assets.AudioClips.QUACK, "assets/Quack.wav")
       .addAsset(Font.class, "monospaced_NORMAL_10", "assets/monospaced_NORMAL_10.json")
       .addAsset(SpriteSheet.class, Constants.Assets.Sprites.ID, "assets/rememory_spritesheet.json")
       .addAsset(SpriteSheet.class, Constants.Assets.CozySprites.ID, "assets/cozy_room.json")
+      .addAsset(SpriteSheet.class, Constants.Assets.AcidRainSprites.ID, "assets/acid_rain_sprites.json")
       .loadAll()
       .onComplete(assets -> {
         AudioClip audioClip = ((AudioClip) assets[0]);
 
         audioClip.setVolume(0.5f);
         audioClip.loop(-1);
+
+        AudioClip audioClipQuack = ((AudioClip) assets[1]);
+        audioClipQuack.addFinishListener(AudioClip::stop);
+
         completeAsyncInit.run();
       });
   }

@@ -4,11 +4,21 @@ import technology.sola.engine.physics.component.ColliderComponent;
 
 public final class Constants {
   public final static class Assets {
+    public final static class AudioClips {
+      public static final String QUACK = "quack";
+    }
+
     public final static class CozySprites {
       public static final String ID = "cozy";
       public static final String FLOOR = "floor";
       public static final String BACK_WALL_TOP = "back_wall_top";
       public static final String BACK_WALL_BOTTOM = "back_wall_bottom";
+    }
+
+    public final static class AcidRainSprites {
+      public static final String ID = "acid_rain";
+      public static final String DUCK = "duck";
+      public static final String DONUT = "donut";
     }
 
     public final static class Sprites {
@@ -24,12 +34,6 @@ public final class Constants {
       public static final String BATTERY = "battery";
       public static final String LAPIS = "lapis";
       public static final String PAGE = "page";
-
-      private Sprites() {
-      }
-    }
-
-    private Assets() {
     }
   }
 
@@ -40,9 +44,6 @@ public final class Constants {
 
   public final static class Names {
     public static final String PLAYER = "player";
-
-    private Names() {
-    }
   }
 
   public enum Tags implements ColliderComponent.ColliderTag {
@@ -50,8 +51,6 @@ public final class Constants {
     PLAYER,
     PORTAL,
     LAPIS,
-  }
-
-  private Constants() {
+    DUCK,
   }
 }

@@ -1,16 +1,19 @@
 ## New ideas potentially
 
+* add donut and duck assets for decorations
+* pages always increase a stat
+* forgetting where reduces random stat
+
 * Madlibs
 * Enemies force bad option word onto you for current slot
 * Nouns and adjectives and verbs?
 * Complete your madlib
   * madlib randomly selected at start
-* lapis instantly spawns portal instead of picking them up first?
 
 ## Pieces missing
 
-* Final paragraph of "who you are"
-* Enemies
+* Balancing
+* Assets
 * How to win/lose
 
 
