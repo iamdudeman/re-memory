@@ -6,7 +6,7 @@ public class RandomUtils {
   private static final Random random = new Random();
 
   public static int roll100() {
-    return random.nextInt(100) + 1;
+    return rollN(100);
   }
 
   public static int rollN(int n) {

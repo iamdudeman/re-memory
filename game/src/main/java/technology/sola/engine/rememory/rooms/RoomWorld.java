@@ -5,9 +5,11 @@ import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.*;
 import technology.sola.engine.graphics.renderer.BlendMode;
+import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.rememory.Constants;
+import technology.sola.engine.rememory.RandomUtils;
 import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.components.PortalComponent;
 
@@ -59,6 +61,15 @@ public abstract class RoomWorld extends World {
     );
   }
 
+  protected void addLapis(float x, float y) {
+    createEntity(
+      new TransformComponent(x, y),
+      ColliderComponent.aabb(2, 2).setSensor(true).setTags(Constants.Tags.LAPIS),
+      new LayerComponent(Constants.Layers.OBJECTS),
+      new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.LAPIS)
+    );
+  }
+
   protected void addEnemy(float x, float y) {
     createEntity(
       new TransformComponent(x, y,
@@ -73,12 +84,31 @@ public abstract class RoomWorld extends World {
     );
   }
 
+  protected void addDuck(float x, float y) {
+    createEntity(
+      new TransformComponent(x, y),
+      ColliderComponent.circle(4).setTags(Constants.Tags.BOUNDARY, Constants.Tags.DUCK),
+      new SpriteComponent(Constants.Assets.AcidRainSprites.ID, Constants.Assets.AcidRainSprites.DUCK),
+      new LayerComponent(Constants.Layers.DECORATION)
+    );
+  }
+
+  protected void addDonut(float x, float y) {
+    createEntity(
+      new TransformComponent(x, y),
+      new DynamicBodyComponent(new Material(20, 0.6f, 0.99f)),
+      ColliderComponent.circle(3),
+      new SpriteComponent(Constants.Assets.AcidRainSprites.ID, Constants.Assets.AcidRainSprites.DONUT),
+      new LayerComponent(Constants.Layers.OBJECTS)
+    );
+  }
+
   protected void addTorch(float x, float y) {
     createEntity(
       new TransformComponent(x, y),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.TORCH),
       new LayerComponent(Constants.Layers.OBJECTS, 1),
-      new LightComponent(16, Color.YELLOW)
+      new LightComponent(32, Color.YELLOW)
         .setOffset(1.5f, 3)
         .setLightFlicker(new LightFlicker(0.2f, 0.8f))
     );

@@ -3,9 +3,7 @@ package technology.sola.engine.rememory.rooms;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
-import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.ColliderComponent;
-import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.RandomUtils;
 import technology.sola.engine.rememory.attributes.ReMemoryMaker;
@@ -83,7 +81,7 @@ public class CozyRoomWorld extends RoomWorld {
       }
     }
 
-    int lapisChance = 5;
+    int lapisChance = 15;
 
     if (tableCount < 2) {
       lapisChance += 15;
@@ -93,39 +91,29 @@ public class CozyRoomWorld extends RoomWorld {
     }
 
     if (RandomUtils.roll100() < lapisChance) {
-      createEntity(
-        new TransformComponent(
-          RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-          RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
-        ),
-        ColliderComponent.aabb(2, 2).setSensor(true).setTags(Constants.Tags.LAPIS),
-        new LayerComponent(Constants.Layers.OBJECTS),
-        new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.LAPIS)
+      addLapis(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
+      );
+    }
+    if (RandomUtils.roll100() < lapisChance - 20) {
+      addLapis(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
       );
     }
 
     if (RandomUtils.roll100() < 15) {
-      createEntity(
-        new TransformComponent(
-          RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-          RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
-        ),
-        ColliderComponent.circle(4).setTags(Constants.Tags.BOUNDARY, Constants.Tags.DUCK),
-        new SpriteComponent(Constants.Assets.AcidRainSprites.ID, Constants.Assets.AcidRainSprites.DUCK),
-        new LayerComponent(Constants.Layers.DECORATION)
+      addDuck(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );
     }
 
     if (RandomUtils.roll100() < 30) {
-      createEntity(
-        new TransformComponent(
-          RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-          RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
-        ),
-        new DynamicBodyComponent(new Material(20, 0.6f, 0.99f)),
-        ColliderComponent.circle(3),
-        new SpriteComponent(Constants.Assets.AcidRainSprites.ID, Constants.Assets.AcidRainSprites.DONUT),
-        new LayerComponent(Constants.Layers.OBJECTS)
+      addDonut(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );
     }
 
