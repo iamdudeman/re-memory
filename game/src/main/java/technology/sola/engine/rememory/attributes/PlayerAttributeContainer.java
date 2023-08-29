@@ -1,7 +1,9 @@
 package technology.sola.engine.rememory.attributes;
 
 import technology.sola.engine.event.EventHub;
+import technology.sola.engine.rememory.RandomUtils;
 import technology.sola.engine.rememory.events.AttributesChangedEvent;
+import technology.sola.engine.rememory.events.ForgetWhereEvent;
 import technology.sola.engine.rememory.events.ForgetWhoEvent;
 import technology.sola.engine.rememory.events.PageAcceptedEvent;
 
@@ -20,7 +22,12 @@ public class PlayerAttributeContainer {
 
     eventHub.add(PageAcceptedEvent.class, event -> {
       acceptedPages.add(event.reMemoryPage());
-      applyPageAttributes(event.reMemoryPage());
+      randomStatIncrease();
+      eventHub.emit(new AttributesChangedEvent());
+    });
+
+    eventHub.add(ForgetWhereEvent.class, event -> {
+      randomStatDecrease();
       eventHub.emit(new AttributesChangedEvent());
     });
 
@@ -58,46 +65,45 @@ public class PlayerAttributeContainer {
     acceptedPages.clear();
   }
 
-  private void applyPageAttributes(ReMemoryPage reMemoryPage) {
-    if (reMemoryPage.attributeCategory() == AttributeCategory.NAME) {
-      name = reMemoryPage.noun();
+  private void randomStatIncrease() {
+    int speedChance = speed < 5 ? 33 : 0;
+    int stealthChance = stealth < 5 ? 33 : 0;
+    int visionChance = vision < 5 ? 33 : 0;
+    int totalChance = speedChance + stealthChance + visionChance;
+
+    if (totalChance == 0) {
+      return;
+    }
+
+    int roll = RandomUtils.rollN(totalChance);
+
+    if (roll < speedChance) {
       speed++;
+    } else if (roll < speedChance + stealthChance) {
       stealth++;
+    } else if (roll < speedChance + stealthChance + visionChance) {
       vision++;
-    } else {
-      switch (reMemoryPage.attribute()) {
-        case SPEED -> {
-          speed = updateAttribute(speed, reMemoryPage.attributeModifier());
-        }
-        case VISION -> {
-          vision = updateAttribute(vision, reMemoryPage.attributeModifier());
-        }
-        case STEALTH -> {
-          stealth = updateAttribute(stealth, reMemoryPage.attributeModifier());
-        }
-      }
-
     }
   }
 
-  private int updateAttribute(int value, AttributeModifier attributeModifier) {
-    int newValue = value;
+  private void randomStatDecrease() {
+    int speedChance = speed > 1 ? 33 : 0;
+    int stealthChance = stealth > 1 ? 33 : 0;
+    int visionChance = vision > 1 ? 33 : 0;
+    int totalChance = speedChance + stealthChance + visionChance;
 
-    newValue += switch (attributeModifier) {
-      case GREAT -> 2;
-      case GOOD -> 1;
-      case BAD -> -1;
-      case TERRIBLE -> -2;
-    };
-
-    return clampAttribute(newValue);
-  }
-
-  private int clampAttribute(int value) {
-    if (value < 1) {
-      return 1;
+    if (totalChance == 0) {
+      return;
     }
 
-    return Math.min(value, 5);
+    int roll = RandomUtils.rollN(totalChance);
+
+    if (roll < speedChance) {
+      speed--;
+    } else if (roll < speedChance + stealthChance) {
+      stealth--;
+    } else if (roll < speedChance + stealthChance + visionChance) {
+      vision--;
+    }
   }
 }

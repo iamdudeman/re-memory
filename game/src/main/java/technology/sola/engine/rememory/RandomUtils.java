@@ -6,7 +6,11 @@ public class RandomUtils {
   private static final Random random = new Random();
 
   public static int roll100() {
-    return random.nextInt(100);
+    return random.nextInt(100) + 1;
+  }
+
+  public static int rollN(int n) {
+    return random.nextInt(n) + 1;
   }
 
   public static float quickRandomDoubleClamp(float min, float max, float minExclude, float maxExclude) {

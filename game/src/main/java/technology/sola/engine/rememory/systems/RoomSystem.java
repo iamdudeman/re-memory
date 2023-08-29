@@ -6,6 +6,7 @@ import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
+import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.rememory.attributes.ReMemoryMaker;
 import technology.sola.engine.rememory.components.PortalComponent;
@@ -15,6 +16,7 @@ import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.rememory.events.ChangeRoomEvent;
 import technology.sola.engine.rememory.rooms.RoomWorld;
+import technology.sola.math.linear.Vector2D;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -71,7 +73,7 @@ public class RoomSystem extends EcsSystem {
         .forEach(entry -> {
           entry.c1().resetActivation();
           entry.entity().removeComponent(ParticleEmitterComponent.class);
-          entry.entity().getComponent(CircleRendererComponent.class).setColor(Color.LIGHT_GRAY);
+          entry.entity().getComponent(CircleRendererComponent.class).setColor(new Color(177, 156, 217));
         });
     }
 

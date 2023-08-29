@@ -12,49 +12,14 @@ public class ReMemoryMaker {
   }
 
   public ReMemoryPage createPage() {
-    Attribute attribute = determineAttribute();
     AttributeCategory attributeCategory = determineCategory();
-    AttributeModifier attributeModifier = determineModifier();
 
     List<String> currentNouns = playerAttributeContainer.getAcceptedPages().stream()
       .filter(page -> page.attributeCategory() == attributeCategory)
       .map(ReMemoryPage::noun)
       .toList();
 
-    return new ReMemoryPage(attributeCategory, attributeModifier, attribute, NounDictionary.getRandomNoun(attributeCategory, currentNouns));
-  }
-
-  private Attribute determineAttribute() {
-    int speedRange = 33;
-    int visionRange = 33;
-
-    int roll = RandomUtils.roll100();
-
-    if (roll < speedRange) {
-      return Attribute.SPEED;
-    } else if (roll < speedRange + visionRange) {
-      return Attribute.VISION;
-    }
-
-    return Attribute.STEALTH;
-  }
-
-  private AttributeModifier determineModifier() {
-    int greatRange = 5;
-    int terribleRange = 5;
-    int goodRange = 50;
-
-    int roll = RandomUtils.roll100();
-
-    if (roll < greatRange) {
-      return AttributeModifier.GREAT;
-    } else if (roll < greatRange + terribleRange) {
-      return AttributeModifier.TERRIBLE;
-    } else if (roll < greatRange + terribleRange + goodRange) {
-      return AttributeModifier.GOOD;
-    }
-
-    return AttributeModifier.BAD;
+    return new ReMemoryPage(attributeCategory, NounDictionary.getRandomNoun(attributeCategory, currentNouns));
   }
 
   private AttributeCategory determineCategory() {
