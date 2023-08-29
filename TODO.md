@@ -5,6 +5,7 @@
 * Nouns and adjectives and verbs?
 * Complete your madlib
   * madlib randomly selected at start
+* lapis instantly spawns portal instead of picking them up first?
 
 ## Pieces missing
 
