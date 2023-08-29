@@ -104,7 +104,7 @@ public class CozyRoomWorld extends RoomWorld {
       );
     }
 
-    if (RandomUtils.roll100() < 5) {
+    if (RandomUtils.roll100() < 15) {
       createEntity(
         new TransformComponent(
           RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
@@ -116,13 +116,13 @@ public class CozyRoomWorld extends RoomWorld {
       );
     }
 
-    if (RandomUtils.roll100() < 10) {
+    if (RandomUtils.roll100() < 30) {
       createEntity(
         new TransformComponent(
           RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
           RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
         ),
-        new DynamicBodyComponent(new Material(50, 0.1f, 0.99f)),
+        new DynamicBodyComponent(new Material(50, 0.5f, 0.99f)),
         ColliderComponent.circle(3),
         new SpriteComponent(Constants.Assets.AcidRainSprites.ID, Constants.Assets.AcidRainSprites.DONUT),
         new LayerComponent(Constants.Layers.OBJECTS)
