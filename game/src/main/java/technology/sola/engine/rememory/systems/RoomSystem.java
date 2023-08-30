@@ -71,7 +71,7 @@ public class RoomSystem extends EcsSystem {
       } else if (playerAttributeContainer.getPagesCollectedCount() == 0) {
         nextRoom = new InitialRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), reMemoryMaker, eventHub);
       } else {
-        nextRoom = new CozyRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), reMemoryMaker);
+        nextRoom = new CozyRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), reMemoryMaker, playerAttributeContainer);
       }
 
       currentRoomId = nextRoomId;

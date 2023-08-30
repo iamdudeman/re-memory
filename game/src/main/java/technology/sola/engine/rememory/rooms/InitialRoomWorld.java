@@ -58,7 +58,7 @@ public class InitialRoomWorld extends RoomWorld {
 
     createEntity(
       new TransformComponent(x + 2, y + 1),
-      ColliderComponent.aabb(-3, -6, 8, 12).setSensor(true),
+      ColliderComponent.aabb(-3, -4, 10, 10).setSensor(true),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PAGE),
       new LayerComponent(Constants.Layers.OBJECTS),
       new PageComponent(reMemoryMaker.createPage())
@@ -71,8 +71,8 @@ public class InitialRoomWorld extends RoomWorld {
 
     eventHub.add(PageAcceptedEvent.class, event -> {
       addLapis(
-        RandomUtils.quickRandomDoubleClamp(x - 10, x + 10, x - 4, x + 4),
-        RandomUtils.quickRandomDoubleClamp(y - 10, y + 10, y - 4, y + 4)
+        RandomUtils.quickRandomDoubleClamp(x - 20, x + 20, x - 4, x + 4),
+        RandomUtils.quickRandomDoubleClamp(y - 20, y + 20, y - 4, y + 4)
       );
     });
   }

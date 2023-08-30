@@ -6,13 +6,15 @@ import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.RandomUtils;
+import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
 import technology.sola.engine.rememory.attributes.ReMemoryMaker;
+import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.components.PageComponent;
 
 public class CozyRoomWorld extends RoomWorld {
   private final ReMemoryMaker reMemoryMaker;
 
-  public CozyRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight, ReMemoryMaker reMemoryMaker) {
+  public CozyRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight, ReMemoryMaker reMemoryMaker, PlayerAttributeContainer playerAttributeContainer) {
     super(previousRoomId, rendererWidth, rendererHeight);
     this.reMemoryMaker = reMemoryMaker;
 
@@ -41,7 +43,7 @@ public class CozyRoomWorld extends RoomWorld {
     float halfWidth = rendererWidth * 0.5f;
     float halfHeight = rendererHeight * 0.5f;
 
-    addExtras();
+    addExtras(playerAttributeContainer);
 
     addBoundaries(-boundarySize + 16);
 
@@ -50,7 +52,7 @@ public class CozyRoomWorld extends RoomWorld {
     addPlayer(halfWidth, halfHeight - 10);
   }
 
-  private void addExtras() {
+  private void addExtras(PlayerAttributeContainer playerAttributeContainer) {
     float halfWidth = rendererWidth * 0.5f;
     float halfHeight = rendererHeight * 0.5f;
     boolean hasSpawnedPage = false;
@@ -68,10 +70,10 @@ public class CozyRoomWorld extends RoomWorld {
         new LayerComponent(Constants.Layers.DECORATION)
       );
 
-      if (!hasSpawnedPage && random.nextInt(10) < 3) {
+      if (!hasSpawnedPage && random.nextBoolean()) {
         createEntity(
           new TransformComponent(x + 2, y + 1),
-          ColliderComponent.aabb(-3, -6, 6, 12).setSensor(true),
+          ColliderComponent.aabb(-3, -4, 10, 10).setSensor(true),
           new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PAGE),
           new LayerComponent(Constants.Layers.OBJECTS),
           new PageComponent(reMemoryMaker.createPage())
@@ -124,11 +126,25 @@ public class CozyRoomWorld extends RoomWorld {
 
     addEnemy(
       RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-      RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
+      RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+      EnemyComponent.EnemyType.CREEPER
     );
-    addEnemy(
-      RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-      RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
-    );
+
+    if (playerAttributeContainer.getPagesCollectedCount() > 1) {
+      addEnemy(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+        EnemyComponent.EnemyType.CREEPER
+      );
+    }
+
+    if (playerAttributeContainer.getPagesCollectedCount() > 2) {
+      addEnemy(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+        random.nextBoolean() || playerAttributeContainer.getPagesCollectedCount() > 3 ? EnemyComponent.EnemyType.SPOOKER : EnemyComponent.EnemyType.CREEPER
+      );
+    }
+
   }
 }
