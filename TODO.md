@@ -1,3 +1,13 @@
+## Bugs
+
+Exception in thread "JavaFX Application Thread" java.lang.IllegalArgumentException: bound must be greater than origin
+at java.base/jdk.internal.util.random.RandomSupport.checkRange(RandomSupport.java:203)
+at java.base/java.util.random.RandomGenerator.nextFloat(RandomGenerator.java:551)
+at technology.sola.rememory.game/technology.sola.engine.rememory.RandomUtils.quickRandomDoubleClamp(RandomUtils.java:23)
+at technology.sola.rememory.game/technology.sola.engine.rememory.rooms.ForestRoomWorld.<init>(ForestRoomWorld.java:52)
+at technology.sola.rememory.game/technology.sola.engine.rememory.systems.RoomSystem.update(RoomSystem.java:64)
+
+
 ## Pieces missing
 
 * How to win/lose

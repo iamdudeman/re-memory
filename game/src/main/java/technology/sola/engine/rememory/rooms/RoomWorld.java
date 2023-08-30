@@ -95,7 +95,7 @@ public abstract class RoomWorld extends World {
   protected void addDonut(float x, float y) {
     createEntity(
       new TransformComponent(x, y),
-      new DynamicBodyComponent(new Material(20, 0.6f, 0.99f)),
+      new DynamicBodyComponent(new Material(20, 0.6f, 0)),
       ColliderComponent.circle(3),
       new SpriteComponent(Constants.Assets.AcidRainSprites.ID, Constants.Assets.AcidRainSprites.DONUT),
       new LayerComponent(Constants.Layers.OBJECTS)

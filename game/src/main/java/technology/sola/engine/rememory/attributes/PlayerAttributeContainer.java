@@ -15,6 +15,7 @@ public class PlayerAttributeContainer {
   private int stealth;
   private int vision;
   private final List<ReMemoryPage> acceptedPages = new ArrayList<>();
+  private int pagesCollectedCount = 0;
   private int tries = 0;
 
   public PlayerAttributeContainer(EventHub eventHub) {
@@ -22,6 +23,7 @@ public class PlayerAttributeContainer {
 
     eventHub.add(PageAcceptedEvent.class, event -> {
       acceptedPages.add(event.reMemoryPage());
+      pagesCollectedCount++;
       randomStatIncrease();
       eventHub.emit(new AttributesChangedEvent());
     });
@@ -63,10 +65,15 @@ public class PlayerAttributeContainer {
     return tries;
   }
 
+  public int getPagesCollectedCount() {
+    return pagesCollectedCount;
+  }
+
   private void forget() {
     speed = 3;
     stealth = 3;
     vision = 3;
+    pagesCollectedCount = 0;
     acceptedPages.clear();
   }
 

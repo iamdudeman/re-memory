@@ -10,11 +10,13 @@ import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
 import technology.sola.engine.rememory.components.EnemyComponent;
+import technology.sola.engine.rememory.events.ChangeRoomEvent;
 import technology.sola.engine.rememory.events.ForgetEverythingEvent;
 import technology.sola.math.linear.Vector2D;
 
 public class EnemySystem extends EcsSystem {
   private final PlayerAttributeContainer playerAttributeContainer;
+  private float enemyMoveDelay = 0;
 
   public EnemySystem(EventHub eventHub, PlayerAttributeContainer playerAttributeContainer) {
     this.playerAttributeContainer = playerAttributeContainer;
@@ -29,10 +31,19 @@ public class EnemySystem extends EcsSystem {
         }
       );
     });
+
+    eventHub.add(ChangeRoomEvent.class, event -> {
+      enemyMoveDelay = 0;
+    });
   }
 
   @Override
   public void update(World world, float deltaTime) {
+    if (enemyMoveDelay < 1.5f) {
+      enemyMoveDelay += deltaTime;
+      return;
+    }
+
     Entity playerEntity = world.findEntityByName(Constants.Names.PLAYER);
     Vector2D playerTranslate = playerEntity.getComponent(TransformComponent.class).getTranslate();
 

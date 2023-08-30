@@ -19,7 +19,7 @@ public class GrainyGraphicsModule extends SolaGraphicsModule {
   public void renderMethod(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
     renderer.setBlendMode(BlendMode.DISSOLVE);
 
-    int alpha = switch (playerAttributeContainer.getAcceptedPages().size()) {
+    int alpha = switch (playerAttributeContainer.getPagesCollectedCount()) {
         case 0 -> 5;
         case 1, 2 -> 1;
         default -> 0;
