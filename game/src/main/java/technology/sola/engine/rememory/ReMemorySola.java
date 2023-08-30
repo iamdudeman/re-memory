@@ -8,6 +8,7 @@ import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.system.GravitySystem;
 import technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem;
@@ -17,12 +18,16 @@ import technology.sola.engine.rememory.events.ForgetWhoEvent;
 import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
 import technology.sola.engine.rememory.gui.GameGui;
 import technology.sola.engine.rememory.render.GrainyGraphicsModule;
+import technology.sola.engine.rememory.render.LoadingScreen;
 import technology.sola.engine.rememory.systems.EnemySystem;
 import technology.sola.engine.rememory.systems.RoomSystem;
 import technology.sola.engine.rememory.systems.PlayerSystem;
 import technology.sola.engine.rememory.systems.PortalSystem;
 
 public class ReMemorySola extends SolaWithDefaults {
+  private boolean isLoading = true;
+  private LoadingScreen loadingScreen = new LoadingScreen();
+
   public ReMemorySola() {
     super(SolaConfiguration.build("re;memory", 256, 240).withTargetUpdatesPerSecond(30));
   }
@@ -65,11 +70,6 @@ public class ReMemorySola extends SolaWithDefaults {
 
     solaGraphics.addGraphicsModules(new GrainyGraphicsModule(playerAttributeContainer));
 
-    eventHub.emit(new ForgetWhoEvent());
-  }
-
-  @Override
-  protected void onAsyncInit(Runnable completeAsyncInit) {
     new BulkAssetLoader(assetLoaderProvider)
       .addAsset(AudioClip.class, "time", "assets/time.wav")
       .addAsset(AudioClip.class, Constants.Assets.AudioClips.QUACK, "assets/Quack.wav")
@@ -81,13 +81,23 @@ public class ReMemorySola extends SolaWithDefaults {
       .onComplete(assets -> {
         AudioClip audioClip = ((AudioClip) assets[0]);
 
-        audioClip.setVolume(0.5f);
+        audioClip.setVolume(0.4f);
         audioClip.loop(-1);
 
         AudioClip audioClipQuack = ((AudioClip) assets[1]);
         audioClipQuack.addFinishListener(AudioClip::stop);
 
-        completeAsyncInit.run();
+        eventHub.emit(new ForgetWhoEvent());
+        isLoading = false;
       });
+  }
+
+  @Override
+  protected void onRender(Renderer renderer) {
+    if (isLoading) {
+      loadingScreen.drawLoading(renderer);
+    } else {
+      super.onRender(renderer);
+    }
   }
 }
