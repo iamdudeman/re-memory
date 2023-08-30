@@ -61,7 +61,7 @@ public class ReMemorySola extends SolaWithDefaults {
       new PlayerSystem(keyboardInput, eventHub, playerAttributeContainer, assetLoaderProvider.get(AudioClip.class)),
       new EnemySystem(eventHub, playerAttributeContainer),
       new ParticleSystem(),
-      new RoomSystem(eventHub, platform.getRenderer(), solaEcs, reMemoryMaker),
+      new RoomSystem(eventHub, platform.getRenderer(), solaEcs, reMemoryMaker, playerAttributeContainer),
       new PortalSystem(eventHub)
     );
 

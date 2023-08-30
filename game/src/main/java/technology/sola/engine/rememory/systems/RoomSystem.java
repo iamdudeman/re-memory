@@ -7,11 +7,13 @@ import technology.sola.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
+import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
 import technology.sola.engine.rememory.attributes.ReMemoryMaker;
 import technology.sola.engine.rememory.components.PortalComponent;
 import technology.sola.engine.rememory.events.ForgetEverythingEvent;
 import technology.sola.engine.rememory.rooms.CozyRoomWorld;
-import technology.sola.engine.rememory.rooms.ForestRoomWorld;
+import technology.sola.engine.rememory.rooms.InitialRoomWorld;
+import technology.sola.engine.rememory.rooms.StartingRoomWorld;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.rememory.events.ChangeRoomEvent;
@@ -21,18 +23,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RoomSystem extends EcsSystem {
+  private final EventHub eventHub;
   private final Renderer renderer;
   private final SolaEcs solaEcs;
   private final ReMemoryMaker reMemoryMaker;
+  private final PlayerAttributeContainer playerAttributeContainer;
   private final Map<String, RoomWorld> worldMap = new HashMap<>();
   private String currentRoomId;
   private String nextRoomId = "";
   private int idCounter = 0;
 
-  public RoomSystem(EventHub eventHub, Renderer renderer, SolaEcs solaEcs, ReMemoryMaker reMemoryMaker) {
+  public RoomSystem(EventHub eventHub, Renderer renderer, SolaEcs solaEcs, ReMemoryMaker reMemoryMaker, PlayerAttributeContainer playerAttributeContainer) {
+    this.eventHub = eventHub;
     this.renderer = renderer;
     this.solaEcs = solaEcs;
     this.reMemoryMaker = reMemoryMaker;
+    this.playerAttributeContainer = playerAttributeContainer;
 
     eventHub.add(ChangeRoomEvent.class, event -> {
       if (event.portalComponent().getRoomId() == null) {
@@ -61,7 +67,9 @@ public class RoomSystem extends EcsSystem {
     if (nextRoom == null) {
       if (idCounter == 0) {
         nextRoomId = nextId();
-        nextRoom = new ForestRoomWorld(null, renderer.getWidth(), renderer.getHeight());
+        nextRoom = new StartingRoomWorld(null, renderer.getWidth(), renderer.getHeight());
+      } else if (playerAttributeContainer.getPagesCollectedCount() == 0) {
+        nextRoom = new InitialRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), reMemoryMaker, eventHub);
       } else {
         nextRoom = new CozyRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), reMemoryMaker);
       }

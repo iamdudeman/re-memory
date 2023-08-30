@@ -8,8 +8,8 @@ import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.RandomUtils;
 
-public class ForestRoomWorld extends RoomWorld {
-  public ForestRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight) {
+public class StartingRoomWorld extends RoomWorld {
+  public StartingRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight) {
     super(previousRoomId, rendererWidth, rendererHeight);
 
 

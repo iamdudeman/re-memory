@@ -1,9 +1,10 @@
 ## todo
 
 * ~~Freeze player and enemies on page acquire~~
-* First room no enemies and always page
+* ~~First room no enemies and always page~~
 * ~~Enemies hitting you take you back to the forest with a +1 stat boost to make next run a bit easier?~~
     * page found dialog changes slightly with "retries"
+* only spawn spookers after acquiring at least two pages
 * Sound effects
     * Forget sound effect
     * Enemy hit sound effect (similar to forget one)
