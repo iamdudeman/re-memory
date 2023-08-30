@@ -41,20 +41,34 @@
 
 ### Random notes
 
-* Attribute "slots"
-    * name - 1
-    * job - 1
-    * interests - 3
+* What is on the pages?
+    * Story that bridges the pages
+    * Each page reveals a bit more and final screen is full story
+    * n many pages to finish game
+    * 100% chance to spawn page until player picks one up
+        * after first page clear all portals to prevent cheese
+    * Maybe they are parts of a diary?
 
-* Battery bar that steadily goes down
-* Maybe only 3 inventory slots
-* Show attributes in top left
-    * Haste - move speed
-    * Efficiency? - battery goes down slower
-    * Clarity? - can see more
-    * Luck (better chance to get + attributes)
+* Freeze player and enemies on page acquire
 
-* enemies
-    * enemy type that steals lapis
-    * enemy type that drains battery
-    * enemy type that kills
+* Enemies hitting you take you back to the forest with a +1 stat boost to make next run a bit easier?
+    * page found dialog changes slightly with "retries"
+
+* Old ideas
+    * Attribute "slots"
+        * name - 1
+        * job - 1
+        * interests - 3
+
+    * Battery bar that steadily goes down
+    * Maybe only 3 inventory slots
+    * Show attributes in top left
+        * Haste - move speed
+        * Efficiency? - battery goes down slower
+        * Clarity? - can see more
+        * Luck (better chance to get + attributes)
+
+    * enemies
+        * enemy type that steals lapis
+        * enemy type that drains battery
+        * enemy type that kills

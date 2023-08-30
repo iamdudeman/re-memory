@@ -18,7 +18,6 @@ import technology.sola.engine.rememory.events.PageAcceptedEvent;
 public class GameGui {
   public static GuiElement<?> build(SolaGuiDocument document, PlayerAttributeContainer playerAttributeContainer, EventHub eventHub) {
     eventHub.add(AttributesChangedEvent.class, event -> {
-      document.getElementById("name", TextGuiElement.class).properties().setText(playerAttributeContainer.getName());
       updateAttributeValueText(document.getElementById("speed", TextGuiElement.class), playerAttributeContainer.getSpeed());
       updateAttributeValueText(document.getElementById("stealth", TextGuiElement.class), playerAttributeContainer.getStealth());
       updateAttributeValueText(document.getElementById("vision", TextGuiElement.class), playerAttributeContainer.getVision());
@@ -26,7 +25,7 @@ public class GameGui {
 
     return document.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setGap(2).setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setBackgroundColor(new Color(100, 255, 255, 255)).padding.set(1),
+      p -> p.setGap(2).setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBackgroundColor(new Color(100, 255, 255, 255)).padding.set(2),
       createAttributeContainer(document),
       createReadPageContainer(document, eventHub)
     );
@@ -64,7 +63,7 @@ public class GameGui {
       p -> p.setGap(3).setDirection(StreamGuiElementContainer.Direction.VERTICAL).setId("page_container").setDisplay(Display.NONE),
       document.createElement(
         TextGuiElement::new,
-        p -> p.setWidth(165).padding.set(2, 5).setBorderColor(Color.BLACK).setId("page")
+        p -> p.setWidth(200).padding.set(2, 5).setBorderColor(Color.BLACK).setId("page")
       ),
       document.createElement(
         StreamGuiElementContainer::new,
@@ -84,8 +83,7 @@ public class GameGui {
   private static GuiElement<?> createAttributeContainer(SolaGuiDocument document) {
     return document.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBorderColor(Color.DARK_GRAY).padding.set(2),
-      createAttributeText(document, "Name:", "name"),
+      p -> p.setGap(10).setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setBorderColor(Color.DARK_GRAY).padding.set(1).setWidth(200),
       createAttributeText(document, "Speed:", "speed"),
       createAttributeText(document, "Stealth:", "stealth"),
       createAttributeText(document, "Vision:", "vision")

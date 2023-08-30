@@ -13,6 +13,7 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.rememory.Constants;
+import technology.sola.engine.rememory.events.ChangeRoomEvent;
 import technology.sola.engine.rememory.events.ForgetWhereEvent;
 import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
 import technology.sola.engine.rememory.events.ForgetWhoEvent;
@@ -23,6 +24,7 @@ public class PlayerSystem extends EcsSystem {
   private final KeyboardInput keyboardInput;
   private final EventHub eventHub;
   private final PlayerAttributeContainer playerAttributeContainer;
+  private boolean canForget = false;
 
   public PlayerSystem(KeyboardInput keyboardInput, EventHub eventHub, PlayerAttributeContainer playerAttributeContainer, AssetLoader<AudioClip> audioClipAssetLoader) {
     this.keyboardInput = keyboardInput;
@@ -41,6 +43,10 @@ public class PlayerSystem extends EcsSystem {
           });
         }
       );
+    });
+
+    eventHub.add(ChangeRoomEvent.class, event -> {
+      canForget = true;
     });
   }
 
@@ -80,7 +86,8 @@ public class PlayerSystem extends EcsSystem {
       }
     }
 
-    if (keyboardInput.isKeyPressed(Key.ONE)) {
+    if (canForget && keyboardInput.isKeyPressed(Key.F)) {
+      canForget = false;
       eventHub.emit(new ForgetWhereEvent());
     }
     if (keyboardInput.isKeyPressed(Key.TWO)) {

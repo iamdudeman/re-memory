@@ -71,7 +71,8 @@ public class ReMemorySola extends SolaWithDefaults {
     solaGraphics.addGraphicsModules(new GrainyGraphicsModule(playerAttributeContainer));
 
     new BulkAssetLoader(assetLoaderProvider)
-      .addAsset(AudioClip.class, "time", "assets/time.wav")
+      .addAsset(AudioClip.class, "memories", "assets/Memories-1.wav")
+//      .addAsset(AudioClip.class, "time", "assets/time.wav")
       .addAsset(AudioClip.class, Constants.Assets.AudioClips.QUACK, "assets/Quack.wav")
       .addAsset(Font.class, "monospaced_NORMAL_10", "assets/monospaced_NORMAL_10.json")
       .addAsset(SpriteSheet.class, Constants.Assets.Sprites.ID, "assets/rememory_spritesheet.json")
@@ -81,7 +82,7 @@ public class ReMemorySola extends SolaWithDefaults {
       .onComplete(assets -> {
         AudioClip audioClip = ((AudioClip) assets[0]);
 
-        audioClip.setVolume(0.4f);
+        audioClip.setVolume(0.7f);
         audioClip.loop(-1);
 
         AudioClip audioClipQuack = ((AudioClip) assets[1]);
