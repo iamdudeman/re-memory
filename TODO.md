@@ -54,6 +54,12 @@
 * Enemies hitting you take you back to the forest with a +1 stat boost to make next run a bit easier?
     * page found dialog changes slightly with "retries"
 
+* Sound effects
+    * Forget sound effect
+    * Enemy hit sound effect (similar to forget one)
+
+--------------------
+
 * Old ideas
     * Attribute "slots"
         * name - 1

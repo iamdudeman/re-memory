@@ -16,7 +16,7 @@ import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.events.ChangeRoomEvent;
 import technology.sola.engine.rememory.events.ForgetWhereEvent;
 import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
-import technology.sola.engine.rememory.events.ForgetWhoEvent;
+import technology.sola.engine.rememory.events.ForgetEverythingEvent;
 import technology.sola.math.linear.Vector2D;
 
 public class PlayerSystem extends EcsSystem {
@@ -47,6 +47,10 @@ public class PlayerSystem extends EcsSystem {
 
     eventHub.add(ChangeRoomEvent.class, event -> {
       canForget = true;
+    });
+
+    eventHub.add(ForgetEverythingEvent.class, event -> {
+      canForget = false;
     });
   }
 
@@ -89,9 +93,6 @@ public class PlayerSystem extends EcsSystem {
     if (canForget && keyboardInput.isKeyPressed(Key.F)) {
       canForget = false;
       eventHub.emit(new ForgetWhereEvent());
-    }
-    if (keyboardInput.isKeyPressed(Key.TWO)) {
-      eventHub.emit(new ForgetWhoEvent());
     }
 
     dynamicBodyComponent.setVelocity(new Vector2D(xSpeed, ySpeed));

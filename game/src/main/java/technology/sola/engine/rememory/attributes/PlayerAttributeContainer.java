@@ -4,18 +4,18 @@ import technology.sola.engine.event.EventHub;
 import technology.sola.engine.rememory.RandomUtils;
 import technology.sola.engine.rememory.events.AttributesChangedEvent;
 import technology.sola.engine.rememory.events.ForgetWhereEvent;
-import technology.sola.engine.rememory.events.ForgetWhoEvent;
+import technology.sola.engine.rememory.events.ForgetEverythingEvent;
 import technology.sola.engine.rememory.events.PageAcceptedEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerAttributeContainer {
-  private String name;
   private int speed;
   private int stealth;
   private int vision;
   private final List<ReMemoryPage> acceptedPages = new ArrayList<>();
+  private int tries = 0;
 
   public PlayerAttributeContainer(EventHub eventHub) {
     forget();
@@ -31,18 +31,20 @@ public class PlayerAttributeContainer {
       eventHub.emit(new AttributesChangedEvent());
     });
 
-    eventHub.add(ForgetWhoEvent.class, event -> {
+    eventHub.add(ForgetEverythingEvent.class, event -> {
       forget();
+      tries++;
+
+      for (int i = 0; i < tries - 1; i++) {
+        randomStatIncrease();
+      }
+
       eventHub.emit(new AttributesChangedEvent());
     });
   }
 
   public List<ReMemoryPage> getAcceptedPages() {
     return acceptedPages;
-  }
-
-  public String getName() {
-    return name;
   }
 
   public int getSpeed() {
@@ -57,8 +59,11 @@ public class PlayerAttributeContainer {
     return vision;
   }
 
+  public int getTries() {
+    return tries;
+  }
+
   private void forget() {
-    name = "???";
     speed = 3;
     stealth = 3;
     vision = 3;

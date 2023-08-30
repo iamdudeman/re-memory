@@ -10,6 +10,7 @@ import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
 import technology.sola.engine.rememory.components.EnemyComponent;
+import technology.sola.engine.rememory.events.ForgetEverythingEvent;
 import technology.sola.math.linear.Vector2D;
 
 public class EnemySystem extends EcsSystem {
@@ -23,8 +24,8 @@ public class EnemySystem extends EcsSystem {
         entity -> Constants.Names.PLAYER.equals(entity.getName()),
         entity -> entity.hasComponent(EnemyComponent.class),
         (player, enemy) -> {
-          // todo send enemy collision event of some sort?
           enemy.destroy();
+          eventHub.emit(new ForgetEverythingEvent());
         }
       );
     });
