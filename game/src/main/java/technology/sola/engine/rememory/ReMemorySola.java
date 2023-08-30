@@ -66,7 +66,7 @@ public class ReMemorySola extends SolaWithDefaults {
     );
 
     // gui
-    solaGuiDocument.setGuiRoot(GameGui.build(solaGuiDocument, playerAttributeContainer, eventHub));
+    solaGuiDocument.setGuiRoot(GameGui.build(solaGuiDocument, playerAttributeContainer, eventHub, solaEcs));
 
     solaGraphics.addGraphicsModules(new GrainyGraphicsModule(playerAttributeContainer));
 

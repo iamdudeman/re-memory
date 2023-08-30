@@ -1,7 +1,8 @@
 ## todo
 
-* Freeze player and enemies on page acquire
-* Enemies hitting you take you back to the forest with a +1 stat boost to make next run a bit easier?
+* ~~Freeze player and enemies on page acquire~~
+* First room no enemies and always page
+* ~~Enemies hitting you take you back to the forest with a +1 stat boost to make next run a bit easier?~~
     * page found dialog changes slightly with "retries"
 * Sound effects
     * Forget sound effect
