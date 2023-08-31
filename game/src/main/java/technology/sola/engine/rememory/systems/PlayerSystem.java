@@ -15,7 +15,7 @@ import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.events.ChangeRoomEvent;
 import technology.sola.engine.rememory.events.ForgetWhereEvent;
-import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
+import technology.sola.engine.rememory.PlayerAttributeContainer;
 import technology.sola.engine.rememory.events.ForgetEverythingEvent;
 import technology.sola.math.linear.Vector2D;
 

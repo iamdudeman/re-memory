@@ -8,7 +8,7 @@ import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.rememory.Constants;
-import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
+import technology.sola.engine.rememory.PlayerAttributeContainer;
 import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.events.ChangeRoomEvent;
 import technology.sola.engine.rememory.events.ForgetEverythingEvent;

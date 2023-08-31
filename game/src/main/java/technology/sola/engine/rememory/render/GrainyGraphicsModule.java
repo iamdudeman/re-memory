@@ -5,7 +5,7 @@ import technology.sola.engine.defaults.graphics.modules.SolaGraphicsModule;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.graphics.renderer.Renderer;
-import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
+import technology.sola.engine.rememory.PlayerAttributeContainer;
 import technology.sola.math.linear.Matrix3D;
 
 public class GrainyGraphicsModule extends SolaGraphicsModule {

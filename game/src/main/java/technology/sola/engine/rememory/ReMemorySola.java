@@ -13,9 +13,7 @@ import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.system.GravitySystem;
 import technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem;
 import technology.sola.engine.physics.system.ParticleSystem;
-import technology.sola.engine.rememory.attributes.ReMemoryMaker;
 import technology.sola.engine.rememory.events.ForgetEverythingEvent;
-import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
 import technology.sola.engine.rememory.gui.GuiManager;
 import technology.sola.engine.rememory.render.GrainyGraphicsModule;
 import technology.sola.engine.rememory.render.LoadingScreen;
@@ -54,14 +52,13 @@ public class ReMemorySola extends SolaWithDefaults {
     );
 
     PlayerAttributeContainer playerAttributeContainer = new PlayerAttributeContainer(eventHub);
-    ReMemoryMaker reMemoryMaker = new ReMemoryMaker(playerAttributeContainer);
 
     // ecs
     solaEcs.addSystems(
       new PlayerSystem(keyboardInput, eventHub, playerAttributeContainer, assetLoaderProvider.get(AudioClip.class)),
       new EnemySystem(eventHub, playerAttributeContainer),
       new ParticleSystem(),
-      new RoomSystem(eventHub, platform.getRenderer(), solaEcs, reMemoryMaker, playerAttributeContainer),
+      new RoomSystem(eventHub, platform.getRenderer(), solaEcs, playerAttributeContainer),
       new PortalSystem(eventHub)
     );
 

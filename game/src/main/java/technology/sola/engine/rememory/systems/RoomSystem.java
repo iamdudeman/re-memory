@@ -7,8 +7,7 @@ import technology.sola.ecs.World;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
-import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
-import technology.sola.engine.rememory.attributes.ReMemoryMaker;
+import technology.sola.engine.rememory.PlayerAttributeContainer;
 import technology.sola.engine.rememory.components.PortalComponent;
 import technology.sola.engine.rememory.events.ForgetEverythingEvent;
 import technology.sola.engine.rememory.rooms.CozyRoomWorld;
@@ -26,18 +25,16 @@ public class RoomSystem extends EcsSystem {
   private final EventHub eventHub;
   private final Renderer renderer;
   private final SolaEcs solaEcs;
-  private final ReMemoryMaker reMemoryMaker;
   private final PlayerAttributeContainer playerAttributeContainer;
   private final Map<String, RoomWorld> worldMap = new HashMap<>();
   private String currentRoomId;
   private String nextRoomId = "";
   private int idCounter = 0;
 
-  public RoomSystem(EventHub eventHub, Renderer renderer, SolaEcs solaEcs, ReMemoryMaker reMemoryMaker, PlayerAttributeContainer playerAttributeContainer) {
+  public RoomSystem(EventHub eventHub, Renderer renderer, SolaEcs solaEcs, PlayerAttributeContainer playerAttributeContainer) {
     this.eventHub = eventHub;
     this.renderer = renderer;
     this.solaEcs = solaEcs;
-    this.reMemoryMaker = reMemoryMaker;
     this.playerAttributeContainer = playerAttributeContainer;
 
     eventHub.add(ChangeRoomEvent.class, event -> {
@@ -69,9 +66,9 @@ public class RoomSystem extends EcsSystem {
         nextRoomId = nextId();
         nextRoom = new StartingRoomWorld(null, renderer.getWidth(), renderer.getHeight());
       } else if (playerAttributeContainer.getPagesCollectedCount() == 0) {
-        nextRoom = new InitialRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), reMemoryMaker, eventHub);
+        nextRoom = new InitialRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), eventHub);
       } else {
-        nextRoom = new CozyRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), reMemoryMaker, playerAttributeContainer);
+        nextRoom = new CozyRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), playerAttributeContainer);
       }
 
       currentRoomId = nextRoomId;

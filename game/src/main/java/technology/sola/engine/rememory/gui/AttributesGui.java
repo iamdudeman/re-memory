@@ -7,7 +7,7 @@ import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
-import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
+import technology.sola.engine.rememory.PlayerAttributeContainer;
 import technology.sola.engine.rememory.events.AttributesChangedEvent;
 
 class AttributesGui {

@@ -4,7 +4,7 @@ import technology.sola.ecs.SolaEcs;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
-import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
+import technology.sola.engine.rememory.PlayerAttributeContainer;
 
 public class GuiManager {
   private final SolaGuiDocument document;
@@ -14,7 +14,7 @@ public class GuiManager {
   public GuiManager(SolaGuiDocument document, EventHub eventHub, PlayerAttributeContainer playerAttributeContainer, SolaEcs solaEcs) {
     this.document = document;
     attributesGui = AttributesGui.build(document, eventHub, playerAttributeContainer, solaEcs);
-    playerMessageGui = PlayerMessageGui.build(this::changeGui, document, eventHub, solaEcs);
+    playerMessageGui = PlayerMessageGui.build(this::changeGui, document, eventHub, solaEcs, playerAttributeContainer);
 
     document.setGuiRoot(attributesGui);
   }

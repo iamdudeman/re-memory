@@ -6,17 +6,14 @@ import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.RandomUtils;
-import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
-import technology.sola.engine.rememory.attributes.ReMemoryMaker;
+import technology.sola.engine.rememory.PlayerAttributeContainer;
 import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.components.PageComponent;
 
 public class CozyRoomWorld extends RoomWorld {
-  private final ReMemoryMaker reMemoryMaker;
 
-  public CozyRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight, ReMemoryMaker reMemoryMaker, PlayerAttributeContainer playerAttributeContainer) {
+  public CozyRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight, PlayerAttributeContainer playerAttributeContainer) {
     super(previousRoomId, rendererWidth, rendererHeight);
-    this.reMemoryMaker = reMemoryMaker;
 
     for (int i = 0; i < rendererWidth; i += 16) {
       for (int j = 0; j < rendererHeight; j += 16) {
@@ -76,7 +73,7 @@ public class CozyRoomWorld extends RoomWorld {
           ColliderComponent.aabb(-3, -4, 10, 10).setSensor(true),
           new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PAGE),
           new LayerComponent(Constants.Layers.OBJECTS),
-          new PageComponent(reMemoryMaker.createPage())
+          new PageComponent()
         );
 
         hasSpawnedPage = true;

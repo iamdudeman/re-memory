@@ -7,12 +7,11 @@ import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.RandomUtils;
-import technology.sola.engine.rememory.attributes.ReMemoryMaker;
 import technology.sola.engine.rememory.components.PageComponent;
 import technology.sola.engine.rememory.events.PageAcceptedEvent;
 
 public class InitialRoomWorld extends RoomWorld {
-  public InitialRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight, ReMemoryMaker reMemoryMaker, EventHub eventHub) {
+  public InitialRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight, EventHub eventHub) {
     super(previousRoomId, rendererWidth, rendererHeight);
 
     for (int i = 0; i < rendererWidth; i += 16) {
@@ -61,7 +60,7 @@ public class InitialRoomWorld extends RoomWorld {
       ColliderComponent.aabb(-3, -4, 10, 10).setSensor(true),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PAGE),
       new LayerComponent(Constants.Layers.OBJECTS),
-      new PageComponent(reMemoryMaker.createPage())
+      new PageComponent()
     );
 
     addTorch(
