@@ -11,6 +11,8 @@ import technology.sola.engine.rememory.components.PageComponent;
 import technology.sola.engine.rememory.events.PageAcceptedEvent;
 
 public class InitialRoomWorld extends RoomWorld {
+  private boolean isLapisAdded = false;
+
   public InitialRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight, EventHub eventHub) {
     super(previousRoomId, rendererWidth, rendererHeight);
 
@@ -69,10 +71,13 @@ public class InitialRoomWorld extends RoomWorld {
     );
 
     eventHub.add(PageAcceptedEvent.class, event -> {
-      addLapis(
-        RandomUtils.quickRandomDoubleClamp(x - 20, x + 20, x - 4, x + 4),
-        RandomUtils.quickRandomDoubleClamp(y - 20, y + 20, y - 4, y + 4)
-      );
+      if (!isLapisAdded) {
+        isLapisAdded = true;
+        addLapis(
+          RandomUtils.quickRandomDoubleClamp(x - 20, x + 20, x - 4, x + 4),
+          RandomUtils.quickRandomDoubleClamp(y - 20, y + 20, y - 4, y + 4)
+        );
+      }
     });
   }
 }

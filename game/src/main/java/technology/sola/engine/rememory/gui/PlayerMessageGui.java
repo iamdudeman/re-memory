@@ -1,6 +1,8 @@
 package technology.sola.engine.rememory.gui;
 
+import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.SolaEcs;
+import technology.sola.ecs.World;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
@@ -40,11 +42,20 @@ class PlayerMessageGui {
           changeGui.accept(2);
 
           textElement.setOnMouseDownCallback(mouseEvent -> {
-            changeGui.accept(1);
+            if (playerAttributeContainer.getPagesCollectedCount() < 4) {
+              changeGui.accept(1);
 
-            eventHub.emit(new PageAcceptedEvent());
+              eventHub.emit(new PageAcceptedEvent());
 
-            setGamePause(solaEcs, false);
+              setGamePause(solaEcs, false);
+            } else {
+              eventHub.emit(new PageAcceptedEvent());
+
+              changeGui.accept(3);
+
+              solaEcs.getSystems().forEach(system -> system.setActive(false));
+              solaEcs.setWorld(new World(1));
+            }
           });
           textElement.setOnKeyPressCallback(keyEvent -> {
             if (keyEvent.getKeyCode() == Key.ENTER.getCode() || keyEvent.getKeyCode() == Key.SPACE.getCode()) {

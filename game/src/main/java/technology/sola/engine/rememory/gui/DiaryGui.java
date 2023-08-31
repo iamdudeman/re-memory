@@ -4,7 +4,6 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
-import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.input.Key;
 
 public class DiaryGui {
@@ -50,10 +49,6 @@ public class DiaryGui {
       changePage.run();
     });
 
-    return document.createElement(
-      StreamGuiElementContainer::new,
-      p -> p.setGap(0).setWidth(196),
-      textElement
-    );
+    return textElement;
   }
 }

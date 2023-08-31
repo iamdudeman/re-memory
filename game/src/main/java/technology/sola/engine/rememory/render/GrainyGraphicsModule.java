@@ -20,7 +20,7 @@ public class GrainyGraphicsModule extends SolaGraphicsModule {
     renderer.setBlendMode(BlendMode.DISSOLVE);
 
     int alpha = switch (playerAttributeContainer.getPagesCollectedCount()) {
-        case 0, 1 -> 5;
+        case 0, 1, 5 -> 5;
         case 2 -> 1;
         default -> 0;
     };
