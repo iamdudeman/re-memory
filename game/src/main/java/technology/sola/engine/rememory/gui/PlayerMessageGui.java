@@ -24,7 +24,7 @@ class PlayerMessageGui {
   static GuiElement<?> build(Consumer<Integer> changeGui, SolaGuiDocument document, EventHub eventHub, SolaEcs solaEcs, PlayerAttributeContainer playerAttributeContainer) {
     var textElement = document.createElement(
       TextGuiElement::new,
-      p -> p.setWidth(255).setHeight(56).padding.set(2, 5).setId("page").setBackgroundColor(Color.WHITE).setBorderColor(Color.BLACK)
+      p -> p.setWidth(255).setHeight(66).padding.set(2, 5).setId("page").setBackgroundColor(Color.WHITE).setBorderColor(Color.BLACK)
     );
 
     textElement.properties().setFocusable(true);
@@ -82,16 +82,19 @@ class PlayerMessageGui {
 
   // TODO real text
   private static String getNextText(PlayerAttributeContainer playerAttributeContainer) {
-    if (playerAttributeContainer.getPagesCollectedCount() == 0) {
-      if (playerAttributeContainer.getMaxPagesCollectedCount() > 1) {
-        return "Just four more";
-      } else {
-        return "What were these for again?";
+    return switch (playerAttributeContainer.getPagesCollectedCount()) {
+      case 0 -> {
+        if (playerAttributeContainer.getMaxPagesCollectedCount() > 1) {
+          yield "Just four more";
+        } else {
+          yield "What were these for again? More text to wrap to next line. Even more text to wrap to next line. Doot doot doot.";
+        }
       }
-    } else if (playerAttributeContainer.getPagesCollectedCount() == 1) {
-      return "I think I need 3 more";
-    }
-
-    return "Ran out of PoC text";
+      case 1 -> "I think I need 3 more";
+      case 2 -> "Just 2 more";
+      case 3 -> "1 more now";
+      case 4 -> "That should be all of them";
+      default -> "Ran out of PoC text";
+    };
   }
 }
