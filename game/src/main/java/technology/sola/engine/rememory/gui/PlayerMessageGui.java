@@ -22,7 +22,7 @@ class PlayerMessageGui {
   static GuiElement<?> build(Consumer<Integer> changeGui, SolaGuiDocument document, EventHub eventHub, SolaEcs solaEcs, PlayerAttributeContainer playerAttributeContainer) {
     var textElement = document.createElement(
       TextGuiElement::new,
-      p -> p.setWidth(254).setHeight(56).padding.set(2, 5).setId("page").setBackgroundColor(Color.WHITE).setBorderColor(Color.BLACK)
+      p -> p.setWidth(255).setHeight(56).padding.set(2, 5).setId("page").setBackgroundColor(Color.WHITE).setBorderColor(Color.BLACK)
     );
 
     textElement.properties().setFocusable(true);
@@ -32,8 +32,6 @@ class PlayerMessageGui {
         entity -> Constants.Names.PLAYER.equals(entity.getName()),
         entity -> entity.hasComponent(PageComponent.class),
         (player, page) -> {
-          var pageComponent = page.getComponent(PageComponent.class);
-
           page.destroy();
 
           setGamePause(solaEcs, true);
@@ -71,6 +69,7 @@ class PlayerMessageGui {
     solaEcs.getSystem(PhysicsSystem.class).setActive(!isPaused);
   }
 
+  // TODO real text
   private static String getNextText(PlayerAttributeContainer playerAttributeContainer) {
     if (playerAttributeContainer.getPagesCollectedCount() == 0) {
       if (playerAttributeContainer.getMaxPagesCollectedCount() > 1) {

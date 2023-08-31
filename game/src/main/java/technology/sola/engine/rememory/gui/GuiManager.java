@@ -10,11 +10,13 @@ public class GuiManager {
   private final SolaGuiDocument document;
   private final GuiElement<?> attributesGui;
   private final GuiElement<?> playerMessageGui;
+  private final GuiElement<?> diaryGui;
 
   public GuiManager(SolaGuiDocument document, EventHub eventHub, PlayerAttributeContainer playerAttributeContainer, SolaEcs solaEcs) {
     this.document = document;
     attributesGui = AttributesGui.build(document, eventHub, playerAttributeContainer, solaEcs);
     playerMessageGui = PlayerMessageGui.build(this::changeGui, document, eventHub, solaEcs, playerAttributeContainer);
+    diaryGui = DiaryGui.build(document);
 
     document.setGuiRoot(attributesGui);
   }
@@ -24,6 +26,8 @@ public class GuiManager {
       document.setGuiRoot(attributesGui);
     } else if (id == 2) {
       document.setGuiRoot(playerMessageGui, 0, 200);
+    } else if (id == 3) {
+      document.setGuiRoot(diaryGui, 30, 5);
     }
   }
 }

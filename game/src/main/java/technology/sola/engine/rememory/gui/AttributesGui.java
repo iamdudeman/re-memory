@@ -13,6 +13,10 @@ import technology.sola.engine.rememory.events.AttributesChangedEvent;
 class AttributesGui {
   static GuiElement<?> build(SolaGuiDocument document, EventHub eventHub, PlayerAttributeContainer playerAttributeContainer, SolaEcs solaEcs) {
     eventHub.add(AttributesChangedEvent.class, event -> {
+      if (document.getElementById("speed") == null) {
+        return;
+      }
+
       updateAttributeValueText(document.getElementById("speed", TextGuiElement.class), playerAttributeContainer.getSpeed());
       updateAttributeValueText(document.getElementById("stealth", TextGuiElement.class), playerAttributeContainer.getStealth());
       updateAttributeValueText(document.getElementById("vision", TextGuiElement.class), playerAttributeContainer.getVision());
