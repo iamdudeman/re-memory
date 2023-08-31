@@ -4,10 +4,7 @@
 * ~~First room no enemies and always page~~
 * ~~Enemies hitting you take you back to the forest with a +1 stat boost to make next run a bit easier?~~
     * page found dialog changes slightly with "retries"
-* only spawn spookers after acquiring at least two pages
-* Sound effects
-    * Forget sound effect
-    * Enemy hit sound effect (similar to forget one)
+* ~~only spawn spookers after acquiring at least two pages~~
 * What is on the pages?
     * Story that bridges the pages
     * Each page reveals a bit more and final screen is full story
@@ -15,10 +12,19 @@
     * 100% chance to spawn page until player picks one up
         * after first page clear all portals to prevent cheese
     * Maybe they are parts of a diary?
+    * Potential order?
+        * 1 - intro to what pages are (diary)
+        * 2 - diagnosis
+        * 3 - lighthouse memory?
+        * 4 - something else
+        * 5 - final remarks
 * Collect N pages to win
 * Final screen to read through pages collected
 * Assets
 * Balancing
+* Sound effects
+    * Forget sound effect
+    * Enemy hit sound effect (similar to forget one)
 
 ## Bugs
 
