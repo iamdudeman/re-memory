@@ -25,7 +25,7 @@ public class GuiManager {
     if (id == 1) {
       document.setGuiRoot(attributesGui);
     } else if (id == 2) {
-      document.setGuiRoot(playerMessageGui, 0, 195);
+      document.setGuiRoot(playerMessageGui, 1, 190);
     } else if (id == 3) {
       document.setGuiRoot(diaryGui, 30, 5);
     }

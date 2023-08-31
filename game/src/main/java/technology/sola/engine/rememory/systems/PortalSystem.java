@@ -5,7 +5,6 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.physics.component.ColliderComponent;
@@ -72,7 +71,6 @@ public class PortalSystem extends EcsSystem {
         if (entry.c1().canBeActivated()) {
           ParticleEmitterComponent portalParticleEmitter = new ParticleEmitterComponent();
 
-          // TODO test these settings out later when particle emitter layer bug fixed
           portalParticleEmitter.setParticleBlendMode(BlendMode.MULTIPLY);
           portalParticleEmitter.setParticleColor(new Color(120, 177, 156, 217));
           portalParticleEmitter.setParticleSizeBounds(1, 3);
@@ -87,9 +85,6 @@ public class PortalSystem extends EcsSystem {
             portalParticleEmitter
           );
 
-//          entry.entity().addComponent(portalParticleEmitter);
-//          entry.entity().removeComponent(CircleRendererComponent.class); // todo do this when particle emitter layer bug fixed
-          entry.entity().getComponent(CircleRendererComponent.class).setColor(new Color(177, 156, 217));
           entry.c1().activate();
         } else {
           entry.c1().tickInactive(deltaTime);

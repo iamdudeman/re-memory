@@ -5,6 +5,8 @@
 * ~~Enemies hitting you take you back to the forest with a +1 stat boost to make next run a bit easier?~~
     * page found dialog changes slightly with "retries"
 * ~~only spawn spookers after acquiring at least two pages~~
+* ~~Collect N pages to win~~
+* ~~Final screen to read through pages collected~~
 * What is on the pages?
     * Story that bridges the pages
     * Each page reveals a bit more and final screen is full story
@@ -18,8 +20,6 @@
         * 3 - lighthouse memory?
         * 4 - something else
         * 5 - final remarks
-* Collect N pages to win
-* Final screen to read through pages collected
 * Assets
 * Balancing
 * Sound effects
@@ -34,29 +34,29 @@ N/A
 ## Old notes
 
 
-    * Attribute "slots"
-        * name - 1
-        * job - 1
-        * interests - 3
+* Attribute "slots"
+    * name - 1
+    * job - 1
+    * interests - 3
 
-    * Battery bar that steadily goes down
-    * Maybe only 3 inventory slots
-    * Show attributes in top left
-        * Haste - move speed
-        * Efficiency? - battery goes down slower
-        * Clarity? - can see more
-        * Luck (better chance to get + attributes)
+* Battery bar that steadily goes down
+* Maybe only 3 inventory slots
+* Show attributes in top left
+    * Haste - move speed
+    * Efficiency? - battery goes down slower
+    * Clarity? - can see more
+    * Luck (better chance to get + attributes)
 
-    * enemies
-        * enemy type that steals lapis
-        * enemy type that drains battery
-        * enemy type that kills
+* enemies
+    * enemy type that steals lapis
+    * enemy type that drains battery
+    * enemy type that kills
 
-    * Madlibs
-        * Enemies force bad option word onto you for current slot
-        * Nouns and adjectives and verbs?
-        * Complete your madlib
-            * madlib randomly selected at start
+* Madlibs
+    * Enemies force bad option word onto you for current slot
+    * Nouns and adjectives and verbs?
+    * Complete your madlib
+        * madlib randomly selected at start
 
 * You can always have a re;memory
     * Who you are

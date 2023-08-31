@@ -24,7 +24,7 @@ class PlayerMessageGui {
   static GuiElement<?> build(Consumer<Integer> changeGui, SolaGuiDocument document, EventHub eventHub, SolaEcs solaEcs, PlayerAttributeContainer playerAttributeContainer) {
     var textElement = document.createElement(
       TextGuiElement::new,
-      p -> p.setWidth(255).setHeight(66).padding.set(2, 5).setId("page").setBackgroundColor(Color.WHITE).setBorderColor(Color.BLACK)
+      p -> p.setWidth(253).setHeight(48).padding.set(2, 4).setId("page").setBackgroundColor(Color.WHITE).setBorderColor(Color.BLACK)
     );
 
     textElement.properties().setFocusable(true);
@@ -82,9 +82,13 @@ class PlayerMessageGui {
 
   // TODO real text
   private static String getNextText(PlayerAttributeContainer playerAttributeContainer) {
-    return switch (playerAttributeContainer.getPagesCollectedCount()) {
+    int pagesCollected = playerAttributeContainer.getPagesCollectedCount();
+    int maxPagesCollected = playerAttributeContainer.getMaxPagesCollectedCount();
+    int tries = playerAttributeContainer.getTries();
+
+    return switch (pagesCollected) {
       case 0 -> {
-        if (playerAttributeContainer.getMaxPagesCollectedCount() > 1) {
+        if (maxPagesCollected > 1) {
           yield "Just four more";
         } else {
           yield "What were these for again? More text to wrap to next line. Even more text to wrap to next line. Doot doot doot.";

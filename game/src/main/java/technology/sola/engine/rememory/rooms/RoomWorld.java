@@ -33,7 +33,7 @@ public abstract class RoomWorld extends World {
       new PortalComponent(null, true),
       new TransformComponent(x, y, 8),
       ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
-      new CircleRendererComponent(new Color(177, 156, 217), true), // TODO temp until particle layer works
+      new CircleRendererComponent(new Color(177, 156, 217), true),
       new LayerComponent(Constants.Layers.OBJECTS)
     );
   }
@@ -55,7 +55,7 @@ public abstract class RoomWorld extends World {
       new PortalComponent(previousRoomId, delayActivation),
       new TransformComponent(x, y, 8),
       ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
-      new CircleRendererComponent(new Color(177, 156, 217), true), // TODO temp until particle layer works
+      new CircleRendererComponent(new Color(177, 156, 217), true),
       new LayerComponent(Constants.Layers.OBJECTS)
     );
   }
