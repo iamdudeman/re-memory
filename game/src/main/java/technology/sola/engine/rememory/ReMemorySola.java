@@ -82,7 +82,7 @@ public class ReMemorySola extends SolaWithDefaults {
       .onComplete(assets -> {
         AudioClip audioClip = ((AudioClip) assets[0]);
 
-        audioClip.setVolume(0.7f);
+        audioClip.setVolume(0.9f);
         audioClip.loop(-1);
 
         AudioClip audioClipQuack = ((AudioClip) assets[1]);
