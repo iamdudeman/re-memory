@@ -18,12 +18,14 @@ public class RandomUtils {
 
     if (minExclude < value && value < maxExclude) {
       if (maxExclude - value > value - minExclude) {
-        return random.nextFloat(maxExclude, max);
+        if (maxExclude < max) {
+          return random.nextFloat(maxExclude, max);
+        }
       } else if (min < minExclude) {
         return random.nextFloat(min, minExclude);
-      } else {
-        return quickRandomDoubleClamp(min, max, minExclude, maxExclude);
       }
+
+      return quickRandomDoubleClamp(min, max, minExclude, maxExclude);
     }
 
     return value;

@@ -16,7 +16,7 @@ import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.engine.rememory.attributes.ReMemoryMaker;
 import technology.sola.engine.rememory.events.ForgetEverythingEvent;
 import technology.sola.engine.rememory.attributes.PlayerAttributeContainer;
-import technology.sola.engine.rememory.gui.GameGui;
+import technology.sola.engine.rememory.gui.GuiManager;
 import technology.sola.engine.rememory.render.GrainyGraphicsModule;
 import technology.sola.engine.rememory.render.LoadingScreen;
 import technology.sola.engine.rememory.systems.EnemySystem;
@@ -66,7 +66,8 @@ public class ReMemorySola extends SolaWithDefaults {
     );
 
     // gui
-    solaGuiDocument.setGuiRoot(GameGui.build(solaGuiDocument, playerAttributeContainer, eventHub, solaEcs));
+    new GuiManager(solaGuiDocument, eventHub, playerAttributeContainer, solaEcs);
+//    solaGuiDocument.setGuiRoot(GameGui.build(solaGuiDocument, playerAttributeContainer, eventHub, solaEcs));
 
     solaGraphics.addGraphicsModules(new GrainyGraphicsModule(playerAttributeContainer));
 
