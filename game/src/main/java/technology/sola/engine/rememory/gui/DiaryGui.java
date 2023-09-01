@@ -36,7 +36,7 @@ public class DiaryGui {
 
     textElement.properties().setFocusable(true);
     textElement.setOnKeyPressCallback(keyEvent -> {
-      if (keyEvent.getKeyCode() == Key.RIGHT.getCode() || keyEvent.getKeyCode() == Key.ENTER.getCode() || keyEvent.getKeyCode() == Key.SPACE.getCode()) {
+      if (keyEvent.getKeyCode() == Key.RIGHT.getCode() || keyEvent.getKeyCode() == Key.SPACE.getCode()) {
         pageIndex++;
         changePage.run();
       } else if (keyEvent.getKeyCode() == Key.LEFT.getCode()) {

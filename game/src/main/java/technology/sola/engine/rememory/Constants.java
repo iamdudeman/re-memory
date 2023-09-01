@@ -10,6 +10,7 @@ public final class Constants {
 
     public final static class CozySprites {
       public static final String ID = "cozy";
+
       public static final String FLOOR = "floor";
       public static final String BACK_WALL_TOP = "back_wall_top";
       public static final String BACK_WALL_BOTTOM = "back_wall_bottom";
@@ -17,6 +18,7 @@ public final class Constants {
 
     public final static class AcidRainSprites {
       public static final String ID = "acid_rain";
+
       public static final String DUCK = "duck";
       public static final String DONUT = "donut";
     }
@@ -31,7 +33,6 @@ public final class Constants {
       public static final String GRASS_2 = "grass_2";
       public static final String GRASS_3 = "grass_3";
       public static final String TABLE = "table";
-      public static final String BATTERY = "battery";
       public static final String LAPIS = "lapis";
       public static final String PAGE = "page";
     }

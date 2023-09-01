@@ -64,18 +64,17 @@ public class ReMemorySola extends SolaWithDefaults {
 
     // gui
     new GuiManager(solaGuiDocument, eventHub, playerAttributeContainer, solaEcs);
-//    solaGuiDocument.setGuiRoot(GameGui.build(solaGuiDocument, playerAttributeContainer, eventHub, solaEcs));
 
     solaGraphics.addGraphicsModules(new GrainyGraphicsModule(playerAttributeContainer));
 
+    // Start loading assets while loading displays
     new BulkAssetLoader(assetLoaderProvider)
-      .addAsset(AudioClip.class, "memories", "assets/Memories-1.wav")
-//      .addAsset(AudioClip.class, "time", "assets/time.wav")
-      .addAsset(AudioClip.class, Constants.Assets.AudioClips.QUACK, "assets/Quack.wav")
-      .addAsset(Font.class, "monospaced_NORMAL_10", "assets/monospaced_NORMAL_10.json")
-      .addAsset(SpriteSheet.class, Constants.Assets.Sprites.ID, "assets/rememory_spritesheet.json")
-      .addAsset(SpriteSheet.class, Constants.Assets.CozySprites.ID, "assets/cozy_room.json")
-      .addAsset(SpriteSheet.class, Constants.Assets.AcidRainSprites.ID, "assets/acid_rain_sprites.json")
+      .addAsset(AudioClip.class, "memories", "assets/audio/Memories-6.wav")
+      .addAsset(AudioClip.class, Constants.Assets.AudioClips.QUACK, "assets/audio/Quack.wav")
+      .addAsset(Font.class, "monospaced_NORMAL_10", "assets/font/monospaced_NORMAL_10.json")
+      .addAsset(SpriteSheet.class, Constants.Assets.Sprites.ID, "assets/sprites/rememory_spritesheet.json")
+      .addAsset(SpriteSheet.class, Constants.Assets.CozySprites.ID, "assets/sprites/cozy_room.json")
+      .addAsset(SpriteSheet.class, Constants.Assets.AcidRainSprites.ID, "assets/sprites/acid_rain_sprites.json")
       .loadAll()
       .onComplete(assets -> {
         AudioClip audioClip = ((AudioClip) assets[0]);
@@ -86,6 +85,7 @@ public class ReMemorySola extends SolaWithDefaults {
         AudioClip audioClipQuack = ((AudioClip) assets[1]);
         audioClipQuack.addFinishListener(AudioClip::stop);
 
+        // Start the game
         eventHub.emit(new ForgetEverythingEvent());
         isLoading = false;
       });

@@ -1,6 +1,5 @@
 package technology.sola.engine.rememory.gui;
 
-import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.World;
 import technology.sola.engine.event.EventHub;
@@ -58,7 +57,7 @@ class PlayerMessageGui {
             }
           });
           textElement.setOnKeyPressCallback(keyEvent -> {
-            if (keyEvent.getKeyCode() == Key.ENTER.getCode() || keyEvent.getKeyCode() == Key.SPACE.getCode()) {
+            if (keyEvent.getKeyCode() == Key.SPACE.getCode() || keyEvent.getKeyCode() == Key.RIGHT.getCode()) {
               changeGui.accept(1);
 
               eventHub.emit(new PageAcceptedEvent());
