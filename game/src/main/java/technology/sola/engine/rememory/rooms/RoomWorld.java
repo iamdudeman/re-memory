@@ -64,7 +64,7 @@ public abstract class RoomWorld extends World {
     createEntity(
       new TransformComponent(x, y),
       ColliderComponent.aabb(2, 2).setSensor(true).setTags(Constants.Tags.LAPIS),
-      new LayerComponent(Constants.Layers.OBJECTS),
+      new LayerComponent(Constants.Layers.OBJECTS, 4),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.LAPIS)
     );
   }
@@ -133,6 +133,40 @@ public abstract class RoomWorld extends World {
     createEntity(
       new TransformComponent(rendererWidth, 0, boundarySize, rendererHeight),
       ColliderComponent.aabb().setTags(Constants.Tags.BOUNDARY)
+    );
+  }
+
+  // todo add randomizing shelves
+  protected void addNook(float x, float y) {
+    // left
+    addShelf(x, y + 22);
+
+    // top 1
+    addShelf(x + 5, y);
+
+    // top 2
+    addShelf(x + 5 + 18, y);
+
+    // top 3
+    addShelf(x + 5 + 18 + 18, y);
+
+    // right
+    addShelf(x + 5 + 18 + 18 + 5, y + 22);
+
+    createEntity(
+      new TransformComponent(x + 5 + 18 - 3, y + 18 + 2),
+      new SpriteComponent(Constants.Assets.LibrarySprites.ID, Constants.Assets.LibrarySprites.TABLE_SET),
+      ColliderComponent.aabb(0, 2, 17, 3).setTags(Constants.Tags.BOUNDARY),
+      new LayerComponent(Constants.Layers.OBJECTS, 3)
+    );
+  }
+
+  private void addShelf(float x, float y) {
+    createEntity(
+      new TransformComponent(x, y),
+      new SpriteComponent(Constants.Assets.LibrarySprites.ID, Constants.Assets.LibrarySprites.SHELF_1),
+      ColliderComponent.aabb(0, 5, 11, 6).setTags(Constants.Tags.BOUNDARY),
+      new LayerComponent(Constants.Layers.OBJECTS, 3)
     );
   }
 }

@@ -50,6 +50,8 @@ public class CozyRoomWorld extends RoomWorld {
     addInitialPortal(halfWidth, halfHeight, true);
 
     addPlayer(halfWidth, halfHeight - 10);
+
+    addNook(10, 20);
   }
 
   private void addExtras(PlayerAttributeContainer playerAttributeContainer) {

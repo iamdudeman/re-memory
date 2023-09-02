@@ -70,18 +70,12 @@ public class InitialRoomWorld extends RoomWorld {
       new PageComponent()
     );
 
-    addTorch(
-      RandomUtils.quickRandomDoubleClamp(x - 30, x + 30, x - 4, x + 4),
-      RandomUtils.quickRandomDoubleClamp(y - 30, y + 30, y - 4, y + 4)
-    );
+    addTorch(tableX - 30, tableY);
 
     eventHub.add(PageAcceptedEvent.class, event -> {
       if (!isLapisAdded) {
         isLapisAdded = true;
-        addLapis(
-          RandomUtils.quickRandomDoubleClamp(x - 20, x + 20, x - 4, x + 4),
-          RandomUtils.quickRandomDoubleClamp(y - 20, y + 20, y - 4, y + 4)
-        );
+        addLapis(tableX + 22, tableY + 2);
       }
     });
   }
