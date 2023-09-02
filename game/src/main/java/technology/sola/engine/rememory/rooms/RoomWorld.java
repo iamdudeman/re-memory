@@ -50,6 +50,18 @@ public abstract class RoomWorld extends World {
     ).setName(Constants.Names.PLAYER);
   }
 
+  protected void addPlayerContrast(float x, float y) {
+    createEntity(
+      new DynamicBodyComponent(),
+      new TransformComponent(x, y),
+      new LayerComponent(Constants.Layers.OBJECTS, 2),
+      new BlendModeComponent(BlendMode.MASK),
+      new LightComponent(200, new Color(200, 255, 255, 255)).setOffset(2.5f, 4),
+      new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PLAYER_CONTRAST),
+      ColliderComponent.aabb(5, 7).setTags(Constants.Tags.PLAYER)
+    ).setName(Constants.Names.PLAYER);
+  }
+
   protected void addInitialPortal(float x, float y, boolean delayActivation) {
     createEntity(
       new PortalComponent(previousRoomId, delayActivation),
@@ -78,6 +90,20 @@ public abstract class RoomWorld extends World {
       new EnemyComponent(enemyType),
       ColliderComponent.circle().setIgnoreTags(Constants.Tags.BOUNDARY), // todo temp until sprite (need to set radius then)
       new CircleRendererComponent(Color.BLACK), // todo temp until sprite
+//      new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.ENEMY),
+      new LayerComponent(Constants.Layers.OBJECTS, 1)
+    );
+  }
+
+  protected void addEnemyContrast(float x, float y, EnemyComponent.EnemyType enemyType) {
+    createEntity(
+      new TransformComponent(x, y,
+        4 // todo temp until sprite
+      ),
+      new DynamicBodyComponent(),
+      new EnemyComponent(enemyType),
+      ColliderComponent.circle().setIgnoreTags(Constants.Tags.BOUNDARY), // todo temp until sprite (need to set radius then)
+      new CircleRendererComponent(new Color(158, 158, 158)), // todo temp until sprite
 //      new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.ENEMY),
       new LayerComponent(Constants.Layers.OBJECTS, 1)
     );

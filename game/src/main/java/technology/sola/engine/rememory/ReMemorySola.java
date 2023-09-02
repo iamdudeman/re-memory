@@ -76,6 +76,7 @@ public class ReMemorySola extends SolaWithDefaults {
       .addAsset(Font.class, "monospaced_NORMAL_10", "assets/font/monospaced_NORMAL_10.json")
       .addAsset(SpriteSheet.class, Constants.Assets.Sprites.ID, "assets/sprites/rememory_spritesheet.json")
       .addAsset(SpriteSheet.class, Constants.Assets.CozySprites.ID, "assets/sprites/cozy_room.json")
+      .addAsset(SpriteSheet.class, Constants.Assets.BasementSprites.ID, "assets/sprites/basement.json")
       .addAsset(SpriteSheet.class, Constants.Assets.AcidRainSprites.ID, "assets/sprites/acid_rain_sprites.json")
       .addAsset(SpriteSheet.class, Constants.Assets.LibrarySprites.ID, "assets/sprites/Library.json")
       .loadAll()

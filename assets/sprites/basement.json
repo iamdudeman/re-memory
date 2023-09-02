@@ -1,0 +1,19 @@
+{
+  "sprites": [
+    {
+      "id": "floor",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "id": "back_wall",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    }
+  ],
+  "spriteSheet": "basement.png"
+}

@@ -18,6 +18,13 @@ public final class Constants {
       public static final String BACK_WALL_BOTTOM = "back_wall_bottom";
     }
 
+    public final static class BasementSprites {
+      public static final String ID = "basement";
+
+      public static final String FLOOR = "floor";
+      public static final String BACK_WALL = "back_wall";
+    }
+
     public final static class AcidRainSprites {
       public static final String ID = "acid_rain";
 
@@ -37,6 +44,7 @@ public final class Constants {
       public static final String ID = "sprites";
 
       public static final String PLAYER = "player";
+      public static final String PLAYER_CONTRAST = "player_contrast";
       public static final String TREE = "tree";
       public static final String TORCH = "torch";
       public static final String GRASS_1 = "grass_1";

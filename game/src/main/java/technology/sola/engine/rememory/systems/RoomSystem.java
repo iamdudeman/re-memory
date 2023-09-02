@@ -8,15 +8,13 @@ import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.CircleRendererComponent;
 import technology.sola.engine.physics.component.ParticleEmitterComponent;
 import technology.sola.engine.rememory.PlayerAttributeContainer;
+import technology.sola.engine.rememory.RandomUtils;
 import technology.sola.engine.rememory.components.PortalComponent;
 import technology.sola.engine.rememory.events.ForgetEverythingEvent;
-import technology.sola.engine.rememory.rooms.CozyRoomWorld;
-import technology.sola.engine.rememory.rooms.InitialRoomWorld;
-import technology.sola.engine.rememory.rooms.StartingRoomWorld;
+import technology.sola.engine.rememory.rooms.*;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.rememory.events.ChangeRoomEvent;
-import technology.sola.engine.rememory.rooms.RoomWorld;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,7 +66,13 @@ public class RoomSystem extends EcsSystem {
       } else if (playerAttributeContainer.getPagesCollectedCount() == 0) {
         nextRoom = new InitialRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), eventHub);
       } else {
-        nextRoom = new CozyRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), playerAttributeContainer);
+        if (playerAttributeContainer.getPagesCollectedCount() > 2) {
+          nextRoom = RandomUtils.roll100() < 75 ?
+            new BasementRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), playerAttributeContainer) :
+            new CozyRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), playerAttributeContainer);
+        } else {
+          nextRoom = new CozyRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), playerAttributeContainer);
+        }
       }
 
       currentRoomId = nextRoomId;
