@@ -29,16 +29,27 @@ public class StartingRoomWorld extends RoomWorld {
       }
     }
 
-    for (int i = 0; i < 200; i++) {
+    for (int i = 0; i < 40; i++) {
       int x = random.nextInt(rendererWidth - 20) + 10;
       int y = random.nextInt(rendererHeight - 20) + 10;
 
       createEntity(
-        new TransformComponent(x, y),
+        new TransformComponent(x, y, 2),
         new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.TREE),
-        new LayerComponent(Constants.Layers.DECORATION),
+        new LayerComponent(Constants.Layers.OBJECTS, 3),
         new BlendModeComponent(BlendMode.MASK)
       );
+
+      if (RandomUtils.roll100() < 20) {
+        createEntity(
+          new TransformComponent(
+            x + 1, y + 10, 0.5f, 0.5f
+          ),
+          new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.BERRY_BUSH),
+          new LayerComponent(Constants.Layers.OBJECTS, 4),
+          new BlendModeComponent(BlendMode.MASK)
+        );
+      }
     }
 
     float halfWidth = rendererWidth * 0.5f;

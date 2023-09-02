@@ -46,6 +46,7 @@ public final class Constants {
 
       public static final String PLAYER = "player";
       public static final String TREE = "tree";
+      public static final String BERRY_BUSH = "berry_bush";
       public static final String TORCH = "torch";
       public static final String GRASS_1 = "grass_1";
       public static final String GRASS_2 = "grass_2";
