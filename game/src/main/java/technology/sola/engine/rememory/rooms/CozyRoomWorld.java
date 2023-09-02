@@ -75,7 +75,7 @@ public class CozyRoomWorld extends RoomWorld {
 
     for (int i = 0; i < tableCount; i++) {
       float x = RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10);
-      float y = RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 10, rendererHeight - 20, halfHeight - 20, halfHeight + 10);
+      float y = RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 18, rendererHeight - 20, halfHeight - 20, halfHeight + 10);
 
       createEntity(
         new TransformComponent(x, y),
@@ -124,34 +124,34 @@ public class CozyRoomWorld extends RoomWorld {
     if (RandomUtils.roll100() < lapisChance) {
       addLapis(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 10, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
+        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 18, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
       );
     }
     if (RandomUtils.roll100() < lapisChance - 20) {
       addLapis(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 10, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
+        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 18, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
       );
     }
 
     if (RandomUtils.roll100() < 15) {
       addDuck(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
+        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 18, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );
     }
 
     if (RandomUtils.roll100() < 30) {
       addDonut(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
+        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 18, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );
     }
 
     if (playerAttributeContainer.getPagesCollectedCount() != 2) {
       addTorch(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
+        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 18, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );
     }
 
