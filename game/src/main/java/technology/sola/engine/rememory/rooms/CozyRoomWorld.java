@@ -14,7 +14,6 @@ import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.components.PageComponent;
 
 public class CozyRoomWorld extends RoomWorld {
-
   public CozyRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight, PlayerAttributeContainer playerAttributeContainer) {
     super(previousRoomId, rendererWidth, rendererHeight);
 
@@ -50,20 +49,33 @@ public class CozyRoomWorld extends RoomWorld {
     addInitialPortal(halfWidth, halfHeight, true);
 
     addPlayer(halfWidth, halfHeight - 10);
-
-    addNook(10, 20);
   }
 
   private void addExtras(PlayerAttributeContainer playerAttributeContainer) {
     float halfWidth = rendererWidth * 0.5f;
     float halfHeight = rendererHeight * 0.5f;
     boolean hasSpawnedPage = false;
+    boolean hasNook = false;
+
+    if (random.nextBoolean()) {
+      addNook(10, 20);
+      hasNook = true;
+    }
+
+    for (int i = 0; i < 5; i++) {
+      if (random.nextBoolean()) {
+        addShelf(
+          RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+          RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 20, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
+        );
+      }
+    }
 
     int tableCount = random.nextInt(4);
 
     for (int i = 0; i < tableCount; i++) {
       float x = RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10);
-      float y = RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10);
+      float y = RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 10, rendererHeight - 20, halfHeight - 20, halfHeight + 10);
 
       createEntity(
         new TransformComponent(x, y),
@@ -112,34 +124,34 @@ public class CozyRoomWorld extends RoomWorld {
     if (RandomUtils.roll100() < lapisChance) {
       addLapis(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
+        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 10, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
       );
     }
     if (RandomUtils.roll100() < lapisChance - 20) {
       addLapis(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
+        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 10, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
       );
     }
 
     if (RandomUtils.roll100() < 15) {
       addDuck(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
+        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );
     }
 
     if (RandomUtils.roll100() < 30) {
       addDonut(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
+        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );
     }
 
     if (playerAttributeContainer.getPagesCollectedCount() != 2) {
       addTorch(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
+        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );
     }
 
@@ -161,8 +173,49 @@ public class CozyRoomWorld extends RoomWorld {
       addEnemy(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
         RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
-        random.nextBoolean() || playerAttributeContainer.getPagesCollectedCount() > 3 ? EnemyComponent.EnemyType.SPOOKER : EnemyComponent.EnemyType.CREEPER
+        random.nextBoolean() ? EnemyComponent.EnemyType.SPOOKER : EnemyComponent.EnemyType.CREEPER
       );
     }
+  }
+
+  private void addNook(float x, float y) {
+    // left
+    if (RandomUtils.roll100() < 60) {
+      addShelf(x, y + 22);
+    }
+
+    // top 1
+    if (RandomUtils.roll100() < 30) {
+      addShelf(x + 5, y);
+    }
+
+    // top 2
+    addShelf(x + 5 + 18, y);
+
+    // top 3
+    addShelf(x + 5 + 18 + 18, y);
+
+    // right
+    if (RandomUtils.roll100() < 50) {
+      addShelf(x + 5 + 18 + 18 + 5, y + 22);
+    }
+
+    addTorch(x + 5 + 13, y + 18);
+
+    createEntity(
+      new TransformComponent(x + 5 + 18 - 3, y + 18 + 2),
+      new SpriteComponent(Constants.Assets.LibrarySprites.ID, Constants.Assets.LibrarySprites.TABLE_SET),
+      ColliderComponent.aabb(0, 2, 17, 3).setTags(Constants.Tags.BOUNDARY),
+      new LayerComponent(Constants.Layers.OBJECTS, 3)
+    );
+  }
+
+  private void addShelf(float x, float y) {
+    createEntity(
+      new TransformComponent(x, y),
+      new SpriteComponent(Constants.Assets.LibrarySprites.ID, Constants.Assets.LibrarySprites.SHELF_1),
+      ColliderComponent.aabb(0, 5, 11, 6).setTags(Constants.Tags.BOUNDARY),
+      new LayerComponent(Constants.Layers.OBJECTS, 3)
+    );
   }
 }

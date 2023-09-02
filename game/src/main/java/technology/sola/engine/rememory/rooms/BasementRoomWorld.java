@@ -50,8 +50,6 @@ public class BasementRoomWorld extends RoomWorld {
       );
     }
 
-    // todo temp
-    addNook(10, 40);
     addExtras(playerAttributeContainer);
   }
 

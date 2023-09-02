@@ -47,8 +47,8 @@ public class InitialRoomWorld extends RoomWorld {
 
     addPlayer(halfWidth, halfHeight - 10);
 
-    float x = RandomUtils.quickRandomDoubleClamp(40, rendererWidth - 40, halfWidth - 10, halfWidth + 10);
-    float y = RandomUtils.quickRandomDoubleClamp(40, rendererHeight - 40, halfHeight - 20, halfHeight + 10);
+    float x = RandomUtils.quickRandomDoubleClamp(40, rendererWidth - 40, halfWidth - 20, halfWidth + 20);
+    float y = RandomUtils.quickRandomDoubleClamp(40, rendererHeight - 40, halfHeight - 30, halfHeight + 20);
 
     addBookShelves(x, y);
 
