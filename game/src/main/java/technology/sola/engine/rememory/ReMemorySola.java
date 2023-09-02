@@ -32,6 +32,8 @@ public class ReMemorySola extends SolaWithDefaults {
 
   @Override
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
+    PlayerAttributeContainer playerAttributeContainer = new PlayerAttributeContainer(eventHub);
+
     defaultsConfigurator.useGui(new GuiPropertyDefaults("monospaced_NORMAL_10", Color.BLACK, Color.BLANK))
       .usePhysics()
       .useGraphics()
@@ -50,8 +52,10 @@ public class ReMemorySola extends SolaWithDefaults {
       Constants.Layers.DECORATION,
       Constants.Layers.OBJECTS
     );
+    solaGraphics.addGraphicsModules(new GrainyGraphicsModule(playerAttributeContainer));
 
-    PlayerAttributeContainer playerAttributeContainer = new PlayerAttributeContainer(eventHub);
+    // gui
+    new GuiManager(solaGuiDocument, eventHub, playerAttributeContainer, solaEcs);
 
     // ecs
     solaEcs.addSystems(
@@ -62,14 +66,10 @@ public class ReMemorySola extends SolaWithDefaults {
       new PortalSystem(eventHub)
     );
 
-    // gui
-    new GuiManager(solaGuiDocument, eventHub, playerAttributeContainer, solaEcs);
-
-    solaGraphics.addGraphicsModules(new GrainyGraphicsModule(playerAttributeContainer));
-
     // Start loading assets while loading displays
+    loadingScreen = new LoadingScreen();
     new BulkAssetLoader(assetLoaderProvider)
-      .addAsset(AudioClip.class, "memories", "assets/audio/Memories-6.wav")
+      .addAsset(AudioClip.class, "memories", "assets/audio/Memories-9.wav")
       .addAsset(AudioClip.class, Constants.Assets.AudioClips.QUACK, "assets/audio/Quack.wav")
       .addAsset(Font.class, "monospaced_NORMAL_10", "assets/font/monospaced_NORMAL_10.json")
       .addAsset(SpriteSheet.class, Constants.Assets.Sprites.ID, "assets/sprites/rememory_spritesheet.json")
@@ -88,6 +88,7 @@ public class ReMemorySola extends SolaWithDefaults {
         // Start the game
         eventHub.emit(new ForgetEverythingEvent());
         isLoading = false;
+        loadingScreen = null;
       });
   }
 

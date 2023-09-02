@@ -79,7 +79,7 @@ class PlayerMessageGui {
     solaEcs.getSystem(PhysicsSystem.class).setActive(!isPaused);
   }
 
-  // TODO real text
+  // TODO finalize real text
   private static String getNextText(PlayerAttributeContainer playerAttributeContainer) {
     int pagesCollected = playerAttributeContainer.getPagesCollectedCount();
     int maxPagesCollected = playerAttributeContainer.getMaxPagesCollectedCount();
@@ -87,17 +87,43 @@ class PlayerMessageGui {
 
     return switch (pagesCollected) {
       case 0 -> {
-        if (maxPagesCollected > 1) {
-          yield "Just four more";
+        if (tries == 1) {
+          yield "Ah, I remember writing these. I need to find them. Four more, I think.";
+        } else if (tries == 2) {
+          yield "I need to keep trying. I can do it this time. Four more to go.";
         } else {
-          yield "What were these for again? More text to wrap to next line. Even more text to wrap to next line. Doot doot doot.";
+          yield "Here we go again.";
         }
       }
-      case 1 -> "I think I need 3 more";
-      case 2 -> "Just 2 more";
-      case 3 -> "1 more now";
-      case 4 -> "That should be all of them";
-      default -> "Ran out of PoC text";
+      case 1 -> {
+        if (tries == 1) {
+          yield "Here's another one! I need to find three more.";
+        } else if (tries == 2) {
+          yield "I can do this. Three more to go.";
+        } else {
+          yield "I need to focus. Three more to find.";
+        }
+      }
+      case 2 -> {
+        if (tries == 1) {
+          yield "I think I'm starting to remember. Two more to go.";
+        } else if (tries == 2) {
+          yield "Things are starting to clear up again. Two more to find.";
+        } else {
+          yield "Gotta keep trying until I remember. Only two left to find.";
+        }
+      }
+      case 3 -> {
+        if (tries == 1) {
+          yield "Everything is getting clear. Only one more page to go.";
+        } else if (tries == 2) {
+          yield "I'm so close, I can't give up now. Only one page left.";
+        } else {
+          yield "One more push and then I've got them all.";
+        }
+      }
+      case 4 -> "I've done it. I remember now...";
+      default -> "If you're reading this, then the game has a bug!";
     };
   }
 }
