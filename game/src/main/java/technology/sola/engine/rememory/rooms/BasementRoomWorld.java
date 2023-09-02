@@ -37,7 +37,6 @@ public class BasementRoomWorld extends RoomWorld {
     float halfWidth = rendererWidth * 0.5f;
     float halfHeight = rendererHeight * 0.5f;
 
-
     addBoundaries(-boundarySize + 32);
 
     addInitialPortal(halfWidth, halfHeight, true);
@@ -155,20 +154,16 @@ public class BasementRoomWorld extends RoomWorld {
       EnemyComponent.EnemyType.CREEPER
     );
 
-    if (playerAttributeContainer.getPagesCollectedCount() > 1) {
-      addEnemyContrast(
-        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
-        EnemyComponent.EnemyType.CREEPER
-      );
-    }
+    addEnemyContrast(
+      RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+      RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+      random.nextBoolean() ? EnemyComponent.EnemyType.SPOOKER : EnemyComponent.EnemyType.CREEPER
+    );
 
-    if (playerAttributeContainer.getPagesCollectedCount() > 2) {
-      addEnemyContrast(
-        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
-        random.nextBoolean() || playerAttributeContainer.getPagesCollectedCount() > 3 ? EnemyComponent.EnemyType.SPOOKER : EnemyComponent.EnemyType.CREEPER
-      );
-    }
+    addEnemyContrast(
+      RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+      RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+      random.nextBoolean() ? EnemyComponent.EnemyType.SPOOKER : EnemyComponent.EnemyType.CREEPER
+    );
   }
 }

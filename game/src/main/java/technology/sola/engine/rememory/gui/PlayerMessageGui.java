@@ -63,11 +63,20 @@ class PlayerMessageGui {
           });
           textElement.setOnKeyPressCallback(keyEvent -> {
             if (keyEvent.getKeyCode() == Key.SPACE.getCode() || keyEvent.getKeyCode() == Key.RIGHT.getCode()) {
-              changeGui.accept(1);
+              if (playerAttributeContainer.getPagesCollectedCount() < 4) {
+                changeGui.accept(1);
 
-              eventHub.emit(new PageAcceptedEvent());
+                eventHub.emit(new PageAcceptedEvent());
 
-              gamePause.accept(false);
+                gamePause.accept(false);
+              } else {
+                eventHub.emit(new PageAcceptedEvent());
+
+                changeGui.accept(3);
+
+                solaEcs.getSystems().forEach(system -> system.setActive(false));
+                solaEcs.setWorld(new World(1));
+              }
             }
           });
           textElement.requestFocus();

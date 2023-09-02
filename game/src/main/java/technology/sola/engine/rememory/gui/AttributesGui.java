@@ -20,6 +20,7 @@ class AttributesGui {
       updateAttributeValueText(document.getElementById("speed", TextGuiElement.class), playerAttributeContainer.getSpeed());
       updateAttributeValueText(document.getElementById("stealth", TextGuiElement.class), playerAttributeContainer.getStealth());
       updateAttributeValueText(document.getElementById("vision", TextGuiElement.class), playerAttributeContainer.getVision());
+      updateAttributeValueText(document.getElementById("pages", TextGuiElement.class), playerAttributeContainer.getPagesCollectedCount());
     });
 
     return document.createElement(
@@ -32,10 +33,11 @@ class AttributesGui {
   private static GuiElement<?> createAttributeContainer(SolaGuiDocument document) {
     return document.createElement(
       StreamGuiElementContainer::new,
-      p -> p.setGap(10).setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setBorderColor(Color.DARK_GRAY).setBackgroundColor(new Color(100, 255, 255, 255)).padding.set(1).setWidth(200),
+      p -> p.setGap(10).setDirection(StreamGuiElementContainer.Direction.HORIZONTAL).setBorderColor(Color.DARK_GRAY).setBackgroundColor(new Color(100, 255, 255, 255)).padding.set(1),
       createAttributeText(document, "Speed:", "speed"),
       createAttributeText(document, "Stealth:", "stealth"),
-      createAttributeText(document, "Vision:", "vision")
+      createAttributeText(document, "Vision:", "vision"),
+      createAttributeText(document, "Pages:", "pages")
     );
   }
 
