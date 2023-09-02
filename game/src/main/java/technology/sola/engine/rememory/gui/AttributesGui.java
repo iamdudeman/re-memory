@@ -49,7 +49,7 @@ class AttributesGui {
       ),
       document.createElement(
         TextGuiElement::new,
-        p -> p.setId(id)
+        p -> p.setText("3").setId(id)
       )
     );
   }

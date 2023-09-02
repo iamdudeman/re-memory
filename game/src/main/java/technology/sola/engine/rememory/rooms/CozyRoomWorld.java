@@ -1,7 +1,10 @@
 package technology.sola.engine.rememory.rooms;
 
 import technology.sola.engine.core.component.TransformComponent;
+import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.LayerComponent;
+import technology.sola.engine.graphics.components.LightComponent;
+import technology.sola.engine.graphics.components.LightFlicker;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.rememory.Constants;
@@ -75,6 +78,21 @@ public class CozyRoomWorld extends RoomWorld {
           new LayerComponent(Constants.Layers.OBJECTS),
           new PageComponent()
         );
+
+        if (playerAttributeContainer.getPagesCollectedCount() == 2) {
+          createEntity(
+            new TransformComponent(
+              RandomUtils.quickRandomDoubleClamp(x - 30, x + 30, x - 5, x + 5),
+              RandomUtils.quickRandomDoubleClamp(y - 30, y + 30, y - 5, y + 15)
+            ),
+            new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.LIGHTHOUSE),
+            ColliderComponent.aabb(0, 6, 3, 6).setTags(Constants.Tags.BOUNDARY),
+            new LayerComponent(Constants.Layers.OBJECTS, 3),
+            new LightComponent(64, Color.WHITE)
+              .setOffset(1f, 3)
+              .setLightFlicker(new LightFlicker(0.5f, 0.9f))
+          );
+        }
 
         hasSpawnedPage = true;
       }

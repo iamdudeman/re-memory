@@ -64,11 +64,11 @@
       "h": 3
     },
     {
-      "id": "battery",
-      "x": 38,
-      "y": 20,
+      "id": "lighthouse",
+      "x": 30,
+      "y": 1,
       "w": 3,
-      "h": 5
+      "h": 12
     }
   ],
   "spriteSheet": "rememory.png"

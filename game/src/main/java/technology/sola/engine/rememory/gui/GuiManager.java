@@ -19,6 +19,8 @@ public class GuiManager {
     diaryGui = DiaryGui.build(document);
 
     document.setGuiRoot(attributesGui);
+
+    changeGui(2);
   }
 
   private void changeGui(int id) {

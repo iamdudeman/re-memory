@@ -27,6 +27,15 @@ class PlayerMessageGui {
     );
 
     textElement.properties().setFocusable(true);
+    textElement.properties().setText("WASD:Move around                    F:Reset portal destinations (1 per room) Space/Right:Cycle GUI text");
+    textElement.setOnKeyPressCallback(keyEvent -> {
+      if (keyEvent.getKeyCode() == Key.SPACE.getCode() || keyEvent.getKeyCode() == Key.RIGHT.getCode()) {
+        changeGui.accept(1);
+      }
+    });
+    textElement.setOnMouseDownCallback(mouseEvent -> {
+      changeGui.accept(1);
+    });
 
     eventHub.add(SensorEvent.class, event -> {
       event.collisionManifold().conditionallyResolveCollision(
