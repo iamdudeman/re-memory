@@ -30,7 +30,7 @@ public final class Constants {
 
       public static final String SHELF_1 = "shelf1";
       public static final String SHELF_2 = "shelf2";
-      public static final String TABLE_SET = "table_Set";
+      public static final String TABLE_SET = "table_set";
     }
 
     public final static class Sprites {

@@ -162,6 +162,5 @@ public class CozyRoomWorld extends RoomWorld {
         random.nextBoolean() || playerAttributeContainer.getPagesCollectedCount() > 3 ? EnemyComponent.EnemyType.SPOOKER : EnemyComponent.EnemyType.CREEPER
       );
     }
-
   }
 }

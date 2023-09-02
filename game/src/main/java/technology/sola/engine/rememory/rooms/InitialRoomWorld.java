@@ -50,15 +50,20 @@ public class InitialRoomWorld extends RoomWorld {
     float x = RandomUtils.quickRandomDoubleClamp(40, rendererWidth - 40, halfWidth - 10, halfWidth + 10);
     float y = RandomUtils.quickRandomDoubleClamp(40, rendererHeight - 40, halfHeight - 20, halfHeight + 10);
 
+    addBookShelves(x, y);
+
+    float tableX = x + 5;
+    float tableY = y + 18;
+
     createEntity(
-      new TransformComponent(x, y),
+      new TransformComponent(tableX, tableY),
       ColliderComponent.circle(4).setTags(Constants.Tags.BOUNDARY),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.TABLE),
       new LayerComponent(Constants.Layers.DECORATION)
     );
 
     createEntity(
-      new TransformComponent(x + 2, y + 1),
+      new TransformComponent(tableX + 2, tableY + 1),
       ColliderComponent.aabb(-3, -4, 10, 10).setSensor(true),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PAGE),
       new LayerComponent(Constants.Layers.OBJECTS),
@@ -79,5 +84,21 @@ public class InitialRoomWorld extends RoomWorld {
         );
       }
     });
+  }
+
+  private void addBookShelves(float x, float y) {
+    createEntity(
+      new TransformComponent(x, y),
+      new SpriteComponent(Constants.Assets.LibrarySprites.ID, Constants.Assets.LibrarySprites.SHELF_1),
+      ColliderComponent.aabb(0, 5, 11, 6).setTags(Constants.Tags.BOUNDARY),
+      new LayerComponent(Constants.Layers.OBJECTS, 3)
+    );
+
+    createEntity(
+      new TransformComponent(x + 18, y),
+      new SpriteComponent(Constants.Assets.LibrarySprites.ID, Constants.Assets.LibrarySprites.SHELF_2),
+      ColliderComponent.aabb(0, 5, 11, 6).setTags(Constants.Tags.BOUNDARY),
+      new LayerComponent(Constants.Layers.OBJECTS, 3)
+    );
   }
 }
