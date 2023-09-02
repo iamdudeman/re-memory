@@ -73,28 +73,22 @@ public abstract class RoomWorld extends World {
 
   protected void addEnemy(float x, float y, EnemyComponent.EnemyType enemyType) {
     createEntity(
-      new TransformComponent(x, y,
-        4 // todo temp until sprite
-      ),
+      new TransformComponent(x, y, 4),
       new DynamicBodyComponent(),
       new EnemyComponent(enemyType),
-      ColliderComponent.circle().setIgnoreTags(Constants.Tags.BOUNDARY), // todo temp until sprite (need to set radius then)
-      new CircleRendererComponent(Color.BLACK), // todo temp until sprite
-//      new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.ENEMY),
+      ColliderComponent.circle().setIgnoreTags(Constants.Tags.BOUNDARY),
+      new CircleRendererComponent(Color.BLACK),
       new LayerComponent(Constants.Layers.OBJECTS, 1)
     );
   }
 
   protected void addEnemyContrast(float x, float y, EnemyComponent.EnemyType enemyType) {
     createEntity(
-      new TransformComponent(x, y,
-        4 // todo temp until sprite
-      ),
+      new TransformComponent(x, y, 4),
       new DynamicBodyComponent(),
       new EnemyComponent(enemyType),
-      ColliderComponent.circle().setIgnoreTags(Constants.Tags.BOUNDARY), // todo temp until sprite (need to set radius then)
-      new CircleRendererComponent(new Color(158, 158, 158)), // todo temp until sprite
-//      new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.ENEMY),
+      ColliderComponent.circle().setIgnoreTags(Constants.Tags.BOUNDARY),
+      new CircleRendererComponent(new Color(158, 158, 158)),
       new LayerComponent(Constants.Layers.OBJECTS, 1)
     );
   }

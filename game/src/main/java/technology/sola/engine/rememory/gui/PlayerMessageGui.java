@@ -87,10 +87,8 @@ class PlayerMessageGui {
     return textElement;
   }
 
-  // TODO finalize real text
   private static String getNextText(PlayerAttributeContainer playerAttributeContainer) {
     int pagesCollected = playerAttributeContainer.getPagesCollectedCount();
-    int maxPagesCollected = playerAttributeContainer.getMaxPagesCollectedCount();
     int tries = playerAttributeContainer.getTries();
 
     return switch (pagesCollected) {
