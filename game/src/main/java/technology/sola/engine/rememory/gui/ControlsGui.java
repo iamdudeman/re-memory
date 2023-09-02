@@ -16,6 +16,10 @@ public class ControlsGui {
       p -> p.setGap(3).setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBackgroundColor(Color.WHITE).padding.set(5),
       document.createElement(
         TextGuiElement::new,
+        p -> p.setText("Controls").margin.setBottom(5)
+      ),
+      document.createElement(
+        TextGuiElement::new,
         p -> p.setText("WASD - Move around")
       ),
       document.createElement(

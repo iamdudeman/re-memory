@@ -5,6 +5,17 @@ It was built on  [sola-game-engine](https://github.com/iamdudeman/sola-game-engi
 template [sola-game-template](https://github.com/iamdudeman/sola-game-template)
 to start the project.
 
+## Credits
+
+* @Eliteomnomnivore
+    * All music
+    * Player sprite
+    * Library assets
+* @Denise
+    * All basement artwork
+* @Lvl30Caterpie
+    * All dialogue
+
 ## Project structure
 
 * [Common game code](game/src)

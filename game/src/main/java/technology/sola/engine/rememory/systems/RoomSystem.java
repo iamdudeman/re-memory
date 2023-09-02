@@ -66,12 +66,12 @@ public class RoomSystem extends EcsSystem {
       } else if (playerAttributeContainer.getPagesCollectedCount() == 0) {
         nextRoom = new InitialRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), eventHub);
       } else {
-        if (playerAttributeContainer.getPagesCollectedCount() > 2) {
+        if (playerAttributeContainer.getPagesCollectedCount() > 3) {
+          nextRoom = new BasementRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), playerAttributeContainer);
+        } else if (playerAttributeContainer.getPagesCollectedCount() > 2) {
           nextRoom = RandomUtils.roll100() < 75 ?
             new BasementRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), playerAttributeContainer) :
             new CozyRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), playerAttributeContainer);
-        } else if (playerAttributeContainer.getPagesCollectedCount() > 3) {
-          nextRoom = new BasementRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), playerAttributeContainer);
         } else {
           nextRoom = new CozyRoomWorld(currentRoomId, renderer.getWidth(), renderer.getHeight(), playerAttributeContainer);
         }
