@@ -46,7 +46,7 @@ public abstract class RoomWorld extends World {
       new BlendModeComponent(BlendMode.MASK),
       new LightComponent(200, new Color(200, 255, 255, 255)).setOffset(2.5f, 4),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PLAYER),
-      ColliderComponent.aabb(5, 7).setTags(Constants.Tags.PLAYER)
+      ColliderComponent.aabb(2, 1, 5, 7).setTags(Constants.Tags.PLAYER)
     ).setName(Constants.Names.PLAYER);
   }
 

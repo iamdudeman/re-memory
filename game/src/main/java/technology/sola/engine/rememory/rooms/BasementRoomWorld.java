@@ -45,7 +45,7 @@ public class BasementRoomWorld extends RoomWorld {
     addPlayer(halfWidth, halfHeight - 10);
 
     for (int i = 0; i < 5; i++) {
-      addTorch(
+      addLantern(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
         RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );
@@ -54,6 +54,17 @@ public class BasementRoomWorld extends RoomWorld {
     // todo temp
     addNook(10, 40);
     addExtras(playerAttributeContainer);
+  }
+
+  private void addLantern(float x, float y) {
+    createEntity(
+      new TransformComponent(x, y, 0.25f),
+      new SpriteComponent(Constants.Assets.BasementSprites.ID, Constants.Assets.BasementSprites.LANTERN),
+      new LayerComponent(Constants.Layers.OBJECTS, 1),
+      new LightComponent(32, Color.YELLOW)
+        .setOffset(1.5f, 3)
+        .setLightFlicker(new LightFlicker(0.2f, 0.8f))
+    );
   }
 
   private void addExtras(PlayerAttributeContainer playerAttributeContainer) {
@@ -133,13 +144,6 @@ public class BasementRoomWorld extends RoomWorld {
 
     if (RandomUtils.roll100() < 30) {
       addDonut(
-        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
-      );
-    }
-
-    if (playerAttributeContainer.getPagesCollectedCount() != 2) {
-      addTorch(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
         RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );

@@ -23,6 +23,7 @@ public final class Constants {
 
       public static final String FLOOR = "floor";
       public static final String BACK_WALL = "back_wall";
+      public static final String LANTERN = "lantern";
     }
 
     public final static class AcidRainSprites {

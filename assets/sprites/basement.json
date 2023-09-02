@@ -13,6 +13,13 @@
       "y": 0,
       "w": 32,
       "h": 32
+    },
+    {
+      "id": "lantern",
+      "x": 75,
+      "y": 2,
+      "w": 18,
+      "h": 29
     }
   ],
   "spriteSheet": "basement.png"

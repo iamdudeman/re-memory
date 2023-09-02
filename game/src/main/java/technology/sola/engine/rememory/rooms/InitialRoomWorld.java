@@ -53,7 +53,7 @@ public class InitialRoomWorld extends RoomWorld {
     addBookShelves(x, y);
 
     float tableX = x + 5;
-    float tableY = y + 18;
+    float tableY = y + 21;
 
     createEntity(
       new TransformComponent(tableX, tableY),
