@@ -44,7 +44,6 @@ public final class Constants {
       public static final String ID = "sprites";
 
       public static final String PLAYER = "player";
-      public static final String PLAYER_CONTRAST = "player_contrast";
       public static final String TREE = "tree";
       public static final String TORCH = "torch";
       public static final String GRASS_1 = "grass_1";

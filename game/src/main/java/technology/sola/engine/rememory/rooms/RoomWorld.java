@@ -50,18 +50,6 @@ public abstract class RoomWorld extends World {
     ).setName(Constants.Names.PLAYER);
   }
 
-  protected void addPlayerContrast(float x, float y) {
-    createEntity(
-      new DynamicBodyComponent(),
-      new TransformComponent(x, y),
-      new LayerComponent(Constants.Layers.OBJECTS, 2),
-      new BlendModeComponent(BlendMode.MASK),
-      new LightComponent(200, new Color(200, 255, 255, 255)).setOffset(2.5f, 4),
-      new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PLAYER_CONTRAST),
-      ColliderComponent.aabb(5, 7).setTags(Constants.Tags.PLAYER)
-    ).setName(Constants.Names.PLAYER);
-  }
-
   protected void addInitialPortal(float x, float y, boolean delayActivation) {
     createEntity(
       new PortalComponent(previousRoomId, delayActivation),
@@ -75,7 +63,7 @@ public abstract class RoomWorld extends World {
   protected void addLapis(float x, float y) {
     createEntity(
       new TransformComponent(x, y),
-      ColliderComponent.aabb(2, 2).setSensor(true).setTags(Constants.Tags.LAPIS),
+      ColliderComponent.aabb(4, 4).setSensor(true).setTags(Constants.Tags.LAPIS),
       new LayerComponent(Constants.Layers.OBJECTS, 4),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.LAPIS)
     );

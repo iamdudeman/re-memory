@@ -42,7 +42,7 @@ public class BasementRoomWorld extends RoomWorld {
 
     addInitialPortal(halfWidth, halfHeight, true);
 
-    addPlayerContrast(halfWidth, halfHeight - 10);
+    addPlayer(halfWidth, halfHeight - 10);
 
     for (int i = 0; i < 5; i++) {
       addTorch(
