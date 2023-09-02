@@ -161,7 +161,7 @@ public class BasementRoomWorld extends RoomWorld {
     addEnemyContrast(
       RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
       RandomUtils.quickRandomDoubleClamp(36, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
-      random.nextBoolean() ? EnemyComponent.EnemyType.SPOOKER : EnemyComponent.EnemyType.CREEPER
+      random.nextBoolean() || playerAttributeContainer.getPagesCollectedCount() > 3 ? EnemyComponent.EnemyType.SPOOKER : EnemyComponent.EnemyType.CREEPER
     );
   }
 }

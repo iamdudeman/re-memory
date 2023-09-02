@@ -1,5 +1,5 @@
 ## todo
 
-* Increase page spawn odds until one is found
+* Add berry bush to forest
 * Adjust Basement room spawns
 * Add final page text
