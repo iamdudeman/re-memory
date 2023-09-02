@@ -9,25 +9,21 @@ import technology.sola.engine.graphics.gui.SolaGuiDocument;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.input.Key;
 import technology.sola.engine.physics.event.SensorEvent;
-import technology.sola.engine.physics.system.PhysicsSystem;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.PlayerAttributeContainer;
 import technology.sola.engine.rememory.components.PageComponent;
 import technology.sola.engine.rememory.events.PageAcceptedEvent;
-import technology.sola.engine.rememory.systems.EnemySystem;
-import technology.sola.engine.rememory.systems.PlayerSystem;
 
 import java.util.function.Consumer;
 
 class PlayerMessageGui {
-  static GuiElement<?> build(Consumer<Integer> changeGui, SolaGuiDocument document, EventHub eventHub, SolaEcs solaEcs, PlayerAttributeContainer playerAttributeContainer) {
+  static GuiElement<?> build(Consumer<Integer> changeGui, Consumer<Boolean> gamePause, SolaGuiDocument document, EventHub eventHub, SolaEcs solaEcs, PlayerAttributeContainer playerAttributeContainer) {
     var textElement = document.createElement(
       TextGuiElement::new,
       p -> p.setWidth(253).setHeight(48).padding.set(2, 4).setId("page").setBackgroundColor(Color.WHITE).setBorderColor(Color.BLACK)
     );
 
     textElement.properties().setFocusable(true);
-    textElement.properties().setText("WASD:Move around                    F:Reset portal destinations (1 per room) Space/Right:Cycle GUI text");
     textElement.setOnKeyPressCallback(keyEvent -> {
       if (keyEvent.getKeyCode() == Key.SPACE.getCode() || keyEvent.getKeyCode() == Key.RIGHT.getCode()) {
         changeGui.accept(1);
@@ -44,7 +40,7 @@ class PlayerMessageGui {
         (player, page) -> {
           page.destroy();
 
-          setGamePause(solaEcs, true);
+          gamePause.accept(true);
 
           textElement.properties().setText(getNextText(playerAttributeContainer));
           changeGui.accept(2);
@@ -55,7 +51,7 @@ class PlayerMessageGui {
 
               eventHub.emit(new PageAcceptedEvent());
 
-              setGamePause(solaEcs, false);
+              gamePause.accept(false);
             } else {
               eventHub.emit(new PageAcceptedEvent());
 
@@ -71,7 +67,7 @@ class PlayerMessageGui {
 
               eventHub.emit(new PageAcceptedEvent());
 
-              setGamePause(solaEcs, false);
+              gamePause.accept(false);
             }
           });
           textElement.requestFocus();
@@ -80,12 +76,6 @@ class PlayerMessageGui {
     });
 
     return textElement;
-  }
-
-  private static void setGamePause(SolaEcs solaEcs, boolean isPaused) {
-    solaEcs.getSystem(EnemySystem.class).setActive(!isPaused);
-    solaEcs.getSystem(PlayerSystem.class).setActive(!isPaused);
-    solaEcs.getSystem(PhysicsSystem.class).setActive(!isPaused);
   }
 
   // TODO finalize real text

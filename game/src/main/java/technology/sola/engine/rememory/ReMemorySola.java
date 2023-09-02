@@ -54,9 +54,6 @@ public class ReMemorySola extends SolaWithDefaults {
     );
     solaGraphics.addGraphicsModules(new GrainyGraphicsModule(playerAttributeContainer));
 
-    // gui
-    new GuiManager(solaGuiDocument, eventHub, playerAttributeContainer, solaEcs);
-
     // ecs
     solaEcs.addSystems(
       new PlayerSystem(keyboardInput, eventHub, playerAttributeContainer, assetLoaderProvider.get(AudioClip.class)),
@@ -65,6 +62,9 @@ public class ReMemorySola extends SolaWithDefaults {
       new RoomSystem(eventHub, platform.getRenderer(), solaEcs, playerAttributeContainer),
       new PortalSystem(eventHub)
     );
+
+    // gui
+    new GuiManager(solaGuiDocument, eventHub, playerAttributeContainer, solaEcs);
 
     // Start loading assets while loading displays
     loadingScreen = new LoadingScreen();
