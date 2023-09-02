@@ -57,7 +57,7 @@ public class ReMemorySola extends SolaWithDefaults {
     // ecs
     solaEcs.addSystems(
       new PlayerSystem(keyboardInput, eventHub, playerAttributeContainer, assetLoaderProvider.get(AudioClip.class)),
-      new EnemySystem(eventHub, playerAttributeContainer),
+      new EnemySystem(eventHub, playerAttributeContainer, assetLoaderProvider.get(AudioClip.class)),
       new ParticleSystem(),
       new RoomSystem(eventHub, platform.getRenderer(), solaEcs, playerAttributeContainer),
       new PortalSystem(eventHub)
@@ -71,19 +71,20 @@ public class ReMemorySola extends SolaWithDefaults {
     new BulkAssetLoader(assetLoaderProvider)
       .addAsset(AudioClip.class, "memories", "assets/audio/Memories-9.wav")
       .addAsset(AudioClip.class, Constants.Assets.AudioClips.QUACK, "assets/audio/Quack.wav")
+      .addAsset(AudioClip.class, Constants.Assets.AudioClips.BELL, "assets/audio/Bell-2.wav")
       .addAsset(Font.class, "monospaced_NORMAL_10", "assets/font/monospaced_NORMAL_10.json")
       .addAsset(SpriteSheet.class, Constants.Assets.Sprites.ID, "assets/sprites/rememory_spritesheet.json")
       .addAsset(SpriteSheet.class, Constants.Assets.CozySprites.ID, "assets/sprites/cozy_room.json")
       .addAsset(SpriteSheet.class, Constants.Assets.AcidRainSprites.ID, "assets/sprites/acid_rain_sprites.json")
       .loadAll()
       .onComplete(assets -> {
-        AudioClip audioClip = ((AudioClip) assets[0]);
+        // configure audio clips
+        ((AudioClip) assets[1]).addFinishListener(AudioClip::stop);
+        ((AudioClip) assets[2]).addFinishListener(AudioClip::stop);
+        AudioClip backgroundMusicClip = ((AudioClip) assets[0]);
 
-        audioClip.setVolume(0.9f);
-        audioClip.loop(-1);
-
-        AudioClip audioClipQuack = ((AudioClip) assets[1]);
-        audioClipQuack.addFinishListener(AudioClip::stop);
+        backgroundMusicClip.setVolume(0.9f);
+        backgroundMusicClip.loop(-1);
 
         // Start the game
         eventHub.emit(new ForgetEverythingEvent());

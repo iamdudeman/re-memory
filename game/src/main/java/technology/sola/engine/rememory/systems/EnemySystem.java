@@ -3,6 +3,8 @@ package technology.sola.engine.rememory.systems;
 import technology.sola.ecs.EcsSystem;
 import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
+import technology.sola.engine.assets.AssetLoader;
+import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
@@ -18,7 +20,7 @@ public class EnemySystem extends EcsSystem {
   private final PlayerAttributeContainer playerAttributeContainer;
   private float enemyMoveDelay = 0;
 
-  public EnemySystem(EventHub eventHub, PlayerAttributeContainer playerAttributeContainer) {
+  public EnemySystem(EventHub eventHub, PlayerAttributeContainer playerAttributeContainer, AssetLoader<AudioClip> audioClipAssetLoader) {
     this.playerAttributeContainer = playerAttributeContainer;
 
     eventHub.add(CollisionEvent.class, event -> {
@@ -26,6 +28,7 @@ public class EnemySystem extends EcsSystem {
         entity -> Constants.Names.PLAYER.equals(entity.getName()),
         entity -> entity.hasComponent(EnemyComponent.class),
         (player, enemy) -> {
+          audioClipAssetLoader.get(Constants.Assets.AudioClips.BELL).executeIfLoaded(AudioClip::play);
           enemy.destroy();
           eventHub.emit(new ForgetEverythingEvent());
         }

@@ -6,6 +6,7 @@ public final class Constants {
   public final static class Assets {
     public final static class AudioClips {
       public static final String QUACK = "quack";
+      public static final String BELL = "bell";
     }
 
     public final static class CozySprites {
