@@ -26,8 +26,6 @@ public class GuiManager {
     controlsGui = ControlsGui.build(this::changeGui, this::setGamePause, document);
 
     document.setGuiRoot(attributesGui);
-
-    changeGui(0);
   }
 
   private void setGamePause(boolean isPaused) {
