@@ -66,6 +66,7 @@ public abstract class RoomWorld extends World {
       new TransformComponent(x, y),
       ColliderComponent.aabb(4, 4).setSensor(true).setTags(Constants.Tags.LAPIS),
       new LayerComponent(Constants.Layers.OBJECTS, 4),
+      new DynamicBodyComponent(),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.LAPIS)
     );
   }

@@ -55,7 +55,7 @@ public class BasementRoomWorld extends RoomWorld {
 
   private void addLantern(float x, float y) {
     createEntity(
-      new TransformComponent(x, y, 0.25f),
+      new TransformComponent(x, y, 0.5f, 0.35f),
       new SpriteComponent(Constants.Assets.BasementSprites.ID, Constants.Assets.BasementSprites.LANTERN),
       new LayerComponent(Constants.Layers.OBJECTS, 1),
       new LightComponent(32, Color.YELLOW)

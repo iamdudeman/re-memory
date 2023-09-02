@@ -62,7 +62,7 @@ public class CozyRoomWorld extends RoomWorld {
       hasNook = true;
     }
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 10; i++) {
       if (random.nextBoolean()) {
         addShelf(
           RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
@@ -200,7 +200,7 @@ public class CozyRoomWorld extends RoomWorld {
       addShelf(x + 5 + 18 + 18 + 5, y + 22);
     }
 
-    addTorch(x + 5 + 13, y + 18);
+    addTorch(x + 5 + 11, y + 16);
 
     createEntity(
       new TransformComponent(x + 5 + 18 - 3, y + 18 + 2),
