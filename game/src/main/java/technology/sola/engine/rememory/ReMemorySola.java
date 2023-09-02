@@ -72,15 +72,18 @@ public class ReMemorySola extends SolaWithDefaults {
       .addAsset(AudioClip.class, "memories", "assets/audio/Memories-9.wav")
       .addAsset(AudioClip.class, Constants.Assets.AudioClips.QUACK, "assets/audio/Quack.wav")
       .addAsset(AudioClip.class, Constants.Assets.AudioClips.BELL, "assets/audio/Bell-2.wav")
+      .addAsset(AudioClip.class, Constants.Assets.AudioClips.FORGET, "assets/audio/Forget.wav")
       .addAsset(Font.class, "monospaced_NORMAL_10", "assets/font/monospaced_NORMAL_10.json")
       .addAsset(SpriteSheet.class, Constants.Assets.Sprites.ID, "assets/sprites/rememory_spritesheet.json")
       .addAsset(SpriteSheet.class, Constants.Assets.CozySprites.ID, "assets/sprites/cozy_room.json")
       .addAsset(SpriteSheet.class, Constants.Assets.AcidRainSprites.ID, "assets/sprites/acid_rain_sprites.json")
+      .addAsset(SpriteSheet.class, Constants.Assets.LibrarySprites.ID, "assets/sprites/Library.json")
       .loadAll()
       .onComplete(assets -> {
         // configure audio clips
         ((AudioClip) assets[1]).addFinishListener(AudioClip::stop);
         ((AudioClip) assets[2]).addFinishListener(AudioClip::stop);
+        ((AudioClip) assets[3]).addFinishListener(AudioClip::stop);
         AudioClip backgroundMusicClip = ((AudioClip) assets[0]);
 
         backgroundMusicClip.setVolume(0.9f);

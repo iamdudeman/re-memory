@@ -7,6 +7,7 @@ public final class Constants {
     public final static class AudioClips {
       public static final String QUACK = "quack";
       public static final String BELL = "bell";
+      public static final String FORGET = "forget";
     }
 
     public final static class CozySprites {
@@ -22,6 +23,14 @@ public final class Constants {
 
       public static final String DUCK = "duck";
       public static final String DONUT = "donut";
+    }
+
+    public final static class LibrarySprites {
+      public static final String ID = "library";
+
+      public static final String SHELF_1 = "shelf1";
+      public static final String SHELF_2 = "shelf2";
+      public static final String TABLE_SET = "table_Set";
     }
 
     public final static class Sprites {

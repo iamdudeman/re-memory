@@ -49,6 +49,10 @@ public class PlayerSystem extends EcsSystem {
       canForget = true;
     });
 
+    eventHub.add(ForgetWhereEvent.class, event -> {
+      audioClipAssetLoader.get(Constants.Assets.AudioClips.FORGET).executeIfLoaded(AudioClip::play);
+    });
+
     eventHub.add(ForgetEverythingEvent.class, event -> {
       canForget = false;
     });
@@ -61,7 +65,7 @@ public class PlayerSystem extends EcsSystem {
     LightComponent lightComponent = playerEntity.getComponent(LightComponent.class);
 
     // apply attributes
-    final int speed = playerAttributeContainer.getSpeed() * 20;
+    final int speed = playerAttributeContainer.getSpeed() * 18;
     lightComponent.setRadius(playerAttributeContainer.getVision() * 20);
 
     float xSpeed = 0;

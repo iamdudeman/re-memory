@@ -1,0 +1,26 @@
+{
+  "sprites": [
+    {
+      "id": "shelf1",
+      "x": 1,
+      "y": 1,
+      "w": 11,
+      "h": 11
+    },
+    {
+      "id": "shelf2",
+      "x": 14,
+      "y": 4,
+      "w": 11,
+      "h": 11
+    },
+    {
+      "id": "table_set",
+      "x": 5,
+      "y": 19,
+      "w": 17,
+      "h": 5
+    }
+  ],
+  "spriteSheet": "Library.png"
+}
