@@ -5,6 +5,31 @@ It was built on  [sola-game-engine](https://github.com/iamdudeman/sola-game-engi
 template [sola-game-template](https://github.com/iamdudeman/sola-game-template)
 to start the project.
 
+## Game info
+
+What is this place? What am I doing here? I need to remember...
+
+### Controls
+
+* WASD - move
+* F - forget where you've been (resets portal destinations)
+* space / mouse click - cycle GUI text
+* left / right arrows - cycle GUI text
+
+### Gameplay hints
+
+The blue circle asset is a Lapis Lazuli gemstone that will create a portal to a new location. If you're ever stuck you
+can always  "forget where you've been" by pressing "F" which will reset all portal destinations so you can explore new
+areas without having to find a new Lapis.
+Don't give up! If a "creeper" or "spooker" try to take your memories you just have to keep trying (you'll return to the
+start of the game with a stat bonus!).
+
+### About development
+
+This game was built as a submission for the One Lone Coder Codejam 2023. It is the second real test of a custom
+[Java 2D game engine](https://github.com/iamdudeman/sola-game-engine) I am working on. With this game I really wanted to
+test out some new rendering features in the game engine like the lighting system, particle system and GUI elements.
+
 ## Credits
 
 * @Eliteomnomnivore

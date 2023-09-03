@@ -3,6 +3,7 @@ package technology.sola.engine.rememory.gui;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.GuiElement;
 import technology.sola.engine.graphics.gui.SolaGuiDocument;
+import technology.sola.engine.graphics.gui.elements.BaseTextGuiElement;
 import technology.sola.engine.graphics.gui.elements.TextGuiElement;
 import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementContainer;
 import technology.sola.engine.input.Key;
@@ -16,7 +17,11 @@ public class ControlsGui {
       p -> p.setGap(3).setDirection(StreamGuiElementContainer.Direction.VERTICAL).setBackgroundColor(Color.WHITE).padding.set(5),
       document.createElement(
         TextGuiElement::new,
-        p -> p.setText("Controls").margin.setBottom(5)
+        p -> p.setText("What is this place? What am I doing here? I need to remember...").margin.setBottom(5).setWidth(220)
+      ),
+      document.createElement(
+        TextGuiElement::new,
+        p -> p.setText("Controls").setTextAlign(BaseTextGuiElement.TextAlign.CENTER).margin.setBottom(5).setWidth(220)
       ),
       document.createElement(
         TextGuiElement::new,
