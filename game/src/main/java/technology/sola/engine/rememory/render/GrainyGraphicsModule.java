@@ -17,7 +17,7 @@ public class GrainyGraphicsModule extends SolaGraphicsModule {
 
   @Override
   public void renderMethod(Renderer renderer, World world, Matrix3D cameraScaleTransform, Matrix3D cameraTranslationTransform) {
-    renderer.setBlendMode(BlendMode.DISSOLVE);
+    renderer.setBlendFunction(BlendMode.DISSOLVE);
 
     int alpha = switch (playerAttributeContainer.getPagesCollectedCount()) {
         case 0, 1, 5 -> 5;
