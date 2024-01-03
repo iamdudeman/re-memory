@@ -10,6 +10,7 @@ import technology.sola.engine.graphics.gui.elements.container.StreamGuiElementCo
 import technology.sola.engine.rememory.PlayerAttributeContainer;
 import technology.sola.engine.rememory.events.AttributesChangedEvent;
 
+@Deprecated
 class AttributesGui {
   static GuiElement<?> build(SolaGuiDocument document, EventHub eventHub, PlayerAttributeContainer playerAttributeContainer, SolaEcs solaEcs) {
     eventHub.add(AttributesChangedEvent.class, event -> {

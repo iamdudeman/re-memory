@@ -18,7 +18,7 @@ import technology.sola.engine.physics.system.GravitySystem;
 import technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.engine.rememory.events.ForgetEverythingEvent;
-import technology.sola.engine.rememory.gui.GuiManager2;
+import technology.sola.engine.rememory.gui.GuiManager;
 import technology.sola.engine.rememory.render.GrainyGraphicsModule;
 import technology.sola.engine.rememory.render.LoadingScreen;
 import technology.sola.engine.rememory.systems.EnemySystem;
@@ -76,7 +76,7 @@ public class ReMemorySola extends SolaWithDefaults {
     );
 
     // gui
-    GuiManager2 guiManager2 = new GuiManager2(solaEcs, eventHub, playerAttributeContainer);
+    GuiManager guiManager = new GuiManager(solaEcs, eventHub, playerAttributeContainer);
 
     // Start loading assets while loading displays
     loadingScreen = new LoadingScreen();
@@ -105,7 +105,7 @@ public class ReMemorySola extends SolaWithDefaults {
         backgroundMusicClip.setVolume(0.9f);
         backgroundMusicClip.loop(-1);
 
-        guiManager2.initialize(guiDocument, (GuiJsonDocument) assets[10], (GuiJsonDocument) assets[11], (GuiJsonDocument) assets[12]);
+        guiManager.initialize(guiDocument, (GuiJsonDocument) assets[10], (GuiJsonDocument) assets[11], (GuiJsonDocument) assets[12]);
 
         // Start the game
         eventHub.emit(new ForgetEverythingEvent());

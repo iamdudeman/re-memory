@@ -16,6 +16,7 @@ import technology.sola.engine.rememory.events.PageAcceptedEvent;
 
 import java.util.function.Consumer;
 
+@Deprecated
 class PlayerMessageGui {
   static GuiElement<?> build(Consumer<Integer> changeGui, Consumer<Boolean> gamePause, SolaGuiDocument document, EventHub eventHub, SolaEcs solaEcs, PlayerAttributeContainer playerAttributeContainer) {
     var textElement = document.createElement(

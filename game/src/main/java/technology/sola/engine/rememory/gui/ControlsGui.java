@@ -10,6 +10,7 @@ import technology.sola.engine.input.Key;
 
 import java.util.function.Consumer;
 
+@Deprecated
 public class ControlsGui {
   static GuiElement<?> build(Consumer<Integer> changeGui, Consumer<Boolean> gamePause, SolaGuiDocument document) {
     var controlsContainer = document.createElement(
