@@ -4,10 +4,15 @@ import technology.sola.engine.assets.BulkAssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.assets.graphics.SpriteSheet;
 import technology.sola.engine.assets.graphics.font.Font;
+import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
+import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
+import technology.sola.engine.graphics.guiv2.elements.TextStyles;
+import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
+import technology.sola.engine.graphics.guiv2.style.theme.GuiTheme;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.system.GravitySystem;
@@ -15,12 +20,15 @@ import technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.engine.rememory.events.ForgetEverythingEvent;
 import technology.sola.engine.rememory.gui.GuiManager;
+import technology.sola.engine.rememory.gui.GuiManager2;
 import technology.sola.engine.rememory.render.GrainyGraphicsModule;
 import technology.sola.engine.rememory.render.LoadingScreen;
 import technology.sola.engine.rememory.systems.EnemySystem;
 import technology.sola.engine.rememory.systems.RoomSystem;
 import technology.sola.engine.rememory.systems.PlayerSystem;
 import technology.sola.engine.rememory.systems.PortalSystem;
+
+import java.util.List;
 
 public class ReMemorySola extends SolaWithDefaults {
   private boolean isLoading = true;
@@ -34,7 +42,14 @@ public class ReMemorySola extends SolaWithDefaults {
   protected void onInit(DefaultsConfigurator defaultsConfigurator) {
     PlayerAttributeContainer playerAttributeContainer = new PlayerAttributeContainer(eventHub);
 
-    defaultsConfigurator.useGui(new GuiPropertyDefaults("monospaced_NORMAL_10", Color.BLACK, Color.BLANK))
+    defaultsConfigurator
+//      .useGui(new GuiPropertyDefaults(Constants.Assets.Font.MONO_10, Color.BLACK, Color.BLANK))
+      .useGuiV2(
+        GuiTheme.getDefaultLightTheme()
+          .addStyle(TextGuiElement.class, List.of(ConditionalStyle.always(
+            TextStyles.create().setFontAssetId(Constants.Assets.Font.MONO_10).build()
+          )))
+      )
       .usePhysics()
       .useGraphics()
       .useLighting()
@@ -64,7 +79,8 @@ public class ReMemorySola extends SolaWithDefaults {
     );
 
     // gui
-    new GuiManager(solaGuiDocument, eventHub, playerAttributeContainer, solaEcs);
+//    new GuiManager(solaGuiDocument, eventHub, playerAttributeContainer, solaEcs);
+    GuiManager2 guiManager2 = new GuiManager2(solaEcs);
 
     // Start loading assets while loading displays
     loadingScreen = new LoadingScreen();
@@ -73,12 +89,15 @@ public class ReMemorySola extends SolaWithDefaults {
       .addAsset(AudioClip.class, Constants.Assets.AudioClips.QUACK, "assets/audio/Quack.wav")
       .addAsset(AudioClip.class, Constants.Assets.AudioClips.BELL, "assets/audio/Bell-2.wav")
       .addAsset(AudioClip.class, Constants.Assets.AudioClips.FORGET, "assets/audio/Forget.wav")
-      .addAsset(Font.class, "monospaced_NORMAL_10", "assets/font/monospaced_NORMAL_10.json")
+      .addAsset(Font.class, Constants.Assets.Font.MONO_10, "assets/font/monospaced_NORMAL_10.json")
       .addAsset(SpriteSheet.class, Constants.Assets.Sprites.ID, "assets/sprites/rememory_spritesheet.json")
       .addAsset(SpriteSheet.class, Constants.Assets.CozySprites.ID, "assets/sprites/cozy_room.json")
       .addAsset(SpriteSheet.class, Constants.Assets.BasementSprites.ID, "assets/sprites/basement.json")
       .addAsset(SpriteSheet.class, Constants.Assets.AcidRainSprites.ID, "assets/sprites/acid_rain_sprites.json")
       .addAsset(SpriteSheet.class, Constants.Assets.LibrarySprites.ID, "assets/sprites/Library.json")
+      .addAsset(GuiJsonDocument.class, Constants.Assets.Gui.CONTROLS, "assets/gui/controls.json")
+      .addAsset(GuiJsonDocument.class, Constants.Assets.Gui.IN_GAME, "assets/gui/in_game.json")
+      .addAsset(GuiJsonDocument.class, Constants.Assets.Gui.DIARY, "assets/gui/diary.json")
       .loadAll()
       .onComplete(assets -> {
         // configure audio clips
@@ -89,6 +108,8 @@ public class ReMemorySola extends SolaWithDefaults {
 
         backgroundMusicClip.setVolume(0.9f);
         backgroundMusicClip.loop(-1);
+
+        guiManager2.initialize(guiDocument, (GuiJsonDocument) assets[10], (GuiJsonDocument) assets[11], (GuiJsonDocument) assets[12]);
 
         // Start the game
         eventHub.emit(new ForgetEverythingEvent());

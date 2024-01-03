@@ -10,6 +10,16 @@ public final class Constants {
       public static final String FORGET = "forget";
     }
 
+    public final static class Gui {
+      public static final String CONTROLS = "controls";
+      public static final String IN_GAME = "in-game";
+      public static final String DIARY = "DIARY";
+    }
+
+    public final static class Font {
+      public static final String MONO_10 = "monospaced_NORMAL_10";
+    }
+
     public final static class CozySprites {
       public static final String ID = "cozy";
 
