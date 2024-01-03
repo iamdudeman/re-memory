@@ -2,11 +2,11 @@
   "tag": "Section",
   "styles": [
     {
-      "crossAxisChildren": "center",
-      "mainAxisChildren": "end",
-      "height": "100%",
-      "padding": 8,
-      "width": "100%"
+      "backgroundColor": "argb(100, 255, 255, 255)",
+      "borderColor": "rgb(169, 169, 169)",
+      "direction": "row",
+      "padding": 1,
+      "gap": 10
     }
   ],
   "children": [
@@ -14,27 +14,21 @@
       "tag": "Section",
       "styles": [
         {
-          "backgroundColor": "argb(150, 255, 255, 255)",
-          "borderColor": "#ffffff",
-          "padding": 3,
-          "positionX": 0,
-          "positionY": 0,
-          "gap": 5
+          "direction": "row"
         }
       ],
       "children": [
         {
           "tag": "Text",
-          "id": "intensity",
           "props": {
-            "text": "Intensity: 1"
+            "text": "Speed:"
           }
         },
         {
           "tag": "Text",
-          "id": "donuts",
+          "id": "speed",
           "props": {
-            "text": "Donuts: 0"
+            "text": "3"
           }
         }
       ]
@@ -43,29 +37,68 @@
       "tag": "Section",
       "styles": [
         {
-          "height": 12,
-          "width": 220
+          "direction": "row"
         }
       ],
       "children": [
         {
-          "tag": "Section",
-          "id": "sunlight",
-          "styles": [
-            {
-              "backgroundColor": "argb(200, 255, 215, 0)",
-              "positionX": 0,
-              "width": 0
-            }
-          ]
+          "tag": "Text",
+          "props": {
+            "text": "Stealth:"
+          }
         },
         {
-          "tag": "Section",
-          "styles": [
-            {
-              "borderColor": "rgb(0, 0, 0)"
-            }
-          ]
+          "tag": "Text",
+          "id": "stealth",
+          "props": {
+            "text": "3"
+          }
+        }
+      ]
+    },
+    {
+      "tag": "Section",
+      "styles": [
+        {
+          "direction": "row"
+        }
+      ],
+      "children": [
+        {
+          "tag": "Text",
+          "props": {
+            "text": "Vision:"
+          }
+        },
+        {
+          "tag": "Text",
+          "id": "vision",
+          "props": {
+            "text": "3"
+          }
+        }
+      ]
+    },
+    {
+      "tag": "Section",
+      "styles": [
+        {
+          "direction": "row"
+        }
+      ],
+      "children": [
+        {
+          "tag": "Text",
+          "props": {
+            "text": "Pages:"
+          }
+        },
+        {
+          "tag": "Text",
+          "id": "pages",
+          "props": {
+            "text": "3"
+          }
         }
       ]
     }

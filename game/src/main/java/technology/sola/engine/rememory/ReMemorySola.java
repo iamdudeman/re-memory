@@ -8,7 +8,6 @@ import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.gui.properties.GuiPropertyDefaults;
 import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
 import technology.sola.engine.graphics.guiv2.elements.TextStyles;
 import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
@@ -19,7 +18,6 @@ import technology.sola.engine.physics.system.GravitySystem;
 import technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem;
 import technology.sola.engine.physics.system.ParticleSystem;
 import technology.sola.engine.rememory.events.ForgetEverythingEvent;
-import technology.sola.engine.rememory.gui.GuiManager;
 import technology.sola.engine.rememory.gui.GuiManager2;
 import technology.sola.engine.rememory.render.GrainyGraphicsModule;
 import technology.sola.engine.rememory.render.LoadingScreen;
@@ -43,7 +41,6 @@ public class ReMemorySola extends SolaWithDefaults {
     PlayerAttributeContainer playerAttributeContainer = new PlayerAttributeContainer(eventHub);
 
     defaultsConfigurator
-//      .useGui(new GuiPropertyDefaults(Constants.Assets.Font.MONO_10, Color.BLACK, Color.BLANK))
       .useGuiV2(
         GuiTheme.getDefaultLightTheme()
           .addStyle(TextGuiElement.class, List.of(ConditionalStyle.always(
@@ -79,8 +76,7 @@ public class ReMemorySola extends SolaWithDefaults {
     );
 
     // gui
-//    new GuiManager(solaGuiDocument, eventHub, playerAttributeContainer, solaEcs);
-    GuiManager2 guiManager2 = new GuiManager2(solaEcs);
+    GuiManager2 guiManager2 = new GuiManager2(solaEcs, eventHub, playerAttributeContainer);
 
     // Start loading assets while loading displays
     loadingScreen = new LoadingScreen();
