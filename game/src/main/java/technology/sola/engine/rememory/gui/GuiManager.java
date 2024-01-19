@@ -214,41 +214,41 @@ public class GuiManager {
     return switch (pagesCollected) {
       case 0 -> {
         if (tries == 1) {
-          yield "Ah, I remember writing these. I need to find them. Four more, I think.";
+          yield "Hey, props to you for trying to remember, but it only gets harder from here.";
         } else if (tries == 2) {
-          yield "I need to keep trying. I can do it this time. Four more to go.";
+          yield "See, I told you didn't I? Finding four more pages isn't worth the effort!";
         } else {
-          yield "Here we go again.";
+          yield "You're not making any progress. You've earned your rest already just give it up.";
         }
       }
       case 1 -> {
         if (tries == 1) {
-          yield "Here's another one! I need to find three more.";
+          yield "I wasn't lying to you ya know. It's gonna get rougher...";
         } else if (tries == 2) {
-          yield "I can do this. Three more to go.";
+          yield "Congrats on another step forward. We should go back to the forest and celebrate!";
         } else {
-          yield "I need to focus. Three more to find.";
+          yield "You haven't even made it halfway yet. Why do you keep trying to remember this?";
         }
       }
       case 2 -> {
         if (tries == 1) {
-          yield "I think I'm starting to remember. Two more to go.";
+          yield "Ahh you already found the lighthouse. We can't have you getting ahead of yourself now.";
         } else if (tries == 2) {
-          yield "Things are starting to clear up again. Two more to find.";
+          yield "I've always been with you. Seeing this lighthouse again changes nothing.";
         } else {
-          yield "Gotta keep trying until I remember. Only two left to find.";
+          yield "Took you long enough to get back here. Was this lighthouse really worth it?";
         }
       }
       case 3 -> {
         if (tries == 1) {
-          yield "Everything is getting clear. Only one more page to go.";
+          yield "Remembering will just bring you pain. Stay with me instead!";
         } else if (tries == 2) {
-          yield "I'm so close, I can't give up now. Only one page left.";
+          yield "Would you leave me behind after all that I have done for you?";
         } else {
-          yield "One more push and then I've got them all.";
+          yield "After so many failures you've done well to make it this far. Let's go back and rest now for awhile.";
         }
       }
-      case 4 -> "I've done it. I remember now...";
+      case 4 -> "You don't need to remember! It's not to late to turn back...";
       default -> "If you're reading this, then the game has a bug!";
     };
   }
