@@ -1,0 +1,25 @@
+{
+  "tag": "Section",
+  "id": "diary-container",
+  "styles": [
+    {
+      "backgroundColor": "#ffffff",
+      "borderColor": "rgb(211, 211, 211)",
+      "height": "95%",
+      "paddingHorizontal": 3,
+      "paddingBottom": 2,
+      "positionX": "11%",
+      "positionY": "2.5%",
+      "width": "78%"
+    }
+  ],
+  "children": [
+    {
+      "tag": "Text",
+      "id": "diary",
+      "props": {
+        "text": ""
+      }
+    }
+  ]
+}

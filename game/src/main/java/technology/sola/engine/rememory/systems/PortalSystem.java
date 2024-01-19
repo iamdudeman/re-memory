@@ -71,7 +71,7 @@ public class PortalSystem extends EcsSystem {
         if (entry.c1().canBeActivated()) {
           ParticleEmitterComponent portalParticleEmitter = new ParticleEmitterComponent();
 
-          portalParticleEmitter.setParticleBlendMode(BlendMode.MULTIPLY);
+          portalParticleEmitter.setParticleBlendFunction(BlendMode.MULTIPLY);
           portalParticleEmitter.setParticleColor(new Color(120, 177, 156, 217));
           portalParticleEmitter.setParticleSizeBounds(1, 3);
           portalParticleEmitter.setParticleLifeBounds(1, 3);

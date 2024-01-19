@@ -1,0 +1,58 @@
+{
+  "tag": "Section",
+  "id": "controls",
+  "styles": [
+    {
+      "backgroundColor": "#ffffff",
+      "gap": 3,
+      "padding": 5,
+      "positionX": 18,
+      "width": 220
+    }
+  ],
+  "children": [
+    {
+      "tag": "Text",
+      "props": {
+        "text": "What is this place? What am I doing here? I need to remember..."
+      }
+    },
+    {
+      "tag": "Text",
+      "props": {
+        "text": "Controls"
+      },
+      "styles": [
+        {
+          "paddingTop": 15,
+          "textAlignment": "center",
+          "width": "100%"
+        }
+      ]
+    },
+    {
+      "tag": "Text",
+      "props": {
+        "text": "WASD - Move around"
+      }
+    },
+    {
+      "tag": "Text",
+      "props": {
+        "text": "F - Reset portal destinations"
+      }
+    },
+    {
+      "tag": "Text",
+      "props": {
+        "text": "Space/Click - Cycle GUI text"
+      }
+    },
+    {
+      "tag": "Text",
+      "props": {
+        "text": "Left/Right arrows - Cycle GUI text"
+      }
+    }
+  ]
+}
