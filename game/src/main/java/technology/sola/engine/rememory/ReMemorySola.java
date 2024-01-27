@@ -8,10 +8,10 @@ import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
-import technology.sola.engine.graphics.guiv2.elements.TextStyles;
-import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
-import technology.sola.engine.graphics.guiv2.style.theme.GuiTheme;
+import technology.sola.engine.graphics.gui.elements.TextGuiElement;
+import technology.sola.engine.graphics.gui.elements.TextStyles;
+import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.system.GravitySystem;
@@ -41,7 +41,7 @@ public class ReMemorySola extends SolaWithDefaults {
     PlayerAttributeContainer playerAttributeContainer = new PlayerAttributeContainer(eventHub);
 
     defaultsConfigurator
-      .useGuiV2(
+      .useGui(
         GuiTheme.getDefaultLightTheme()
           .addStyle(TextGuiElement.class, List.of(ConditionalStyle.always(
             TextStyles.create().setFontAssetId(Constants.Assets.Font.MONO_10).build()

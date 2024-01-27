@@ -5,7 +5,7 @@ import technology.sola.ecs.Component;
 public class PortalComponent implements Component {
   private boolean isActive;
   private float inactiveTicks;
-  private static final float ACTIVATION_DELAY = 5;
+  private static final float ACTIVATION_DELAY = 4;
   private String roomId;
 
   public PortalComponent(String roomId, boolean delayActivation) {
