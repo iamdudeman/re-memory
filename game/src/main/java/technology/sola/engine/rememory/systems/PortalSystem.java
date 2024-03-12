@@ -5,6 +5,7 @@ import technology.sola.ecs.World;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.Color;
+import technology.sola.engine.graphics.components.BlendModeComponent;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.physics.component.ColliderComponent;
@@ -71,7 +72,6 @@ public class PortalSystem extends EcsSystem {
         if (entry.c1().canBeActivated()) {
           ParticleEmitterComponent portalParticleEmitter = new ParticleEmitterComponent();
 
-          portalParticleEmitter.setParticleBlendFunction(BlendMode.MULTIPLY);
           portalParticleEmitter.setParticleColor(new Color(120, 177, 156, 217));
           portalParticleEmitter.setParticleSizeBounds(1, 3);
           portalParticleEmitter.setParticleLifeBounds(1, 3);
@@ -82,6 +82,7 @@ public class PortalSystem extends EcsSystem {
           world.createEntity(
             new TransformComponent(3, 5, entry.entity()),
             new LayerComponent(Constants.Layers.OBJECTS, 2),
+            new BlendModeComponent(BlendMode.MULTIPLY),
             portalParticleEmitter
           );
 

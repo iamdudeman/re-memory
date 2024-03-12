@@ -88,7 +88,7 @@ public class GuiManager {
 
     var attributesSectionElement = inGameDocument.rootElement().findElementById("attributes", SectionGuiElement.class);
     var pageTextElement = inGameDocument.rootElement().findElementById("page", TextGuiElement.class);
-    var pageStyles = pageTextElement.getStyles();
+    var pageStyles = pageTextElement.styles();
 
     pageTextElement.events().mousePressed().on(guiMouseEvent -> {
       if (!showingPlayerMessage) {
@@ -197,16 +197,16 @@ public class GuiManager {
   private void updateAttributeValueText(TextGuiElement textGuiElement, int value) {
     textGuiElement.setText("" + value);
 
-    textGuiElement.getStyles().removeStyle(negativeTextStyle);
-    textGuiElement.getStyles().removeStyle(positiveTextStyle);
+    textGuiElement.styles().removeStyle(negativeTextStyle);
+    textGuiElement.styles().removeStyle(positiveTextStyle);
 
     if (value < 3) {
-      textGuiElement.getStyles().addStyle(negativeTextStyle);
+      textGuiElement.styles().addStyle(negativeTextStyle);
     } else if (value > 3) {
-      textGuiElement.getStyles().addStyle(positiveTextStyle);
+      textGuiElement.styles().addStyle(positiveTextStyle);
     }
 
-    textGuiElement.getStyles().invalidate();
+    textGuiElement.styles().invalidate();
   }
 
   private static String getNextText(PlayerAttributeContainer playerAttributeContainer) {
