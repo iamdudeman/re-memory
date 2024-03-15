@@ -2,7 +2,6 @@ package technology.sola.engine.rememory;
 
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.rememory.events.AttributesChangedEvent;
-import technology.sola.engine.rememory.events.ForgetWhereEvent;
 import technology.sola.engine.rememory.events.ForgetEverythingEvent;
 import technology.sola.engine.rememory.events.PageAcceptedEvent;
 
@@ -21,11 +20,6 @@ public class PlayerAttributeContainer {
       pagesCollectedCount++;
       maxPagesCollectedCount = pagesCollectedCount;
       randomStatIncrease();
-      eventHub.emit(new AttributesChangedEvent());
-    });
-
-    eventHub.add(ForgetWhereEvent.class, event -> {
-      randomStatDecrease();
       eventHub.emit(new AttributesChangedEvent());
     });
 

@@ -14,7 +14,6 @@ import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.components.PortalComponent;
 import technology.sola.engine.rememory.events.ChangeRoomEvent;
-import technology.sola.engine.rememory.events.ForgetWhereEvent;
 import technology.sola.engine.rememory.rooms.RoomWorld;
 import technology.sola.math.linear.Vector2D;
 
@@ -47,10 +46,6 @@ public class PortalSystem extends EcsSystem {
           addPortalLocation = player.getComponent(TransformComponent.class).getTranslate();
         }
       );
-    });
-
-    eventHub.add(ForgetWhereEvent.class, event -> {
-      clearPortalIds = true;
     });
   }
 

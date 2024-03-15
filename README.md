@@ -12,17 +12,14 @@ What is this place? What am I doing here? I need to remember...
 ### Controls
 
 * WASD - move
-* F - forget where you've been (resets portal destinations)
 * space / mouse click - cycle GUI text
 * left / right arrows - cycle GUI text
 
 ### Gameplay hints
 
-The blue circle asset is a Lapis Lazuli gemstone that will create a portal to a new location. If you're ever stuck you
-can always  "forget where you've been" by pressing "F" which will reset all portal destinations so you can explore new
-areas without having to find a new Lapis.
-Don't give up! If a "creeper" or "spooker" try to take your memories you just have to keep trying (you'll return to the
-start of the game with a stat bonus!).
+The blue circle asset is a Lapis Lazuli gemstone that will permanently increase one of your stats as you remember skills
+you thought you'd lost!
+Portals will always take you to a new room so explore a new room if there isn't anything interesting!
 
 ### About development
 

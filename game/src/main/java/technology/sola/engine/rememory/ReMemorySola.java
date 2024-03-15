@@ -103,7 +103,7 @@ public class ReMemorySola extends SolaWithDefaults {
         AudioClip backgroundMusicClip = ((AudioClip) assets[0]);
 
         backgroundMusicClip.setVolume(0.9f);
-        backgroundMusicClip.loop(-1);
+        backgroundMusicClip.loop(AudioClip.CONTINUOUS_LOOPING);
 
         guiManager.initialize(guiDocument, (GuiJsonDocument) assets[10], (GuiJsonDocument) assets[11], (GuiJsonDocument) assets[12]);
 

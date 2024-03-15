@@ -39,12 +39,6 @@
     {
       "tag": "Text",
       "props": {
-        "text": "F - Reset portal destinations"
-      }
-    },
-    {
-      "tag": "Text",
-      "props": {
         "text": "Space/Click - Cycle GUI text"
       }
     },

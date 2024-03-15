@@ -29,6 +29,7 @@ public class EnemySystem extends EcsSystem {
         entity -> entity.hasComponent(EnemyComponent.class),
         (player, enemy) -> {
           audioClipAssetLoader.get(Constants.Assets.AudioClips.BELL).executeIfLoaded(AudioClip::play);
+          audioClipAssetLoader.get(Constants.Assets.AudioClips.FORGET).executeIfLoaded(AudioClip::play);
           enemy.destroy();
           eventHub.emit(new ForgetEverythingEvent());
         }

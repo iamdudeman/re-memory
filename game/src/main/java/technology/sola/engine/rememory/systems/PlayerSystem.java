@@ -13,22 +13,16 @@ import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.rememory.Constants;
-import technology.sola.engine.rememory.events.ChangeRoomEvent;
-import technology.sola.engine.rememory.events.ForgetWhereEvent;
 import technology.sola.engine.rememory.PlayerAttributeContainer;
-import technology.sola.engine.rememory.events.ForgetEverythingEvent;
 import technology.sola.math.linear.Vector2D;
 
 public class PlayerSystem extends EcsSystem {
   private final float halfRootTwo = (float) (Math.sqrt(2) * 0.5f);
   private final KeyboardInput keyboardInput;
-  private final EventHub eventHub;
   private final PlayerAttributeContainer playerAttributeContainer;
-  private boolean canForget = false;
 
   public PlayerSystem(KeyboardInput keyboardInput, EventHub eventHub, PlayerAttributeContainer playerAttributeContainer, AssetLoader<AudioClip> audioClipAssetLoader) {
     this.keyboardInput = keyboardInput;
-    this.eventHub = eventHub;
     this.playerAttributeContainer = playerAttributeContainer;
 
     eventHub.add(CollisionEvent.class, event -> {
@@ -43,18 +37,6 @@ public class PlayerSystem extends EcsSystem {
           });
         }
       );
-    });
-
-    eventHub.add(ChangeRoomEvent.class, event -> {
-      canForget = true;
-    });
-
-    eventHub.add(ForgetWhereEvent.class, event -> {
-      audioClipAssetLoader.get(Constants.Assets.AudioClips.FORGET).executeIfLoaded(AudioClip::play);
-    });
-
-    eventHub.add(ForgetEverythingEvent.class, event -> {
-      canForget = false;
     });
   }
 
@@ -92,11 +74,6 @@ public class PlayerSystem extends EcsSystem {
         xSpeed = speed * halfRootTwo;
         ySpeed *= halfRootTwo;
       }
-    }
-
-    if (canForget && keyboardInput.isKeyPressed(Key.F)) {
-      canForget = false;
-      eventHub.emit(new ForgetWhereEvent());
     }
 
     dynamicBodyComponent.setVelocity(new Vector2D(xSpeed, ySpeed));

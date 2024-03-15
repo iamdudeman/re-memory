@@ -65,7 +65,14 @@ public class GuiManager {
   public void initialize(GuiDocument guiDocument, GuiJsonDocument controlsDocument, GuiJsonDocument inGameDocument, GuiJsonDocument diaryDocument) {
     guiDocument.setRootElement(controlsDocument.rootElement());
 
-    // controls
+    initializeControlsGui(guiDocument, controlsDocument, inGameDocument);
+
+    initializeInGameGui(guiDocument, inGameDocument, diaryDocument);
+
+    initializeDiaryGui(guiDocument, diaryDocument, inGameDocument);
+  }
+
+  private void initializeControlsGui(GuiDocument guiDocument, GuiJsonDocument controlsDocument, GuiJsonDocument inGameDocument) {
     controlsDocument.rootElement().events().keyPressed().on(guiKeyEvent -> {
       if (guiKeyEvent.getKeyEvent().keyCode() == Key.SPACE.getCode() || guiKeyEvent.getKeyEvent().keyCode() == Key.RIGHT.getCode()) {
         setGamePause(false);
@@ -77,8 +84,9 @@ public class GuiManager {
       setGamePause(false);
       guiDocument.setRootElement(inGameDocument.rootElement());
     });
+  }
 
-    // in_game
+  private void initializeInGameGui(GuiDocument guiDocument, GuiJsonDocument inGameDocument, GuiJsonDocument diaryDocument) {
     eventHub.add(AttributesChangedEvent.class, event -> {
       updateAttributeValueText(inGameDocument.rootElement().findElementById("speed", TextGuiElement.class), playerAttributeContainer.getSpeed());
       updateAttributeValueText(inGameDocument.rootElement().findElementById("stealth", TextGuiElement.class), playerAttributeContainer.getStealth());
@@ -147,7 +155,7 @@ public class GuiManager {
 
           setGamePause(true);
 
-          pageTextElement.setText(getNextText(playerAttributeContainer));
+          pageTextElement.setText(getNextEnemyResponseText(playerAttributeContainer));
           pageStyles.addStyle(visibilityVisibleStyle);
           pageStyles.invalidate();
 
@@ -156,8 +164,9 @@ public class GuiManager {
         }
       );
     });
+  }
 
-    // diary
+  private void initializeDiaryGui(GuiDocument guiDocument, GuiJsonDocument diaryDocument, GuiJsonDocument inGameDocument) {
     var diaryTextElement = diaryDocument.rootElement().findElementById("diary", TextGuiElement.class);
     var diaryContainerElement = diaryDocument.rootElement().findElementById("diary-container", SectionGuiElement.class);
 
@@ -209,7 +218,7 @@ public class GuiManager {
     textGuiElement.styles().invalidate();
   }
 
-  private static String getNextText(PlayerAttributeContainer playerAttributeContainer) {
+  private static String getNextEnemyResponseText(PlayerAttributeContainer playerAttributeContainer) {
     int pagesCollected = playerAttributeContainer.getPagesCollectedCount();
     int tries = playerAttributeContainer.getTries();
 
