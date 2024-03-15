@@ -5,6 +5,7 @@ import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.components.LightComponent;
 import technology.sola.engine.input.Key;
@@ -12,8 +13,10 @@ import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.event.CollisionEvent;
+import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.PlayerAttributeContainer;
+import technology.sola.engine.rememory.events.StatIncreaseEvent;
 import technology.sola.math.linear.Vector2D;
 
 public class PlayerSystem extends EcsSystem {
@@ -35,6 +38,18 @@ public class PlayerSystem extends EcsSystem {
               audioClip.play();
             }
           });
+        }
+      );
+    });
+
+    eventHub.add(SensorEvent.class, event -> {
+      event.collisionManifold().conditionallyResolveCollision(
+        entity -> Constants.Names.PLAYER.equals(entity.getName()),
+        entity -> entity.getComponent(ColliderComponent.class).hasTag(Constants.Tags.LAPIS),
+        (player, lapis) -> {
+          lapis.destroy();
+
+          eventHub.emit(new StatIncreaseEvent());
         }
       );
     });

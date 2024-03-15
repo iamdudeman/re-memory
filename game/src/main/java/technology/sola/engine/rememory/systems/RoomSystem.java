@@ -5,7 +5,7 @@ import technology.sola.ecs.SolaEcs;
 import technology.sola.ecs.World;
 import technology.sola.engine.rememory.PlayerAttributeContainer;
 import technology.sola.engine.rememory.RandomUtils;
-import technology.sola.engine.rememory.events.ForgetEverythingEvent;
+import technology.sola.engine.rememory.events.ForgetPagesEvent;
 import technology.sola.engine.rememory.rooms.*;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.renderer.Renderer;
@@ -28,7 +28,7 @@ public class RoomSystem extends EcsSystem {
       setActive(true);
     });
 
-    eventHub.add(ForgetEverythingEvent.class, event -> {
+    eventHub.add(ForgetPagesEvent.class, event -> {
       isStart = true;
       setActive(true);
     });

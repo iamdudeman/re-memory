@@ -1,14 +1,16 @@
 1. ~~Removing "forget" concept to reset portals. I really like this idea but with the content of the game it doesn't feel
    good. There isn't really any reason to go back to previous rooms so "forgetting" is done whenever a lapis doesn't
    spawn and you get penalized for it. Instead the center portal will always take you to a new room~~
-2. Lapis that are picked up now instead increase your stats permanently. You can never lose stats anymore (all values
+2. ~~Lapis that are picked up now instead increase your stats permanently. You can never lose stats anymore (all values
    will start lower as a result). This also gives more reason to explore each room since it may have a lapis for stats
-   or pages for story progression
+   or pages for story progression~~
 3. Picking up a page immediately shows you the page. After reading it the "enemy" will respond with some dialogue. If
    you have already seen a page before it won't be shown again until the end
 4. new page content!
 5. Consider new enemy type "roamer" that moves randomly even without detecting
 6. introduce zoomers sooner
+7. consider removing donut object, add collision for enemies to the duck?
+8. Turn stat color blue if at max, orange only at 1
 
 
 new page content

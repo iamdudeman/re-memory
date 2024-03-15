@@ -13,7 +13,7 @@ import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.PlayerAttributeContainer;
 import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.events.ChangeRoomEvent;
-import technology.sola.engine.rememory.events.ForgetEverythingEvent;
+import technology.sola.engine.rememory.events.ForgetPagesEvent;
 import technology.sola.math.linear.Vector2D;
 
 public class EnemySystem extends EcsSystem {
@@ -31,7 +31,7 @@ public class EnemySystem extends EcsSystem {
           audioClipAssetLoader.get(Constants.Assets.AudioClips.BELL).executeIfLoaded(AudioClip::play);
           audioClipAssetLoader.get(Constants.Assets.AudioClips.FORGET).executeIfLoaded(AudioClip::play);
           enemy.destroy();
-          eventHub.emit(new ForgetEverythingEvent());
+          eventHub.emit(new ForgetPagesEvent());
         }
       );
     });

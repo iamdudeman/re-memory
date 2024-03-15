@@ -14,12 +14,9 @@ import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.components.PortalComponent;
 import technology.sola.engine.rememory.events.ChangeRoomEvent;
-import technology.sola.engine.rememory.rooms.RoomWorld;
 import technology.sola.math.linear.Vector2D;
 
 public class PortalSystem extends EcsSystem {
-  private Vector2D addPortalLocation = null;
-
   public PortalSystem(EventHub eventHub) {
     eventHub.add(SensorEvent.class, event -> {
       event.collisionManifold().conditionallyResolveCollision(
@@ -34,28 +31,10 @@ public class PortalSystem extends EcsSystem {
         }
       );
     });
-
-    eventHub.add(SensorEvent.class, event -> {
-      event.collisionManifold().conditionallyResolveCollision(
-        entity -> Constants.Names.PLAYER.equals(entity.getName()),
-        entity -> entity.getComponent(ColliderComponent.class).hasTag(Constants.Tags.LAPIS),
-        (player, lapis) -> {
-          lapis.destroy();
-
-          addPortalLocation = player.getComponent(TransformComponent.class).getTranslate();
-        }
-      );
-    });
   }
 
   @Override
   public void update(World world, float deltaTime) {
-    if (addPortalLocation != null) {
-      ((RoomWorld) world).addPortal(addPortalLocation.x(), addPortalLocation.y());
-
-      addPortalLocation = null;
-    }
-
     world.createView().of(PortalComponent.class)
       .getEntries()
       .forEach(entry -> {

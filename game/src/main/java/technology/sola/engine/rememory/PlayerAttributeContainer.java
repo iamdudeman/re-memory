@@ -2,13 +2,14 @@ package technology.sola.engine.rememory;
 
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.rememory.events.AttributesChangedEvent;
-import technology.sola.engine.rememory.events.ForgetEverythingEvent;
+import technology.sola.engine.rememory.events.ForgetPagesEvent;
 import technology.sola.engine.rememory.events.PageAcceptedEvent;
+import technology.sola.engine.rememory.events.StatIncreaseEvent;
 
 public class PlayerAttributeContainer {
-  private int speed;
-  private int stealth;
-  private int vision;
+  private int speed = 2;
+  private int stealth = 1;
+  private int vision = 2;
   private int pagesCollectedCount = 0;
   private int tries = 0;
   private int maxPagesCollectedCount = 0;
@@ -19,11 +20,15 @@ public class PlayerAttributeContainer {
     eventHub.add(PageAcceptedEvent.class, event -> {
       pagesCollectedCount++;
       maxPagesCollectedCount = pagesCollectedCount;
+      eventHub.emit(new AttributesChangedEvent());
+    });
+
+    eventHub.add(StatIncreaseEvent.class, event -> {
       randomStatIncrease();
       eventHub.emit(new AttributesChangedEvent());
     });
 
-    eventHub.add(ForgetEverythingEvent.class, event -> {
+    eventHub.add(ForgetPagesEvent.class, event -> {
       forget();
       tries++;
 
@@ -60,9 +65,6 @@ public class PlayerAttributeContainer {
   }
 
   private void forget() {
-    speed = 3;
-    stealth = 3;
-    vision = 3;
     pagesCollectedCount = 0;
   }
 
@@ -84,27 +86,6 @@ public class PlayerAttributeContainer {
       stealth++;
     } else if (roll < speedChance + stealthChance + visionChance) {
       vision++;
-    }
-  }
-
-  private void randomStatDecrease() {
-    int speedChance = speed > 1 ? 33 : 0;
-    int stealthChance = stealth > 1 ? 33 : 0;
-    int visionChance = vision > 1 ? 33 : 0;
-    int totalChance = speedChance + stealthChance + visionChance;
-
-    if (totalChance == 0) {
-      return;
-    }
-
-    int roll = RandomUtils.rollN(totalChance);
-
-    if (roll < speedChance) {
-      speed--;
-    } else if (roll < speedChance + stealthChance) {
-      stealth--;
-    } else if (roll < speedChance + stealthChance + visionChance) {
-      vision--;
     }
   }
 }

@@ -17,7 +17,7 @@ import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.system.GravitySystem;
 import technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem;
 import technology.sola.engine.physics.system.ParticleSystem;
-import technology.sola.engine.rememory.events.ForgetEverythingEvent;
+import technology.sola.engine.rememory.events.ForgetPagesEvent;
 import technology.sola.engine.rememory.gui.GuiManager;
 import technology.sola.engine.rememory.render.GrainyGraphicsModule;
 import technology.sola.engine.rememory.render.LoadingScreen;
@@ -108,7 +108,7 @@ public class ReMemorySola extends SolaWithDefaults {
         guiManager.initialize(guiDocument, (GuiJsonDocument) assets[10], (GuiJsonDocument) assets[11], (GuiJsonDocument) assets[12]);
 
         // Start the game
-        eventHub.emit(new ForgetEverythingEvent());
+        eventHub.emit(new ForgetPagesEvent());
         isLoading = false;
         loadingScreen = null;
       });
