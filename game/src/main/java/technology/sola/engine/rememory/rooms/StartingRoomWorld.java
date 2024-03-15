@@ -9,8 +9,8 @@ import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.RandomUtils;
 
 public class StartingRoomWorld extends RoomWorld {
-  public StartingRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight) {
-    super(previousRoomId, rendererWidth, rendererHeight);
+  public StartingRoomWorld(int rendererWidth, int rendererHeight) {
+    super(rendererWidth, rendererHeight);
 
 
     for (int i = 0; i < rendererWidth; i += 8) {

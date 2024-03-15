@@ -14,8 +14,8 @@ import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.components.PageComponent;
 
 public class BasementRoomWorld extends RoomWorld {
-  public BasementRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight, PlayerAttributeContainer playerAttributeContainer) {
-    super(previousRoomId, rendererWidth, rendererHeight);
+  public BasementRoomWorld(int rendererWidth, int rendererHeight, PlayerAttributeContainer playerAttributeContainer) {
+    super(rendererWidth, rendererHeight);
 
     for (int i = 0; i < rendererWidth; i += 32) {
       for (int j = 0; j < rendererHeight; j += 32) {

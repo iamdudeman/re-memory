@@ -18,7 +18,6 @@ import technology.sola.engine.rememory.rooms.RoomWorld;
 import technology.sola.math.linear.Vector2D;
 
 public class PortalSystem extends EcsSystem {
-  private boolean clearPortalIds = false;
   private Vector2D addPortalLocation = null;
 
   public PortalSystem(EventHub eventHub) {
@@ -60,10 +59,6 @@ public class PortalSystem extends EcsSystem {
     world.createView().of(PortalComponent.class)
       .getEntries()
       .forEach(entry -> {
-        if (clearPortalIds) {
-          entry.c1().setRoomId(null);
-        }
-
         if (entry.c1().canBeActivated()) {
           ParticleEmitterComponent portalParticleEmitter = new ParticleEmitterComponent();
 
@@ -86,7 +81,5 @@ public class PortalSystem extends EcsSystem {
           entry.c1().tickInactive(deltaTime);
         }
       });
-
-    clearPortalIds = false;
   }
 }

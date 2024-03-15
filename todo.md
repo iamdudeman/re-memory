@@ -1,6 +1,6 @@
-1. Removing "forget" concept to reset portals. I really like this idea but with the content of the game it doesn't feel
+1. ~~Removing "forget" concept to reset portals. I really like this idea but with the content of the game it doesn't feel
    good. There isn't really any reason to go back to previous rooms so "forgetting" is done whenever a lapis doesn't
-   spawn and you get penalized for it. Instead the center portal will always take you to a new room
+   spawn and you get penalized for it. Instead the center portal will always take you to a new room~~
 2. Lapis that are picked up now instead increase your stats permanently. You can never lose stats anymore (all values
    will start lower as a result). This also gives more reason to explore each room since it may have a lapis for stats
    or pages for story progression

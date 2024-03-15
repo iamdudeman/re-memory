@@ -14,8 +14,8 @@ import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.components.PageComponent;
 
 public class CozyRoomWorld extends RoomWorld {
-  public CozyRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight, PlayerAttributeContainer playerAttributeContainer) {
-    super(previousRoomId, rendererWidth, rendererHeight);
+  public CozyRoomWorld(int rendererWidth, int rendererHeight, PlayerAttributeContainer playerAttributeContainer) {
+    super(rendererWidth, rendererHeight);
 
     for (int i = 0; i < rendererWidth; i += 16) {
       for (int j = 0; j < rendererHeight; j += 16) {

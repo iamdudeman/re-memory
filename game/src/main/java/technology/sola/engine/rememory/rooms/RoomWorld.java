@@ -9,7 +9,6 @@ import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.rememory.Constants;
-import technology.sola.engine.rememory.RandomUtils;
 import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.components.PortalComponent;
 
@@ -20,18 +19,16 @@ public abstract class RoomWorld extends World {
   protected Random random = new Random();
   protected int rendererWidth;
   protected int rendererHeight;
-  private final String previousRoomId;
 
-  public RoomWorld(String previousRoomId, int rendererWidth, int rendererHeight) {
+  public RoomWorld(int rendererWidth, int rendererHeight) {
     super(1500);
-    this.previousRoomId = previousRoomId;
     this.rendererWidth = rendererWidth;
     this.rendererHeight = rendererHeight;
   }
 
   public void addPortal(float x, float y) {
     createEntity(
-      new PortalComponent(null, true),
+      new PortalComponent(true),
       new TransformComponent(x, y, 8),
       ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
       new CircleRendererComponent(new Color(177, 156, 217), true),
@@ -53,7 +50,7 @@ public abstract class RoomWorld extends World {
 
   protected void addInitialPortal(float x, float y, boolean delayActivation) {
     createEntity(
-      new PortalComponent(previousRoomId, delayActivation),
+      new PortalComponent(delayActivation),
       new TransformComponent(x, y, 8),
       ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
       new CircleRendererComponent(new Color(177, 156, 217), true),
