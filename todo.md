@@ -10,9 +10,10 @@
 5. Consider new enemy type "roamer/wanderer" that moves randomly even without detecting
     * introduce spookers sooner
 6. ~~consider removing donut object, add collision for enemies to the duck?~~
-7. Stat rebalance
-    * Turn stat color blue if at max, orange only at 1
-8. Enemy dialog updates
+7. ~~Stat rebalance~~
+    * ~~Turn stat color blue if at max, orange only at 1~~
+    * ~~Tweak impact so there can be larger values maybe?~~
+8. ~~Enemy dialog updates~~
 
 
 new page content

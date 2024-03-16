@@ -7,9 +7,10 @@ import technology.sola.engine.rememory.events.PageAcceptedEvent;
 import technology.sola.engine.rememory.events.StatIncreaseEvent;
 
 public class PlayerAttributeContainer {
-  private int speed = 2;
+  public static final int STAT_CAP = 9;
+  private int speed = 1;
   private int stealth = 1;
-  private int vision = 2;
+  private int vision = 1;
   private int pagesCollectedCount = 0;
   private int tries = 0;
   private int maxPagesCollectedCount = 0;
@@ -73,9 +74,9 @@ public class PlayerAttributeContainer {
   }
 
   private void randomStatIncrease() {
-    int speedChance = speed < 5 ? 33 : 0;
-    int stealthChance = stealth < 5 ? 33 : 0;
-    int visionChance = vision < 5 ? 33 : 0;
+    int speedChance = speed < STAT_CAP ? 33 : 0;
+    int stealthChance = stealth < STAT_CAP ? 33 : 0;
+    int visionChance = vision < STAT_CAP ? 33 : 0;
     int totalChance = speedChance + stealthChance + visionChance;
 
     if (totalChance == 0) {

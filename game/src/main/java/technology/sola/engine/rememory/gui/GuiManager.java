@@ -82,7 +82,8 @@ public class GuiManager {
       updateAttributeValueText(inGameDocument.rootElement().findElementById("speed", TextGuiElement.class), playerAttributeContainer.getSpeed());
       updateAttributeValueText(inGameDocument.rootElement().findElementById("stealth", TextGuiElement.class), playerAttributeContainer.getStealth());
       updateAttributeValueText(inGameDocument.rootElement().findElementById("vision", TextGuiElement.class), playerAttributeContainer.getVision());
-      updateAttributeValueText(inGameDocument.rootElement().findElementById("pages", TextGuiElement.class), playerAttributeContainer.getPagesCollectedCount());
+
+      inGameDocument.rootElement().findElementById("pages", TextGuiElement.class).setText("" + playerAttributeContainer.getPagesCollectedCount());
     });
 
     var attributesSectionElement = inGameDocument.rootElement().findElementById("attributes", SectionGuiElement.class);
@@ -237,7 +238,7 @@ public class GuiManager {
 
     if (value < 2) {
       textGuiElement.styles().addStyle(negativeTextStyle);
-    } else if (value > 4) {
+    } else if (value > PlayerAttributeContainer.STAT_CAP - 1) {
       textGuiElement.styles().addStyle(positiveTextStyle);
     }
 
