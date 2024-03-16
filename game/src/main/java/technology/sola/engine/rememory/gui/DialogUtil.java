@@ -42,56 +42,89 @@ Christ holds it in eternal hands
     """,
     """
 ~~~~~~Thank you for playing~~~~~~
-@Lvl30Caterpie      Poem
-@Eliteomnomnivore   Music & Art
-@Denise             Art
-@iamdudeman         Code & Art
+@Lvl30Caterpie               Poem
+@Eliteomnomnivore     Music & Art
+@Denise                       Art
+@iamdudeman            Code & Art
     """,
   };
 
   public static String getNextEnemyResponseText(PlayerAttributeContainer playerAttributeContainer) {
     int pagesCollected = playerAttributeContainer.getPagesCollectedCount();
+    int maxPagesCollected = playerAttributeContainer.getMaxPagesCollectedCount();
     int tries = playerAttributeContainer.getTries();
 
     return switch (pagesCollected) {
       case 0 -> {
         if (tries == 1) {
-          yield "Hey, props to you for trying to remember, but it only gets harder from here.";
+          yield "Hey, props to you for trying to remember, but the pain only gets worse. It's not worth the effort!";
         } else if (tries == 2) {
-          yield "See, I told you didn't I? Finding four more pages isn't worth the effort!";
+          yield "See, I told you didn't I? Nothing on these pages will help you escape this darkness anyway!";
         } else {
-          yield "You're not making any progress. You've earned your rest already just give it up.";
+          if (tries == 3) {
+            yield "You haven't given up yet?";
+          }
+
+          if (maxPagesCollected < 3) {
+            yield "You're not making any progress. You've earned your rest already just give it up... ";
+          }
+
+          yield "";
         }
       }
+
       case 1 -> {
         if (tries == 1) {
-          yield "I wasn't lying to you ya know. It's gonna get rougher...";
+          yield "I wasn't lying to you ya know. Can your heart handle it I wonder...";
         } else if (tries == 2) {
-          yield "Congrats on another step forward. We should go back to the forest and celebrate!";
+          yield "Congrats on another step forward. We should go back to the forest to celebrate!";
         } else {
-          yield "You haven't even made it halfway yet. Why do you keep trying to remember this?";
+          yield "Why do you keep trying to remember?";
         }
       }
-      case 2 -> "Placeholder";
+
+      case 2 -> {
+        if (tries == 1 && playerAttributeContainer.getSpeed() > 3) {
+          yield "Whoa! You're really speeding through this. Do you really want to leave me that badly?";
+        }
+
+        if (tries < 4) {
+          yield "Growing weary yet?";
+        }
+
+        yield "";
+      }
+
       case 3 -> {
         if (tries == 1) {
           yield "Remembering will just bring you pain. Stay with me instead!";
         } else if (tries == 2) {
           yield "Would you leave me behind after all that I have done for you?";
         } else {
-          yield "After so many failures you've done well to make it this far. Let's go back and rest now for awhile.";
+          yield "After so many failures you've really done well to make it this far. Let's go back and rest now for awhile.";
         }
       }
+
       case 4 -> {
         if (tries == 1) {
           yield "Ahh you already found the lighthouse. We can't have you getting ahead of yourself now.";
         } else if (tries == 2) {
-          yield "I've always been with you. Seeing this lighthouse again changes nothing.";
+          yield "I've always been with you. This lighthouse can't guide you like I do!";
         } else {
-          yield "Took you long enough to get back here. Was this lighthouse really worth it?";
+          if (maxPagesCollected > playerAttributeContainer.getPagesCollectedCount()) {
+            yield "Took you long enough to get back here. Was this glimmer of light really worth it?";
+          }
+
+          if (playerAttributeContainer.getPagesCollectedCount() == maxPagesCollected) {
+            yield "Ahh, I see... You actually consider perseverance to be a virtue.";
+          }
+
+          yield "Really now. Just what is so attractive about that light?";
         }
       }
-      case 5 -> "You don't need to remember! It's not to late to turn back...";
+
+      case 5 -> "It's not to late to turn ba-";
+
       default -> "If you're reading this, then the game has a bug!";
     };
   }
