@@ -148,14 +148,20 @@ public class GuiManager {
         (player, page) -> {
           page.destroy();
 
-          setGamePause(true);
+          String nextEnemyDialog = DialogUtil.getNextEnemyResponseText(playerAttributeContainer);
 
-          pageTextElement.setText(DialogUtil.getNextEnemyResponseText(playerAttributeContainer));
-          pageStyles.addStyle(visibilityVisibleStyle);
-          pageStyles.invalidate();
+          if (nextEnemyDialog.isEmpty()) {
+            eventHub.emit(new PageAcceptedEvent());
+          } else {
+            setGamePause(true);
 
-          attributesSectionElement.requestFocus();
-          showingPlayerMessage = true;
+            pageTextElement.setText(nextEnemyDialog);
+            pageStyles.addStyle(visibilityVisibleStyle);
+            pageStyles.invalidate();
+
+            attributesSectionElement.requestFocus();
+            showingPlayerMessage = true;
+          }
 
           int pagesCollected = playerAttributeContainer.getPagesCollectedCount();
 

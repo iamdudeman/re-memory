@@ -17,31 +17,37 @@
 
 new page content
 ```markdown
+## 0
 I stand in darkness of the mind
 I can’t recall what came behind
 All memory is but a haze
 Of fear and torment, like a maze
 
+## 1
 I search and seek to realize
 To bring the past back to my eyes
 But whispers in the deathly dark
 Bid me to cease, to disembark.
 
+## 2
 Always this lurker in the dark
 Enjoins me with entreaties stark
 Bids me to sink in the abyss
 Of blessèd sleep of blissfulness
 
+## 3
 My soul doth drift upon this sea
 Whose blackness doth consumeth me
 This all surrounding shadow soars
 But hark! A light upon the shores!
 
+## 4
 A lighthouse beacon in the mist
 Stands like a bulwark to assist
 My weary soul and darkened mind
 To guide me to the truth so kind
 
+## 5
 Though sail I in forgetfulness
 There is no greater bliss than this
 That though my past’s in shadow bands

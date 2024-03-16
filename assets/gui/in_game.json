@@ -20,6 +20,7 @@
           "height": 48,
           "paddingHorizontal": 4,
           "paddingVertical": 2,
+          "textColor": "#8B0000",
           "visibility": "none",
           "width": "100%"
         }

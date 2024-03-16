@@ -72,15 +72,7 @@ Christ holds it in eternal hands
           yield "You haven't even made it halfway yet. Why do you keep trying to remember this?";
         }
       }
-      case 2 -> {
-        if (tries == 1) {
-          yield "Ahh you already found the lighthouse. We can't have you getting ahead of yourself now.";
-        } else if (tries == 2) {
-          yield "I've always been with you. Seeing this lighthouse again changes nothing.";
-        } else {
-          yield "Took you long enough to get back here. Was this lighthouse really worth it?";
-        }
-      }
+      case 2 -> "Placeholder";
       case 3 -> {
         if (tries == 1) {
           yield "Remembering will just bring you pain. Stay with me instead!";
@@ -90,8 +82,16 @@ Christ holds it in eternal hands
           yield "After so many failures you've done well to make it this far. Let's go back and rest now for awhile.";
         }
       }
-      case 4 -> "You don't need to remember! It's not to late to turn back...";
-      case 5 -> "The final message before showing whole diary";
+      case 4 -> {
+        if (tries == 1) {
+          yield "Ahh you already found the lighthouse. We can't have you getting ahead of yourself now.";
+        } else if (tries == 2) {
+          yield "I've always been with you. Seeing this lighthouse again changes nothing.";
+        } else {
+          yield "Took you long enough to get back here. Was this lighthouse really worth it?";
+        }
+      }
+      case 5 -> "You don't need to remember! It's not to late to turn back...";
       default -> "If you're reading this, then the game has a bug!";
     };
   }
