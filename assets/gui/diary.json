@@ -5,12 +5,12 @@
     {
       "backgroundColor": "#ffffff",
       "borderColor": "rgb(211, 211, 211)",
-      "height": "95%",
+      "height": "50%",
       "paddingHorizontal": 3,
       "paddingBottom": 2,
-      "positionX": "11%",
-      "positionY": "2.5%",
-      "width": "78%"
+      "positionX": "6%",
+      "positionY": "25%",
+      "width": "88%"
     }
   ],
   "children": [

@@ -7,7 +7,7 @@
 3. Picking up a page immediately shows you the page. After reading it the "enemy" will respond with some dialogue. If
    you have already seen a page before it won't be shown again until the end
 4. new page content!
-5. Consider new enemy type "roamer" that moves randomly even without detecting
+5. Consider new enemy type "roamer/wanderer" that moves randomly even without detecting
 6. introduce zoomers sooner
 7. consider removing donut object, add collision for enemies to the duck?
 8. Turn stat color blue if at max, orange only at 1
