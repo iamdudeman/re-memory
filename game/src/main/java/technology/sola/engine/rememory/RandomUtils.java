@@ -13,6 +13,10 @@ public class RandomUtils {
     return random.nextInt(n) + 1;
   }
 
+  public static float randomRange(float min, float max) {
+    return random.nextFloat(min, max);
+  }
+
   public static float quickRandomDoubleClamp(float min, float max, float minExclude, float maxExclude) {
     float value = random.nextFloat(min, max);
 

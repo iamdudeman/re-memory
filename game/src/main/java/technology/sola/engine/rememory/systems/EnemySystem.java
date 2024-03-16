@@ -11,6 +11,7 @@ import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.PlayerAttributeContainer;
+import technology.sola.engine.rememory.RandomUtils;
 import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.events.ChangeRoomEvent;
 import technology.sola.engine.rememory.events.ForgetPagesEvent;
@@ -58,8 +59,8 @@ public class EnemySystem extends EcsSystem {
         DynamicBodyComponent dynamicBodyComponent = entry.c2();
         float distanceFromPlayer = playerTranslate.distance(enemyTranslate);
 
-        float speed = enemyType == EnemyComponent.EnemyType.CREEPER ? 30 : 60;
-        float initialDetectionRange = enemyType == EnemyComponent.EnemyType.CREEPER ? 300 : 120;
+        float speed = enemyType == EnemyComponent.EnemyType.CREEPER ? RandomUtils.randomRange(22, 38) : RandomUtils.randomRange(50, 70);
+        float initialDetectionRange = enemyType == EnemyComponent.EnemyType.CREEPER ? 260 : 100;
         float detectionRange = initialDetectionRange - initialDetectionRange * (playerAttributeContainer.getStealth() / (1.5f * PlayerAttributeContainer.STAT_CAP));
 
         if (distanceFromPlayer < detectionRange) {
