@@ -8,7 +8,7 @@
    you have already seen a page before it won't be shown again until the end~~
 4. ~~new page content!~~
 5. Consider new enemy type "roamer/wanderer" that moves randomly even without detecting
-    * introduce zoomers sooner
+    * introduce spookers sooner
 6. ~~consider removing donut object, add collision for enemies to the duck?~~
 7. Stat rebalance
     * Turn stat color blue if at max, orange only at 1
