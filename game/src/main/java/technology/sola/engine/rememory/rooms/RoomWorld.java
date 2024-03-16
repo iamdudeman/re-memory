@@ -26,16 +26,6 @@ public abstract class RoomWorld extends World {
     this.rendererHeight = rendererHeight;
   }
 
-  public void addPortal(float x, float y) {
-    createEntity(
-      new PortalComponent(true),
-      new TransformComponent(x, y, 8),
-      ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
-      new CircleRendererComponent(new Color(177, 156, 217), true),
-      new LayerComponent(Constants.Layers.OBJECTS)
-    );
-  }
-
   protected void addPlayer(float x, float y) {
     createEntity(
       new DynamicBodyComponent(),
@@ -93,18 +83,9 @@ public abstract class RoomWorld extends World {
   protected void addDuck(float x, float y) {
     createEntity(
       new TransformComponent(x, y),
-      ColliderComponent.circle(4).setTags(Constants.Tags.BOUNDARY, Constants.Tags.DUCK),
+      new DynamicBodyComponent(new Material(100, 0, 0), true),
+      ColliderComponent.circle(4).setTags(Constants.Tags.DUCK),
       new SpriteComponent(Constants.Assets.AcidRainSprites.ID, Constants.Assets.AcidRainSprites.DUCK),
-      new LayerComponent(Constants.Layers.DECORATION)
-    );
-  }
-
-  protected void addDonut(float x, float y) {
-    createEntity(
-      new TransformComponent(x, y),
-      new DynamicBodyComponent(new Material(20, 0.6f, 0)),
-      ColliderComponent.circle(3),
-      new SpriteComponent(Constants.Assets.AcidRainSprites.ID, Constants.Assets.AcidRainSprites.DONUT),
       new LayerComponent(Constants.Layers.OBJECTS)
     );
   }

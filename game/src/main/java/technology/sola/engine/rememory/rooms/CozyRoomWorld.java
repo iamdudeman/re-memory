@@ -119,15 +119,8 @@ public class CozyRoomWorld extends RoomWorld {
       );
     }
 
-    if (RandomUtils.roll100() < 15) {
+    if (RandomUtils.roll100() < 90) {
       addDuck(
-        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 18, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
-      );
-    }
-
-    if (RandomUtils.roll100() < 30) {
-      addDonut(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
         RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 18, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );

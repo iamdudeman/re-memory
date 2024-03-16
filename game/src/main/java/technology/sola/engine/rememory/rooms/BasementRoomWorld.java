@@ -139,13 +139,6 @@ public class BasementRoomWorld extends RoomWorld {
       );
     }
 
-    if (RandomUtils.roll100() < 30) {
-      addDonut(
-        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(36, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
-      );
-    }
-
     addEnemyContrast(
       RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
       RandomUtils.quickRandomDoubleClamp(36, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
