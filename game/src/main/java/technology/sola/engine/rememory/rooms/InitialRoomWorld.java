@@ -70,7 +70,7 @@ public class InitialRoomWorld extends RoomWorld {
       new PageComponent()
     );
 
-    addTorch(tableX - 30, tableY);
+    addTorch(tableX - 20, tableY);
 
     eventHub.add(PageAcceptedEvent.class, event -> {
       if (!isLapisAdded) {

@@ -63,7 +63,7 @@ public class PlayerSystem extends EcsSystem {
 
     // apply attributes
     final int speed = 30 + playerAttributeContainer.getSpeed() * 5;
-    lightComponent.setRadius(30 + playerAttributeContainer.getVision() * 8);
+    lightComponent.setRadius(35 + playerAttributeContainer.getVision() * 7);
 
     float xSpeed = 0;
     float ySpeed = 0;

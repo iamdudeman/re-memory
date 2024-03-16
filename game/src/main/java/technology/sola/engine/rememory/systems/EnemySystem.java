@@ -7,6 +7,7 @@ import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
 import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
+import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.event.CollisionEvent;
 import technology.sola.engine.rememory.Constants;
@@ -19,10 +20,14 @@ import technology.sola.math.linear.Vector2D;
 
 public class EnemySystem extends EcsSystem {
   private final PlayerAttributeContainer playerAttributeContainer;
+  private final int rendererWidth;
+  private final int rendererHeight;
   private float enemyMoveDelay = 0;
 
-  public EnemySystem(EventHub eventHub, PlayerAttributeContainer playerAttributeContainer, AssetLoader<AudioClip> audioClipAssetLoader) {
+  public EnemySystem(EventHub eventHub, PlayerAttributeContainer playerAttributeContainer, AssetLoader<AudioClip> audioClipAssetLoader, Renderer renderer) {
     this.playerAttributeContainer = playerAttributeContainer;
+    this.rendererWidth = renderer.getWidth();
+    this.rendererHeight = renderer.getHeight();
 
     eventHub.add(CollisionEvent.class, event -> {
       event.collisionManifold().conditionallyResolveCollision(
@@ -59,14 +64,19 @@ public class EnemySystem extends EcsSystem {
         DynamicBodyComponent dynamicBodyComponent = entry.c2();
         float distanceFromPlayer = playerTranslate.distance(enemyTranslate);
 
-        float speed = enemyType == EnemyComponent.EnemyType.CREEPER ? RandomUtils.randomRange(22, 38) : RandomUtils.randomRange(50, 70);
-        float initialDetectionRange = enemyType == EnemyComponent.EnemyType.CREEPER ? 260 : 100;
-        float detectionRange = initialDetectionRange - initialDetectionRange * (playerAttributeContainer.getStealth() / (1.5f * PlayerAttributeContainer.STAT_CAP));
+        float initialDetectionRange = enemyType == EnemyComponent.EnemyType.CREEPER ? 140 : 60;
+        float detectionRange = initialDetectionRange - initialDetectionRange * (playerAttributeContainer.getStealth() / (2f * PlayerAttributeContainer.STAT_CAP));
 
         if (distanceFromPlayer < detectionRange) {
+          float speed = enemyType == EnemyComponent.EnemyType.CREEPER ? RandomUtils.randomRange(22, 32) : RandomUtils.randomRange(50, 70);
+
           dynamicBodyComponent.setVelocity(playerTranslate.subtract(enemyTranslate).normalize().scalar(speed));
         } else {
-          dynamicBodyComponent.setVelocity(new Vector2D(0, 0));
+          var enemyComponent = entry.c3();
+          float roamingSpeed = enemyType == EnemyComponent.EnemyType.CREEPER ? 20 : 10;
+
+          enemyComponent.newRoamingLocationIfDestinationReached(enemyTranslate, rendererWidth, rendererHeight);
+          dynamicBodyComponent.setVelocity(enemyComponent.getRoamingLocation().subtract(enemyTranslate).normalize().scalar(roamingSpeed));
         }
       });
   }

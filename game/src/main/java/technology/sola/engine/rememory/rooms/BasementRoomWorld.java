@@ -153,7 +153,7 @@ public class BasementRoomWorld extends RoomWorld {
     );
 
     if (RandomUtils.roll100() < 25) {
-      addEnemy(
+      addEnemyContrast(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
         RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
         EnemyComponent.EnemyType.CREEPER

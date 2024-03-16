@@ -86,7 +86,9 @@ public class CozyRoomWorld extends RoomWorld {
         new LayerComponent(Constants.Layers.DECORATION)
       );
 
-      if (!hasSpawnedPage && random.nextBoolean()) {
+      boolean delayPageSpawn = playerAttributeContainer.getPagesCollectedCount() > 3 && playerAttributeContainer.getStatCount() < 8;
+
+      if (!hasSpawnedPage && random.nextBoolean() && !delayPageSpawn) {
         createEntity(
           new TransformComponent(x + 2, y + 1),
           ColliderComponent.aabb(-3, -4, 10, 10).setSensor(true),
@@ -100,6 +102,10 @@ public class CozyRoomWorld extends RoomWorld {
     }
 
     int lapisChance = 20;
+
+    if (playerAttributeContainer.getStatCount() < 6) {
+      lapisChance += 30;
+    }
 
     if (tableCount < 2) {
       lapisChance += 15;

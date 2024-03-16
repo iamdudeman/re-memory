@@ -44,6 +44,8 @@ public abstract class RoomWorld extends World {
       new TransformComponent(x, y, 8),
       ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
       new CircleRendererComponent(new Color(177, 156, 217), true),
+      new LightComponent(16, new Color(177, 156, 217, 120)).setLightFlicker(new LightFlicker(0.25f, 0.6f)).setOffset(3, 3),
+      new BlendModeComponent(BlendMode.NORMAL),
       new LayerComponent(Constants.Layers.OBJECTS)
     );
   }
@@ -95,7 +97,7 @@ public abstract class RoomWorld extends World {
       new TransformComponent(x, y),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.TORCH),
       new LayerComponent(Constants.Layers.OBJECTS, 1),
-      new LightComponent(32, Color.YELLOW)
+      new LightComponent(40, Color.YELLOW)
         .setOffset(1.5f, 3)
         .setLightFlicker(new LightFlicker(0.2f, 0.8f))
     );

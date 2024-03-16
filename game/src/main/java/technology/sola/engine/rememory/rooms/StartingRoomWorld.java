@@ -59,17 +59,6 @@ public class StartingRoomWorld extends RoomWorld {
 
     addInitialPortal(x, y, false);
 
-    addTorch(
-      RandomUtils.quickRandomDoubleClamp(
-        Math.max(x - 40, 20), Math.min(x + 40, rendererWidth - 20),
-        x - 5, x + 5
-      ),
-      RandomUtils.quickRandomDoubleClamp(
-        Math.max(y - 40, 20), Math.min(y + 40, rendererHeight - 20),
-        y - 5, y + 5
-      )
-    );
-
     addBoundaries(-boundarySize);
 
     addPlayer(halfWidth, halfHeight);
