@@ -37,21 +37,20 @@ To guide me to the truth so kind
     """
 Though sail I in forgetfulness
 There is no greater bliss than this
-That though my past’s in shadow bands
+That though my past's in shadow bands
 Christ holds it in eternal hands
     """,
     """
 ~~~~~Thank you for playing~~~~~
+Poem-@Lvl30Caterpie
 Music-@Eliteomnomnivore
 Code-@iamdudeman
 Art-@Denise
-Art-@iamdudeman
 Art-@Eliteomnomnivore
-Poetry-@Lvl30Caterpie
+Art-@iamdudeman
 Dialog-@iamdudeman
     """,
   };
-  public static final int PAGE_COUNT = pages.length - 1;
 
   public static String getNextEnemyResponseText(PlayerAttributeContainer playerAttributeContainer) {
     int pagesCollected = playerAttributeContainer.getPagesCollectedCount();
@@ -95,6 +94,7 @@ Dialog-@iamdudeman
         }
       }
       case 4 -> "You don't need to remember! It's not to late to turn back...";
+      case 5 -> "The final message before showing whole diary";
       default -> "If you're reading this, then the game has a bug!";
     };
   }

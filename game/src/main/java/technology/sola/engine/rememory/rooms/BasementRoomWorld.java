@@ -91,7 +91,7 @@ public class BasementRoomWorld extends RoomWorld {
           new PageComponent()
         );
 
-        if (playerAttributeContainer.getPagesCollectedCount() == 2) {
+        if (playerAttributeContainer.getPagesCollectedCount() == 4) {
           createEntity(
             new TransformComponent(
               RandomUtils.quickRandomDoubleClamp(x - 30, x + 30, x - 5, x + 5),

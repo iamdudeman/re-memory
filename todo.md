@@ -4,9 +4,9 @@
 2. ~~Lapis that are picked up now instead increase your stats permanently. You can never lose stats anymore (all values
    will start lower as a result). This also gives more reason to explore each room since it may have a lapis for stats
    or pages for story progression~~
-3. Picking up a page immediately shows you the page. After reading it the "enemy" will respond with some dialogue. If
-   you have already seen a page before it won't be shown again until the end
-4. new page content!
+3. ~~Picking up a page immediately shows you the page. After reading it the "enemy" will respond with some dialogue. If
+   you have already seen a page before it won't be shown again until the end~~
+4. ~~new page content!~~
 5. Consider new enemy type "roamer/wanderer" that moves randomly even without detecting
 6. introduce zoomers sooner
 7. consider removing donut object, add collision for enemies to the duck?

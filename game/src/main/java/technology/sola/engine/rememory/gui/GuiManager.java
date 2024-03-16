@@ -94,7 +94,7 @@ public class GuiManager {
         return;
       }
 
-      if (playerAttributeContainer.getPagesCollectedCount() < 4) {
+      if (playerAttributeContainer.getPagesCollectedCount() < DialogUtil.pages.length - 2) {
         pageStyles.removeStyle(visibilityVisibleStyle);
         pageStyles.invalidate();
 
@@ -105,7 +105,8 @@ public class GuiManager {
         eventHub.emit(new PageAcceptedEvent());
 
         isFullDiary = true;
-        guiDocument.setRootElement(diaryDocument.rootElement());
+        pageIndex = 0;
+        showNewPage(guiDocument, diaryDocument);
 
         solaEcs.getSystems().forEach(system -> system.setActive(false));
         solaEcs.setWorld(new World(1));
@@ -118,7 +119,7 @@ public class GuiManager {
       }
 
       if (guiKeyEvent.getKeyEvent().keyCode() == Key.SPACE.getCode() || guiKeyEvent.getKeyEvent().keyCode() == Key.RIGHT.getCode()) {
-        if (playerAttributeContainer.getPagesCollectedCount() < DialogUtil.PAGE_COUNT - 1) {
+        if (playerAttributeContainer.getPagesCollectedCount() < DialogUtil.pages.length - 2) {
           pageStyles.removeStyle(visibilityVisibleStyle);
           pageStyles.invalidate();
 
@@ -128,7 +129,9 @@ public class GuiManager {
         } else {
           eventHub.emit(new PageAcceptedEvent());
 
-          guiDocument.setRootElement(diaryDocument.rootElement());
+          isFullDiary = true;
+          pageIndex = 0;
+          showNewPage(guiDocument, diaryDocument);
 
           solaEcs.getSystems().forEach(system -> system.setActive(false));
           solaEcs.setWorld(new World(1));
@@ -154,7 +157,12 @@ public class GuiManager {
           attributesSectionElement.requestFocus();
           showingPlayerMessage = true;
 
-          showNewPage(guiDocument, diaryDocument);
+          int pagesCollected = playerAttributeContainer.getPagesCollectedCount();
+
+          if (playerAttributeContainer.getMaxPagesCollectedCount() <= pagesCollected) {
+            pageIndex = pagesCollected;
+            showNewPage(guiDocument, diaryDocument);
+          }
         }
       );
     });
@@ -203,14 +211,10 @@ public class GuiManager {
   }
 
   private void showNewPage(GuiDocument guiDocument, GuiJsonDocument diaryDocument) {
-    int pagesCollected = playerAttributeContainer.getPagesCollectedCount();
+    var diaryTextElement = diaryDocument.rootElement().findElementById("diary", TextGuiElement.class);
 
-    if (playerAttributeContainer.getMaxPagesCollectedCount() <= pagesCollected) {
-      var diaryTextElement = diaryDocument.rootElement().findElementById("diary", TextGuiElement.class);
-
-      diaryTextElement.setText(DialogUtil.pages[pagesCollected]);
-      guiDocument.setRootElement(diaryDocument.rootElement());
-    }
+    diaryTextElement.setText(DialogUtil.pages[pageIndex]);
+    guiDocument.setRootElement(diaryDocument.rootElement());
   }
 
   private void setGamePause(boolean isPaused) {

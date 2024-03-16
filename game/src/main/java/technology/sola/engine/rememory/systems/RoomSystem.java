@@ -46,7 +46,7 @@ public class RoomSystem extends EcsSystem {
       if (playerAttributeContainer.getPagesCollectedCount() > 3) {
         nextRoom = new BasementRoomWorld(renderer.getWidth(), renderer.getHeight(), playerAttributeContainer);
       } else if (playerAttributeContainer.getPagesCollectedCount() > 2) {
-        nextRoom = RandomUtils.roll100() < 75 ?
+        nextRoom = RandomUtils.roll100() < 50 ?
           new BasementRoomWorld(renderer.getWidth(), renderer.getHeight(), playerAttributeContainer) :
           new CozyRoomWorld(renderer.getWidth(), renderer.getHeight(), playerAttributeContainer);
       } else {

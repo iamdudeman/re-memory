@@ -19,7 +19,11 @@ public class PlayerAttributeContainer {
 
     eventHub.add(PageAcceptedEvent.class, event -> {
       pagesCollectedCount++;
-      maxPagesCollectedCount = pagesCollectedCount;
+
+      if (pagesCollectedCount > maxPagesCollectedCount) {
+        maxPagesCollectedCount = pagesCollectedCount;
+      }
+
       eventHub.emit(new AttributesChangedEvent());
     });
 
