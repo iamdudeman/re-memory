@@ -112,7 +112,7 @@ public class BasementRoomWorld extends RoomWorld {
       }
     }
 
-    int lapisChance = 15;
+    int lapisChance = 25;
 
     if (tableCount < 2) {
       lapisChance += 15;
@@ -127,7 +127,7 @@ public class BasementRoomWorld extends RoomWorld {
         RandomUtils.quickRandomDoubleClamp(36, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
       );
     }
-    if (RandomUtils.roll100() < lapisChance - 20) {
+    if (RandomUtils.roll100() < 20) {
       addLapis(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
         RandomUtils.quickRandomDoubleClamp(36, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
