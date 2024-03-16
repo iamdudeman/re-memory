@@ -5,18 +5,25 @@
     {
       "backgroundColor": "#ffffff",
       "borderColor": "rgb(211, 211, 211)",
-      "height": "50%",
+      "crossAxisChildren": "center",
+      "height": "40%",
+      "mainAxisChildren": "center",
       "paddingHorizontal": 3,
       "paddingBottom": 2,
-      "positionX": "6%",
-      "positionY": "25%",
-      "width": "88%"
+      "positionX": "4%",
+      "positionY": "30%",
+      "width": "92%"
     }
   ],
   "children": [
     {
       "tag": "Text",
       "id": "diary",
+      "styles": [
+        {
+          "textAlignment": "center"
+        }
+      ],
       "props": {
         "text": ""
       }

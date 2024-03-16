@@ -41,14 +41,11 @@ That though my past's in shadow bands
 Christ holds it in eternal hands
     """,
     """
-~~~~~Thank you for playing~~~~~
-Poem-@Lvl30Caterpie
-Music-@Eliteomnomnivore
-Code-@iamdudeman
-Art-@Denise
-Art-@Eliteomnomnivore
-Art-@iamdudeman
-Dialog-@iamdudeman
+~~~~~~Thank you for playing~~~~~~
+@Lvl30Caterpie      Poem
+@Eliteomnomnivore   Music & Art
+@Denise             Art
+@iamdudeman         Code & Art
     """,
   };
 
