@@ -42,6 +42,8 @@ public class CozyRoomWorld extends RoomWorld {
     float halfWidth = rendererWidth * 0.5f;
     float halfHeight = rendererHeight * 0.5f;
 
+    addEnemies(playerAttributeContainer);
+
     addExtras(playerAttributeContainer);
 
     addBoundaries(-boundarySize + 16);
@@ -132,12 +134,25 @@ public class CozyRoomWorld extends RoomWorld {
         RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 18, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );
     }
+  }
+
+  private void addEnemies(PlayerAttributeContainer playerAttributeContainer) {
+    float halfWidth = rendererWidth * 0.5f;
+    float halfHeight = rendererHeight * 0.5f;
 
     addEnemy(
       RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
       RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
       EnemyComponent.EnemyType.CREEPER
     );
+
+    if (RandomUtils.roll100() < 25) {
+      addEnemy(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+        EnemyComponent.EnemyType.CREEPER
+      );
+    }
 
     if (playerAttributeContainer.getPagesCollectedCount() > 1) {
       addEnemy(
@@ -152,6 +167,28 @@ public class CozyRoomWorld extends RoomWorld {
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
         RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
         random.nextBoolean() ? EnemyComponent.EnemyType.SPOOKER : EnemyComponent.EnemyType.CREEPER
+      );
+    }
+
+    if (playerAttributeContainer.getPagesCollectedCount() > 3) {
+      addEnemy(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+        EnemyComponent.EnemyType.SPOOKER
+      );
+    }
+
+    if (playerAttributeContainer.getStatCount() > 10) {
+      addEnemy(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+        EnemyComponent.EnemyType.SPOOKER
+      );
+    } else if (playerAttributeContainer.getStatCount() > 5) {
+      addEnemy(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+        EnemyComponent.EnemyType.CREEPER
       );
     }
   }

@@ -57,6 +57,10 @@ public class PlayerAttributeContainer {
     return vision;
   }
 
+  public int getStatCount() {
+    return speed + stealth + vision;
+  }
+
   public int getTries() {
     return tries;
   }
