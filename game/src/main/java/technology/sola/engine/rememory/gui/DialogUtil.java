@@ -69,7 +69,7 @@ Christ holds it in eternal hands
             yield "You're not making any progress. You've earned your rest already just give it up... ";
           }
 
-          yield "";
+          yield "I'll help you with just one more attempt, then let's take a break yeah?";
         }
       }
 
@@ -88,11 +88,11 @@ Christ holds it in eternal hands
           yield "Whoa! You're really speeding through this. Do you really want to leave me that badly?";
         }
 
-        if (tries < 4) {
-          yield "Growing weary yet?";
+        if (tries == 1) {
+          yield "You run from the darkness even though it has always welcomed you.";
         }
 
-        yield "";
+        yield "Growing weary yet?";
       }
 
       case 3 -> {

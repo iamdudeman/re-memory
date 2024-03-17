@@ -9,7 +9,7 @@ public class JavaFxMain {
     JavaFxSolaPlatform solaPlatform = new JavaFxSolaPlatform();
     Sola sola = new ReMemorySola();
 
-    solaPlatform.setWindowSize(1024, 960);
+    solaPlatform.setWindowSize(768, 720);
 
     solaPlatform.play(sola);
   }

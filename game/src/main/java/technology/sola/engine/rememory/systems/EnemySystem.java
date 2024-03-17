@@ -64,11 +64,11 @@ public class EnemySystem extends EcsSystem {
         DynamicBodyComponent dynamicBodyComponent = entry.c2();
         float distanceFromPlayer = playerTranslate.distance(enemyTranslate);
 
-        float initialDetectionRange = enemyType == EnemyComponent.EnemyType.CREEPER ? 140 : 60;
+        float initialDetectionRange = enemyType == EnemyComponent.EnemyType.CREEPER ? 140 : 70;
         float detectionRange = initialDetectionRange - initialDetectionRange * (playerAttributeContainer.getStealth() / (2f * PlayerAttributeContainer.STAT_CAP));
 
         if (distanceFromPlayer < detectionRange) {
-          float speed = enemyType == EnemyComponent.EnemyType.CREEPER ? RandomUtils.randomRange(22, 32) : RandomUtils.randomRange(50, 70);
+          float speed = enemyType == EnemyComponent.EnemyType.CREEPER ? RandomUtils.randomRange(22, 32) : RandomUtils.randomRange(50, 65);
 
           dynamicBodyComponent.setVelocity(playerTranslate.subtract(enemyTranslate).normalize().scalar(speed));
         } else {

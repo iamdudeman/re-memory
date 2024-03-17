@@ -151,18 +151,14 @@ public class GuiManager {
 
           String nextEnemyDialog = DialogUtil.getNextEnemyResponseText(playerAttributeContainer);
 
-          if (nextEnemyDialog.isEmpty()) {
-            eventHub.emit(new PageAcceptedEvent());
-          } else {
-            setGamePause(true);
+          setGamePause(true);
 
-            pageTextElement.setText(nextEnemyDialog);
-            pageStyles.addStyle(visibilityVisibleStyle);
-            pageStyles.invalidate();
+          pageTextElement.setText(nextEnemyDialog);
+          pageStyles.addStyle(visibilityVisibleStyle);
+          pageStyles.invalidate();
 
-            attributesSectionElement.requestFocus();
-            showingPlayerMessage = true;
-          }
+          attributesSectionElement.requestFocus();
+          showingPlayerMessage = true;
 
           int pagesCollected = playerAttributeContainer.getPagesCollectedCount();
 
