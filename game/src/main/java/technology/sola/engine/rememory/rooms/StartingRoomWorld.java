@@ -9,8 +9,8 @@ import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.RandomUtils;
 
 public class StartingRoomWorld extends RoomWorld {
-  public StartingRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight) {
-    super(previousRoomId, rendererWidth, rendererHeight);
+  public StartingRoomWorld(int rendererWidth, int rendererHeight) {
+    super(rendererWidth, rendererHeight);
 
 
     for (int i = 0; i < rendererWidth; i += 8) {
@@ -58,17 +58,6 @@ public class StartingRoomWorld extends RoomWorld {
     float y = RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 10, halfHeight + 10);
 
     addInitialPortal(x, y, false);
-
-    addTorch(
-      RandomUtils.quickRandomDoubleClamp(
-        Math.max(x - 40, 20), Math.min(x + 40, rendererWidth - 20),
-        x - 5, x + 5
-      ),
-      RandomUtils.quickRandomDoubleClamp(
-        Math.max(y - 40, 20), Math.min(y + 40, rendererHeight - 20),
-        y - 5, y + 5
-      )
-    );
 
     addBoundaries(-boundarySize);
 

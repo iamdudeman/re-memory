@@ -13,8 +13,8 @@ import technology.sola.engine.rememory.events.PageAcceptedEvent;
 public class InitialRoomWorld extends RoomWorld {
   private boolean isLapisAdded = false;
 
-  public InitialRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight, EventHub eventHub) {
-    super(previousRoomId, rendererWidth, rendererHeight);
+  public InitialRoomWorld(int rendererWidth, int rendererHeight, EventHub eventHub) {
+    super(rendererWidth, rendererHeight);
 
     for (int i = 0; i < rendererWidth; i += 16) {
       for (int j = 0; j < rendererHeight; j += 16) {
@@ -70,7 +70,7 @@ public class InitialRoomWorld extends RoomWorld {
       new PageComponent()
     );
 
-    addTorch(tableX - 30, tableY);
+    addTorch(tableX - 20, tableY);
 
     eventHub.add(PageAcceptedEvent.class, event -> {
       if (!isLapisAdded) {

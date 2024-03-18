@@ -14,8 +14,8 @@ import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.components.PageComponent;
 
 public class BasementRoomWorld extends RoomWorld {
-  public BasementRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight, PlayerAttributeContainer playerAttributeContainer) {
-    super(previousRoomId, rendererWidth, rendererHeight);
+  public BasementRoomWorld(int rendererWidth, int rendererHeight, PlayerAttributeContainer playerAttributeContainer) {
+    super(rendererWidth, rendererHeight);
 
     for (int i = 0; i < rendererWidth; i += 32) {
       for (int j = 0; j < rendererHeight; j += 32) {
@@ -49,6 +49,8 @@ public class BasementRoomWorld extends RoomWorld {
         RandomUtils.quickRandomDoubleClamp(36, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );
     }
+
+    addEnemies(playerAttributeContainer);
 
     addExtras(playerAttributeContainer);
   }
@@ -91,7 +93,7 @@ public class BasementRoomWorld extends RoomWorld {
           new PageComponent()
         );
 
-        if (playerAttributeContainer.getPagesCollectedCount() == 2) {
+        if (playerAttributeContainer.getPagesCollectedCount() == 4) {
           createEntity(
             new TransformComponent(
               RandomUtils.quickRandomDoubleClamp(x - 30, x + 30, x - 5, x + 5),
@@ -110,7 +112,7 @@ public class BasementRoomWorld extends RoomWorld {
       }
     }
 
-    int lapisChance = 15;
+    int lapisChance = 25;
 
     if (tableCount < 2) {
       lapisChance += 15;
@@ -125,7 +127,7 @@ public class BasementRoomWorld extends RoomWorld {
         RandomUtils.quickRandomDoubleClamp(36, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
       );
     }
-    if (RandomUtils.roll100() < lapisChance - 20) {
+    if (RandomUtils.roll100() < 20) {
       addLapis(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
         RandomUtils.quickRandomDoubleClamp(36, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
@@ -138,19 +140,25 @@ public class BasementRoomWorld extends RoomWorld {
         RandomUtils.quickRandomDoubleClamp(36, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );
     }
+  }
 
-    if (RandomUtils.roll100() < 30) {
-      addDonut(
-        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(36, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
-      );
-    }
+  private void addEnemies(PlayerAttributeContainer playerAttributeContainer) {
+    float halfWidth = rendererWidth * 0.5f;
+    float halfHeight = rendererHeight * 0.5f;
 
     addEnemyContrast(
       RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
       RandomUtils.quickRandomDoubleClamp(36, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
       EnemyComponent.EnemyType.CREEPER
     );
+
+    if (RandomUtils.roll100() < 25) {
+      addEnemyContrast(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+        EnemyComponent.EnemyType.CREEPER
+      );
+    }
 
     addEnemyContrast(
       RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
@@ -163,5 +171,13 @@ public class BasementRoomWorld extends RoomWorld {
       RandomUtils.quickRandomDoubleClamp(36, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
       random.nextBoolean() || playerAttributeContainer.getPagesCollectedCount() > 3 ? EnemyComponent.EnemyType.SPOOKER : EnemyComponent.EnemyType.CREEPER
     );
+
+    if (playerAttributeContainer.getStatCount() > 5) {
+      addEnemyContrast(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+        EnemyComponent.EnemyType.SPOOKER
+      );
+    }
   }
 }

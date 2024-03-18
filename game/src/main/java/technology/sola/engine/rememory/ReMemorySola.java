@@ -8,16 +8,16 @@ import technology.sola.engine.assets.graphics.gui.GuiJsonDocument;
 import technology.sola.engine.core.SolaConfiguration;
 import technology.sola.engine.defaults.SolaWithDefaults;
 import technology.sola.engine.graphics.Color;
-import technology.sola.engine.graphics.guiv2.elements.TextGuiElement;
-import technology.sola.engine.graphics.guiv2.elements.TextStyles;
-import technology.sola.engine.graphics.guiv2.style.ConditionalStyle;
-import technology.sola.engine.graphics.guiv2.style.theme.GuiTheme;
+import technology.sola.engine.graphics.gui.elements.TextGuiElement;
+import technology.sola.engine.graphics.gui.elements.TextStyles;
+import technology.sola.engine.graphics.gui.style.ConditionalStyle;
+import technology.sola.engine.graphics.gui.style.theme.GuiTheme;
 import technology.sola.engine.graphics.renderer.Renderer;
 import technology.sola.engine.graphics.screen.AspectMode;
 import technology.sola.engine.physics.system.GravitySystem;
 import technology.sola.engine.physics.system.ImpulseCollisionResolutionSystem;
 import technology.sola.engine.physics.system.ParticleSystem;
-import technology.sola.engine.rememory.events.ForgetEverythingEvent;
+import technology.sola.engine.rememory.events.ForgetPagesEvent;
 import technology.sola.engine.rememory.gui.GuiManager;
 import technology.sola.engine.rememory.render.GrainyGraphicsModule;
 import technology.sola.engine.rememory.render.LoadingScreen;
@@ -41,7 +41,7 @@ public class ReMemorySola extends SolaWithDefaults {
     PlayerAttributeContainer playerAttributeContainer = new PlayerAttributeContainer(eventHub);
 
     defaultsConfigurator
-      .useGuiV2(
+      .useGui(
         GuiTheme.getDefaultLightTheme()
           .addStyle(TextGuiElement.class, List.of(ConditionalStyle.always(
             TextStyles.create().setFontAssetId(Constants.Assets.Font.MONO_10).build()
@@ -69,7 +69,7 @@ public class ReMemorySola extends SolaWithDefaults {
     // ecs
     solaEcs.addSystems(
       new PlayerSystem(keyboardInput, eventHub, playerAttributeContainer, assetLoaderProvider.get(AudioClip.class)),
-      new EnemySystem(eventHub, playerAttributeContainer, assetLoaderProvider.get(AudioClip.class)),
+      new EnemySystem(eventHub, playerAttributeContainer, assetLoaderProvider.get(AudioClip.class), platform.getRenderer()),
       new ParticleSystem(),
       new RoomSystem(eventHub, platform.getRenderer(), solaEcs, playerAttributeContainer),
       new PortalSystem(eventHub)
@@ -103,12 +103,12 @@ public class ReMemorySola extends SolaWithDefaults {
         AudioClip backgroundMusicClip = ((AudioClip) assets[0]);
 
         backgroundMusicClip.setVolume(0.9f);
-        backgroundMusicClip.loop(-1);
+        backgroundMusicClip.loop(AudioClip.CONTINUOUS_LOOPING);
 
         guiManager.initialize(guiDocument, (GuiJsonDocument) assets[10], (GuiJsonDocument) assets[11], (GuiJsonDocument) assets[12]);
 
         // Start the game
-        eventHub.emit(new ForgetEverythingEvent());
+        eventHub.emit(new ForgetPagesEvent());
         isLoading = false;
         loadingScreen = null;
       });

@@ -5,6 +5,7 @@ import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
+import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.components.LightComponent;
 import technology.sola.engine.input.Key;
@@ -12,23 +13,19 @@ import technology.sola.engine.input.KeyboardInput;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.physics.event.CollisionEvent;
+import technology.sola.engine.physics.event.SensorEvent;
 import technology.sola.engine.rememory.Constants;
-import technology.sola.engine.rememory.events.ChangeRoomEvent;
-import technology.sola.engine.rememory.events.ForgetWhereEvent;
 import technology.sola.engine.rememory.PlayerAttributeContainer;
-import technology.sola.engine.rememory.events.ForgetEverythingEvent;
+import technology.sola.engine.rememory.events.StatIncreaseEvent;
 import technology.sola.math.linear.Vector2D;
 
 public class PlayerSystem extends EcsSystem {
   private final float halfRootTwo = (float) (Math.sqrt(2) * 0.5f);
   private final KeyboardInput keyboardInput;
-  private final EventHub eventHub;
   private final PlayerAttributeContainer playerAttributeContainer;
-  private boolean canForget = false;
 
   public PlayerSystem(KeyboardInput keyboardInput, EventHub eventHub, PlayerAttributeContainer playerAttributeContainer, AssetLoader<AudioClip> audioClipAssetLoader) {
     this.keyboardInput = keyboardInput;
-    this.eventHub = eventHub;
     this.playerAttributeContainer = playerAttributeContainer;
 
     eventHub.add(CollisionEvent.class, event -> {
@@ -45,16 +42,16 @@ public class PlayerSystem extends EcsSystem {
       );
     });
 
-    eventHub.add(ChangeRoomEvent.class, event -> {
-      canForget = true;
-    });
+    eventHub.add(SensorEvent.class, event -> {
+      event.collisionManifold().conditionallyResolveCollision(
+        entity -> Constants.Names.PLAYER.equals(entity.getName()),
+        entity -> entity.getComponent(ColliderComponent.class).hasTag(Constants.Tags.LAPIS),
+        (player, lapis) -> {
+          lapis.destroy();
 
-    eventHub.add(ForgetWhereEvent.class, event -> {
-      audioClipAssetLoader.get(Constants.Assets.AudioClips.FORGET).executeIfLoaded(AudioClip::play);
-    });
-
-    eventHub.add(ForgetEverythingEvent.class, event -> {
-      canForget = false;
+          eventHub.emit(new StatIncreaseEvent());
+        }
+      );
     });
   }
 
@@ -65,8 +62,8 @@ public class PlayerSystem extends EcsSystem {
     LightComponent lightComponent = playerEntity.getComponent(LightComponent.class);
 
     // apply attributes
-    final int speed = playerAttributeContainer.getSpeed() * 18;
-    lightComponent.setRadius(playerAttributeContainer.getVision() * 20);
+    final int speed = 30 + playerAttributeContainer.getSpeed() * 5;
+    lightComponent.setRadius(35 + playerAttributeContainer.getVision() * 7);
 
     float xSpeed = 0;
     float ySpeed = 0;
@@ -92,11 +89,6 @@ public class PlayerSystem extends EcsSystem {
         xSpeed = speed * halfRootTwo;
         ySpeed *= halfRootTwo;
       }
-    }
-
-    if (canForget && keyboardInput.isKeyPressed(Key.F)) {
-      canForget = false;
-      eventHub.emit(new ForgetWhereEvent());
     }
 
     dynamicBodyComponent.setVelocity(new Vector2D(xSpeed, ySpeed));

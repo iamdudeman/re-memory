@@ -12,17 +12,14 @@ What is this place? What am I doing here? I need to remember...
 ### Controls
 
 * WASD - move
-* F - forget where you've been (resets portal destinations)
 * space / mouse click - cycle GUI text
 * left / right arrows - cycle GUI text
 
 ### Gameplay hints
 
-The blue circle asset is a Lapis Lazuli gemstone that will create a portal to a new location. If you're ever stuck you
-can always  "forget where you've been" by pressing "F" which will reset all portal destinations so you can explore new
-areas without having to find a new Lapis.
-Don't give up! If a "creeper" or "spooker" try to take your memories you just have to keep trying (you'll return to the
-start of the game with a stat bonus!).
+The blue circle asset is a Lapis Lazuli gemstone that will permanently increase one of your stats as you remember skills
+you thought you'd lost!
+Portals will always take you to a new room so explore a new room if there isn't anything interesting!
 
 ### About development
 
@@ -47,6 +44,30 @@ test out some new rendering features in the game engine like the lighting system
 * [Swing platform code](swing/src)
 * [JavaFX platform code](javafx/src)
 * [Browser platform code](browser/src)
+
+## JSON Schema
+
+[JSON schema definitions](https://github.com/iamdudeman/sola-game-engine/tree/master/json-schema) are provided for
+various
+asset types. These can assist you in creating valid assets for the sola game engine to load when manually creating or
+updating them.
+
+* SpriteSheet
+    * https://raw.githubusercontent.com/iamdudeman/sola-game-engine/master/json-schema/SpriteSheet.schema.json
+* Font
+    * https://raw.githubusercontent.com/iamdudeman/sola-game-engine/master/json-schema/Font.schema.json
+* GuiDocument
+    * https://raw.githubusercontent.com/iamdudeman/sola-game-engine/master/json-schema/GuiDocument.schema.json
+
+### IntelliJ setup
+
+1. Open settings
+2. Go to `Languages & Frameworks | Schemas and DTDs | JSON Schema Mappings`
+3. Click `+` and select the schema file to add
+4. Add by file path pattern (recommendations below)
+    * SpriteSheet -> `*.sprites.json`
+    * Font -> `*.font.json`
+    * GuiDocument -> `*.gui.json`
 
 ## Packaging for release
 

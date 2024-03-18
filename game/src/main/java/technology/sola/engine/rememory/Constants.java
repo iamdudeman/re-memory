@@ -40,7 +40,6 @@ public final class Constants {
       public static final String ID = "acid_rain";
 
       public static final String DUCK = "duck";
-      public static final String DONUT = "donut";
     }
 
     public final static class LibrarySprites {

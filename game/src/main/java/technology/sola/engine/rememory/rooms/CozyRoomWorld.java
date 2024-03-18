@@ -14,8 +14,8 @@ import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.components.PageComponent;
 
 public class CozyRoomWorld extends RoomWorld {
-  public CozyRoomWorld(String previousRoomId, int rendererWidth, int rendererHeight, PlayerAttributeContainer playerAttributeContainer) {
-    super(previousRoomId, rendererWidth, rendererHeight);
+  public CozyRoomWorld(int rendererWidth, int rendererHeight, PlayerAttributeContainer playerAttributeContainer) {
+    super(rendererWidth, rendererHeight);
 
     for (int i = 0; i < rendererWidth; i += 16) {
       for (int j = 0; j < rendererHeight; j += 16) {
@@ -41,6 +41,8 @@ public class CozyRoomWorld extends RoomWorld {
 
     float halfWidth = rendererWidth * 0.5f;
     float halfHeight = rendererHeight * 0.5f;
+
+    addEnemies(playerAttributeContainer);
 
     addExtras(playerAttributeContainer);
 
@@ -84,7 +86,9 @@ public class CozyRoomWorld extends RoomWorld {
         new LayerComponent(Constants.Layers.DECORATION)
       );
 
-      if (!hasSpawnedPage && random.nextBoolean()) {
+      boolean delayPageSpawn = playerAttributeContainer.getPagesCollectedCount() > 3 && playerAttributeContainer.getStatCount() < 8;
+
+      if (!hasSpawnedPage && random.nextBoolean() && !delayPageSpawn) {
         createEntity(
           new TransformComponent(x + 2, y + 1),
           ColliderComponent.aabb(-3, -4, 10, 10).setSensor(true),
@@ -93,26 +97,15 @@ public class CozyRoomWorld extends RoomWorld {
           new PageComponent()
         );
 
-        if (playerAttributeContainer.getPagesCollectedCount() == 2) {
-          createEntity(
-            new TransformComponent(
-              RandomUtils.quickRandomDoubleClamp(x - 30, x + 30, x - 5, x + 5),
-              RandomUtils.quickRandomDoubleClamp(y - 30, y + 30, y - 5, y + 15)
-            ),
-            new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.LIGHTHOUSE),
-            ColliderComponent.aabb(0, 6, 3, 6).setTags(Constants.Tags.BOUNDARY),
-            new LayerComponent(Constants.Layers.OBJECTS, 3),
-            new LightComponent(64, Color.WHITE)
-              .setOffset(1f, 3)
-              .setLightFlicker(new LightFlicker(0.5f, 0.9f))
-          );
-        }
-
         hasSpawnedPage = true;
       }
     }
 
-    int lapisChance = 15;
+    int lapisChance = 20;
+
+    if (playerAttributeContainer.getStatCount() < 6) {
+      lapisChance += 30;
+    }
 
     if (tableCount < 2) {
       lapisChance += 15;
@@ -127,7 +120,7 @@ public class CozyRoomWorld extends RoomWorld {
         RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 18, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
       );
     }
-    if (RandomUtils.roll100() < lapisChance - 20) {
+    if (RandomUtils.roll100() < 20) {
       addLapis(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
         RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 18, rendererHeight - 20, halfHeight - 10, halfHeight + 10)
@@ -141,25 +134,31 @@ public class CozyRoomWorld extends RoomWorld {
       );
     }
 
-    if (RandomUtils.roll100() < 30) {
-      addDonut(
-        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
-        RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 18, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
-      );
-    }
-
     if (playerAttributeContainer.getPagesCollectedCount() != 2) {
       addTorch(
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
         RandomUtils.quickRandomDoubleClamp(hasNook ? 40 : 18, rendererHeight - 20, halfHeight - 20, halfHeight + 10)
       );
     }
+  }
+
+  private void addEnemies(PlayerAttributeContainer playerAttributeContainer) {
+    float halfWidth = rendererWidth * 0.5f;
+    float halfHeight = rendererHeight * 0.5f;
 
     addEnemy(
       RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
       RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
       EnemyComponent.EnemyType.CREEPER
     );
+
+    if (RandomUtils.roll100() < 25) {
+      addEnemy(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+        EnemyComponent.EnemyType.CREEPER
+      );
+    }
 
     if (playerAttributeContainer.getPagesCollectedCount() > 1) {
       addEnemy(
@@ -174,6 +173,28 @@ public class CozyRoomWorld extends RoomWorld {
         RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
         RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
         random.nextBoolean() ? EnemyComponent.EnemyType.SPOOKER : EnemyComponent.EnemyType.CREEPER
+      );
+    }
+
+    if (playerAttributeContainer.getPagesCollectedCount() > 3) {
+      addEnemy(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+        EnemyComponent.EnemyType.SPOOKER
+      );
+    }
+
+    if (playerAttributeContainer.getStatCount() > 10) {
+      addEnemy(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+        EnemyComponent.EnemyType.SPOOKER
+      );
+    } else if (playerAttributeContainer.getStatCount() > 5) {
+      addEnemy(
+        RandomUtils.quickRandomDoubleClamp(10, rendererWidth - 20, halfWidth - 10, halfWidth + 10),
+        RandomUtils.quickRandomDoubleClamp(10, rendererHeight - 20, halfHeight - 20, halfHeight + 10),
+        EnemyComponent.EnemyType.CREEPER
       );
     }
   }

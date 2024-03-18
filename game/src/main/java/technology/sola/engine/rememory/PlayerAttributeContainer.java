@@ -2,14 +2,15 @@ package technology.sola.engine.rememory;
 
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.rememory.events.AttributesChangedEvent;
-import technology.sola.engine.rememory.events.ForgetWhereEvent;
-import technology.sola.engine.rememory.events.ForgetEverythingEvent;
+import technology.sola.engine.rememory.events.ForgetPagesEvent;
 import technology.sola.engine.rememory.events.PageAcceptedEvent;
+import technology.sola.engine.rememory.events.StatIncreaseEvent;
 
 public class PlayerAttributeContainer {
-  private int speed;
-  private int stealth;
-  private int vision;
+  public static final int STAT_CAP = 9;
+  private int speed = 1;
+  private int stealth = 1;
+  private int vision = 1;
   private int pagesCollectedCount = 0;
   private int tries = 0;
   private int maxPagesCollectedCount = 0;
@@ -19,17 +20,20 @@ public class PlayerAttributeContainer {
 
     eventHub.add(PageAcceptedEvent.class, event -> {
       pagesCollectedCount++;
-      maxPagesCollectedCount = pagesCollectedCount;
+
+      if (pagesCollectedCount > maxPagesCollectedCount) {
+        maxPagesCollectedCount = pagesCollectedCount;
+      }
+
+      eventHub.emit(new AttributesChangedEvent());
+    });
+
+    eventHub.add(StatIncreaseEvent.class, event -> {
       randomStatIncrease();
       eventHub.emit(new AttributesChangedEvent());
     });
 
-    eventHub.add(ForgetWhereEvent.class, event -> {
-      randomStatDecrease();
-      eventHub.emit(new AttributesChangedEvent());
-    });
-
-    eventHub.add(ForgetEverythingEvent.class, event -> {
+    eventHub.add(ForgetPagesEvent.class, event -> {
       forget();
       tries++;
 
@@ -53,6 +57,10 @@ public class PlayerAttributeContainer {
     return vision;
   }
 
+  public int getStatCount() {
+    return speed + stealth + vision;
+  }
+
   public int getTries() {
     return tries;
   }
@@ -66,16 +74,13 @@ public class PlayerAttributeContainer {
   }
 
   private void forget() {
-    speed = 3;
-    stealth = 3;
-    vision = 3;
     pagesCollectedCount = 0;
   }
 
   private void randomStatIncrease() {
-    int speedChance = speed < 5 ? 33 : 0;
-    int stealthChance = stealth < 5 ? 33 : 0;
-    int visionChance = vision < 5 ? 33 : 0;
+    int speedChance = speed < STAT_CAP ? 33 : 0;
+    int stealthChance = stealth < STAT_CAP ? 33 : 0;
+    int visionChance = vision < STAT_CAP ? 33 : 0;
     int totalChance = speedChance + stealthChance + visionChance;
 
     if (totalChance == 0) {
@@ -90,27 +95,6 @@ public class PlayerAttributeContainer {
       stealth++;
     } else if (roll < speedChance + stealthChance + visionChance) {
       vision++;
-    }
-  }
-
-  private void randomStatDecrease() {
-    int speedChance = speed > 1 ? 33 : 0;
-    int stealthChance = stealth > 1 ? 33 : 0;
-    int visionChance = vision > 1 ? 33 : 0;
-    int totalChance = speedChance + stealthChance + visionChance;
-
-    if (totalChance == 0) {
-      return;
-    }
-
-    int roll = RandomUtils.rollN(totalChance);
-
-    if (roll < speedChance) {
-      speed--;
-    } else if (roll < speedChance + stealthChance) {
-      stealth--;
-    } else if (roll < speedChance + stealthChance + visionChance) {
-      vision--;
     }
   }
 }

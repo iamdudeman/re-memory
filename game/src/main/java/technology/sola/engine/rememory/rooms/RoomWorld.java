@@ -9,7 +9,6 @@ import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
 import technology.sola.engine.rememory.Constants;
-import technology.sola.engine.rememory.RandomUtils;
 import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.components.PortalComponent;
 
@@ -20,23 +19,11 @@ public abstract class RoomWorld extends World {
   protected Random random = new Random();
   protected int rendererWidth;
   protected int rendererHeight;
-  private final String previousRoomId;
 
-  public RoomWorld(String previousRoomId, int rendererWidth, int rendererHeight) {
+  public RoomWorld(int rendererWidth, int rendererHeight) {
     super(1500);
-    this.previousRoomId = previousRoomId;
     this.rendererWidth = rendererWidth;
     this.rendererHeight = rendererHeight;
-  }
-
-  public void addPortal(float x, float y) {
-    createEntity(
-      new PortalComponent(null, true),
-      new TransformComponent(x, y, 8),
-      ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
-      new CircleRendererComponent(new Color(177, 156, 217), true),
-      new LayerComponent(Constants.Layers.OBJECTS)
-    );
   }
 
   protected void addPlayer(float x, float y) {
@@ -53,10 +40,12 @@ public abstract class RoomWorld extends World {
 
   protected void addInitialPortal(float x, float y, boolean delayActivation) {
     createEntity(
-      new PortalComponent(previousRoomId, delayActivation),
+      new PortalComponent(delayActivation),
       new TransformComponent(x, y, 8),
       ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
       new CircleRendererComponent(new Color(177, 156, 217), true),
+      new LightComponent(16, new Color(177, 156, 217, 120)).setLightFlicker(new LightFlicker(0.25f, 0.6f)).setOffset(3, 3),
+      new BlendModeComponent(BlendMode.NORMAL),
       new LayerComponent(Constants.Layers.OBJECTS)
     );
   }
@@ -96,18 +85,9 @@ public abstract class RoomWorld extends World {
   protected void addDuck(float x, float y) {
     createEntity(
       new TransformComponent(x, y),
-      ColliderComponent.circle(4).setTags(Constants.Tags.BOUNDARY, Constants.Tags.DUCK),
+      new DynamicBodyComponent(new Material(100, 0, 0), true),
+      ColliderComponent.circle(4).setTags(Constants.Tags.DUCK),
       new SpriteComponent(Constants.Assets.AcidRainSprites.ID, Constants.Assets.AcidRainSprites.DUCK),
-      new LayerComponent(Constants.Layers.DECORATION)
-    );
-  }
-
-  protected void addDonut(float x, float y) {
-    createEntity(
-      new TransformComponent(x, y),
-      new DynamicBodyComponent(new Material(20, 0.6f, 0)),
-      ColliderComponent.circle(3),
-      new SpriteComponent(Constants.Assets.AcidRainSprites.ID, Constants.Assets.AcidRainSprites.DONUT),
       new LayerComponent(Constants.Layers.OBJECTS)
     );
   }
@@ -117,7 +97,7 @@ public abstract class RoomWorld extends World {
       new TransformComponent(x, y),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.TORCH),
       new LayerComponent(Constants.Layers.OBJECTS, 1),
-      new LightComponent(32, Color.YELLOW)
+      new LightComponent(40, Color.YELLOW)
         .setOffset(1.5f, 3)
         .setLightFlicker(new LightFlicker(0.2f, 0.8f))
     );
