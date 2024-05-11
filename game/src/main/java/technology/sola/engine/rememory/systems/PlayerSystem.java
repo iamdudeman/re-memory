@@ -5,7 +5,6 @@ import technology.sola.ecs.Entity;
 import technology.sola.ecs.World;
 import technology.sola.engine.assets.AssetLoader;
 import technology.sola.engine.assets.audio.AudioClip;
-import technology.sola.engine.core.component.TransformComponent;
 import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.components.LightComponent;
 import technology.sola.engine.input.Key;
