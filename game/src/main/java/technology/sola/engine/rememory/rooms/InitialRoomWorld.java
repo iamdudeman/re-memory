@@ -5,6 +5,8 @@ import technology.sola.engine.event.EventHub;
 import technology.sola.engine.graphics.components.LayerComponent;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
+import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.RandomUtils;
 import technology.sola.engine.rememory.components.PageComponent;
@@ -57,14 +59,14 @@ public class InitialRoomWorld extends RoomWorld {
 
     createEntity(
       new TransformComponent(tableX, tableY),
-      ColliderComponent.circle(4).setTags(Constants.Tags.BOUNDARY),
+      new ColliderComponent(new ColliderShapeCircle(4)).setTags(Constants.Tags.BOUNDARY),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.TABLE),
       new LayerComponent(Constants.Layers.DECORATION)
     );
 
     createEntity(
       new TransformComponent(tableX + 2, tableY + 1),
-      ColliderComponent.aabb(-3, -4, 10, 10).setSensor(true),
+      new ColliderComponent(new ColliderShapeAABB(10, 10), -3, -4).setSensor(true),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PAGE),
       new LayerComponent(Constants.Layers.OBJECTS),
       new PageComponent()
@@ -84,14 +86,14 @@ public class InitialRoomWorld extends RoomWorld {
     createEntity(
       new TransformComponent(x, y),
       new SpriteComponent(Constants.Assets.LibrarySprites.ID, Constants.Assets.LibrarySprites.SHELF_1),
-      ColliderComponent.aabb(0, 5, 11, 6).setTags(Constants.Tags.BOUNDARY),
+      new ColliderComponent(new ColliderShapeAABB(11, 6), 0, 5).setTags(Constants.Tags.BOUNDARY),
       new LayerComponent(Constants.Layers.OBJECTS, 3)
     );
 
     createEntity(
       new TransformComponent(x + 18, y),
       new SpriteComponent(Constants.Assets.LibrarySprites.ID, Constants.Assets.LibrarySprites.SHELF_2),
-      ColliderComponent.aabb(0, 5, 11, 6).setTags(Constants.Tags.BOUNDARY),
+      new ColliderComponent(new ColliderShapeAABB(11, 6), 0, 5).setTags(Constants.Tags.BOUNDARY),
       new LayerComponent(Constants.Layers.OBJECTS, 3)
     );
   }

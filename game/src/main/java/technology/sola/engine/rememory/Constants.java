@@ -1,6 +1,7 @@
 package technology.sola.engine.rememory;
 
 import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.collider.ColliderTag;
 
 public final class Constants {
   public final static class Assets {
@@ -76,7 +77,7 @@ public final class Constants {
     public static final String PLAYER = "player";
   }
 
-  public enum Tags implements ColliderComponent.ColliderTag {
+  public enum Tags implements ColliderTag {
     BOUNDARY,
     PLAYER,
     PORTAL,

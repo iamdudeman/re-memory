@@ -8,6 +8,8 @@ import technology.sola.engine.graphics.renderer.BlendMode;
 import technology.sola.engine.physics.Material;
 import technology.sola.engine.physics.component.ColliderComponent;
 import technology.sola.engine.physics.component.DynamicBodyComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
+import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.components.EnemyComponent;
 import technology.sola.engine.rememory.components.PortalComponent;
@@ -34,7 +36,7 @@ public abstract class RoomWorld extends World {
       new BlendModeComponent(BlendMode.MASK),
       new LightComponent(200, new Color(200, 255, 255, 255)).setOffset(2.5f, 4),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PLAYER),
-      ColliderComponent.aabb(2, 1, 5, 7).setTags(Constants.Tags.PLAYER)
+      new ColliderComponent(new ColliderShapeAABB(5, 7), 2, 1).setTags(Constants.Tags.PLAYER)
     ).setName(Constants.Names.PLAYER);
   }
 
@@ -42,7 +44,7 @@ public abstract class RoomWorld extends World {
     createEntity(
       new PortalComponent(delayActivation),
       new TransformComponent(x, y, 8),
-      ColliderComponent.circle().setSensor(true).setTags(Constants.Tags.PORTAL),
+      new ColliderComponent(new ColliderShapeCircle()).setSensor(true).setTags(Constants.Tags.PORTAL),
       new CircleRendererComponent(new Color(177, 156, 217), true),
       new LightComponent(16, new Color(177, 156, 217, 120)).setLightFlicker(new LightFlicker(0.25f, 0.6f)).setOffset(3, 3),
       new BlendModeComponent(BlendMode.NORMAL),
@@ -53,7 +55,7 @@ public abstract class RoomWorld extends World {
   protected void addLapis(float x, float y) {
     createEntity(
       new TransformComponent(x, y),
-      ColliderComponent.aabb(4, 4).setSensor(true).setTags(Constants.Tags.LAPIS),
+      new ColliderComponent(new ColliderShapeAABB(4, 4)).setSensor(true).setTags(Constants.Tags.LAPIS),
       new LayerComponent(Constants.Layers.OBJECTS, 4),
       new DynamicBodyComponent(),
       new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.LAPIS)
@@ -65,7 +67,7 @@ public abstract class RoomWorld extends World {
       new TransformComponent(x, y, 4),
       new DynamicBodyComponent(),
       new EnemyComponent(enemyType),
-      ColliderComponent.circle().setIgnoreTags(Constants.Tags.BOUNDARY),
+      new ColliderComponent(new ColliderShapeCircle()).setIgnoreTags(Constants.Tags.BOUNDARY),
       new CircleRendererComponent(Color.BLACK),
       new LayerComponent(Constants.Layers.OBJECTS, 1)
     );
@@ -76,7 +78,7 @@ public abstract class RoomWorld extends World {
       new TransformComponent(x, y, 4),
       new DynamicBodyComponent(),
       new EnemyComponent(enemyType),
-      ColliderComponent.circle().setIgnoreTags(Constants.Tags.BOUNDARY),
+      new ColliderComponent(new ColliderShapeCircle()).setIgnoreTags(Constants.Tags.BOUNDARY),
       new CircleRendererComponent(new Color(158, 158, 158)),
       new LayerComponent(Constants.Layers.OBJECTS, 1)
     );
@@ -86,7 +88,7 @@ public abstract class RoomWorld extends World {
     createEntity(
       new TransformComponent(x, y),
       new DynamicBodyComponent(new Material(100, 0, 0), true),
-      ColliderComponent.circle(4).setTags(Constants.Tags.DUCK),
+      new ColliderComponent(new ColliderShapeCircle(4)).setTags(Constants.Tags.DUCK),
       new SpriteComponent(Constants.Assets.AcidRainSprites.ID, Constants.Assets.AcidRainSprites.DUCK),
       new LayerComponent(Constants.Layers.OBJECTS)
     );
@@ -107,22 +109,22 @@ public abstract class RoomWorld extends World {
     // top
     createEntity(
       new TransformComponent(0, topBoundaryY, rendererWidth, boundarySize),
-      ColliderComponent.aabb().setTags(Constants.Tags.BOUNDARY)
+      new ColliderComponent(new ColliderShapeAABB()).setTags(Constants.Tags.BOUNDARY)
     );
     // bottom
     createEntity(
       new TransformComponent(0, rendererHeight, rendererWidth, boundarySize),
-      ColliderComponent.aabb().setTags(Constants.Tags.BOUNDARY)
+      new ColliderComponent(new ColliderShapeAABB()).setTags(Constants.Tags.BOUNDARY)
     );
     // left
     createEntity(
       new TransformComponent(-boundarySize, 0, boundarySize, rendererHeight),
-      ColliderComponent.aabb().setTags(Constants.Tags.BOUNDARY)
+      new ColliderComponent(new ColliderShapeAABB()).setTags(Constants.Tags.BOUNDARY)
     );
     // right
     createEntity(
       new TransformComponent(rendererWidth, 0, boundarySize, rendererHeight),
-      ColliderComponent.aabb().setTags(Constants.Tags.BOUNDARY)
+      new ColliderComponent(new ColliderShapeAABB()).setTags(Constants.Tags.BOUNDARY)
     );
   }
 }

@@ -1,12 +1,11 @@
 package technology.sola.engine.rememory.rooms;
 
 import technology.sola.engine.core.component.TransformComponent;
-import technology.sola.engine.graphics.Color;
 import technology.sola.engine.graphics.components.LayerComponent;
-import technology.sola.engine.graphics.components.LightComponent;
-import technology.sola.engine.graphics.components.LightFlicker;
 import technology.sola.engine.graphics.components.SpriteComponent;
 import technology.sola.engine.physics.component.ColliderComponent;
+import technology.sola.engine.physics.component.collider.ColliderShapeAABB;
+import technology.sola.engine.physics.component.collider.ColliderShapeCircle;
 import technology.sola.engine.rememory.Constants;
 import technology.sola.engine.rememory.RandomUtils;
 import technology.sola.engine.rememory.PlayerAttributeContainer;
@@ -81,7 +80,7 @@ public class CozyRoomWorld extends RoomWorld {
 
       createEntity(
         new TransformComponent(x, y),
-        ColliderComponent.circle(4).setTags(Constants.Tags.BOUNDARY),
+        new ColliderComponent(new ColliderShapeCircle(4)).setTags(Constants.Tags.BOUNDARY),
         new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.TABLE),
         new LayerComponent(Constants.Layers.DECORATION)
       );
@@ -91,7 +90,7 @@ public class CozyRoomWorld extends RoomWorld {
       if (!hasSpawnedPage && random.nextBoolean() && !delayPageSpawn) {
         createEntity(
           new TransformComponent(x + 2, y + 1),
-          ColliderComponent.aabb(-3, -4, 10, 10).setSensor(true),
+          new ColliderComponent(new ColliderShapeAABB(10, 10), -3, -4).setSensor(true),
           new SpriteComponent(Constants.Assets.Sprites.ID, Constants.Assets.Sprites.PAGE),
           new LayerComponent(Constants.Layers.OBJECTS),
           new PageComponent()
@@ -226,7 +225,7 @@ public class CozyRoomWorld extends RoomWorld {
     createEntity(
       new TransformComponent(x + 5 + 18 - 3, y + 18 + 2),
       new SpriteComponent(Constants.Assets.LibrarySprites.ID, Constants.Assets.LibrarySprites.TABLE_SET),
-      ColliderComponent.aabb(0, 2, 17, 3).setTags(Constants.Tags.BOUNDARY),
+      new ColliderComponent(new ColliderShapeAABB(17, 3), 0, 2).setTags(Constants.Tags.BOUNDARY),
       new LayerComponent(Constants.Layers.OBJECTS, 3)
     );
   }
@@ -235,7 +234,7 @@ public class CozyRoomWorld extends RoomWorld {
     createEntity(
       new TransformComponent(x, y),
       new SpriteComponent(Constants.Assets.LibrarySprites.ID, Constants.Assets.LibrarySprites.SHELF_1),
-      ColliderComponent.aabb(0, 5, 11, 6).setTags(Constants.Tags.BOUNDARY),
+      new ColliderComponent(new ColliderShapeAABB(11, 6), 0, 5).setTags(Constants.Tags.BOUNDARY),
       new LayerComponent(Constants.Layers.OBJECTS, 3)
     );
   }
