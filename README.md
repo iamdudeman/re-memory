@@ -5,6 +5,8 @@ It was built on  [sola-game-engine](https://github.com/iamdudeman/sola-game-engi
 template [sola-game-template](https://github.com/iamdudeman/sola-game-template)
 to start the project.
 
+Play it on [itch.io](https://iamdudeman.itch.io/rememory)!
+
 ## Game info
 
 What is this place? What am I doing here? I need to remember...
