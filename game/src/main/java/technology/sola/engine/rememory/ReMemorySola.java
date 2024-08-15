@@ -33,7 +33,7 @@ public class ReMemorySola extends SolaWithDefaults {
   private LoadingScreen loadingScreen = new LoadingScreen();
 
   public ReMemorySola() {
-    super(SolaConfiguration.build("re;memory", 256, 240).withTargetUpdatesPerSecond(30));
+    super(new SolaConfiguration("re;memory", 256, 240, 30));
   }
 
   @Override
